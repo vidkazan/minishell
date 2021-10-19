@@ -48,15 +48,15 @@ t_elem  *push_back(t_elem *ptr)
 
 void print_current_elem(t_elem *ptr,int id)
 {
-    printf("|%d|%s|",id, ptr->cmd);
+    printf("| %d | %s |",id, ptr->cmd);
     if(ptr->args && *ptr->args)
     {
         while(*ptr->args)
-            printf("%s|",*ptr->args++);
+            printf(" %s | ",*ptr->args++);
         printf("\n");
     }
     else
-        printf("|noargs|\n");
+        printf("| noargs |\n");
 }
 
 void print_elems(t_elem *ptr)
@@ -71,17 +71,41 @@ void print_elems(t_elem *ptr)
     }
 }
 
-int main()
+void execution(t_data *data)
+{
+	char *args[2];
+	args[0] = "-l"
+	pid_t pid1 = fork();
+	if(pid1 == 0)
+	{
+		write(1, "here\n", 5);
+		if(execve(data->elem_start->cmd, , data->envp) < 0)
+			write(1, "error", 6);
+	}
+	else
+	{
+		wait(0);
+		write(1, "\nweeeee\n", 8);
+	}
+}
+
+
+int main(int ac, char **av, char **env)
 {
     int i = 5;
     char *arg[3];
-    arg[0] = "123";
-    arg[1] = "456";
-    arg[2] = 0;
+    t_data data;
     t_elem *root_ptr = NULL;
+
+    data.envp = env;
+    arg[0] = "-l";
+//    arg[1] = "456";
+//    arg[1] = 0;
     root_ptr = push_back(root_ptr);
-    root_ptr->cmd = "echo";
+    root_ptr->cmd = "/bin/ls";
     root_ptr->args = arg;
-    print_elems(root_ptr);
+    data.elem_start = root_ptr;
+    print_elems(data.elem_start);
+    execution(&data);
     return 0;
 }
