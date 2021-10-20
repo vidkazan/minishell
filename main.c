@@ -29,23 +29,30 @@ void execution(t_elem *elem)
     while(elem)
     {
         find_path(elem);
-        if (elem->type == CMD && elem->prev && !elem->next)
+//        ft_putstr_fd("\n>>> ", 2);
+//		ft_putstr_fd(elem->cmd[0], 2);
+//		ft_putstr_fd("\n", 2);
+		if (elem->type == CMD && elem->prev && !elem->next)
         {
 //            ft_putstr_fd(">>> last_cmd\n", 2);
             dup2(elem->prev->pfd[0], 0);
-            if(elem->data->simple_redirect_output_fd)
+            if(elem->data->double_redirect_output_fd)
+				dup2(elem->data->double_redirect_output_fd, 1);
+			if(elem->data->simple_redirect_output_fd)
 				dup2(elem->data->simple_redirect_output_fd, 1);
 			else
             	dup2(elem->data->std_out, 1);
         }
         else if(elem->type == CMD && !elem->prev && !elem->next)
         {
-//      		ft_putstr_fd(">>> first_cmd\n", 2);
+//			ft_putstr_fd(">>> first_cmd\n", 2);
+			if(elem->data->double_redirect_output_fd)
+				dup2(elem->data->double_redirect_output_fd, 1);
 			if(elem->data->simple_redirect_output_fd)
 				dup2(elem->data->simple_redirect_output_fd, 1);
 			if(elem->data->simple_redirect_input_fd)
 				dup2(elem->data->simple_redirect_input_fd, 0);
-        }
+		}
         if (elem->type == PIPE)
         {
 //            ft_putstr_fd(">>> pipe\n", 2);
@@ -90,7 +97,6 @@ void execution(t_elem *elem)
             }
             break;
         }
-//        ft_putstr_fd("\n>>> next_elem\n", 2);
     }
 }
 
@@ -103,6 +109,7 @@ void init(t_data *data, char **env)
     data->elem_start = NULL;
     data->simple_redirect_input_fd = -1;
     data->simple_redirect_output_fd = -1;
+    data->double_redirect_output_fd = -1;
     env_path_find(data);
 }
 
@@ -114,6 +121,7 @@ int main(int ac, char **av, char **env)
     char *cmd4[3];
     char *cmd5[2];
     char *cmd6[2];
+    char *cmd7[2];
     t_data *data = malloc(sizeof (t_data));
 
     init(data, env);
@@ -123,6 +131,7 @@ int main(int ac, char **av, char **env)
     data->elem_start->next->next = push_back(data->elem_start->next->next, data);
     data->elem_start->next->next->next = push_back(data->elem_start->next->next->next, data);
     data->elem_start->next->next->next->next = push_back(data->elem_start->next->next->next->next, data);
+    data->elem_start->next->next->next->next->next = push_back(data->elem_start->next->next->next->next->next, data);
 
     data->elem_start->cmd = cmd;
     data->elem_start->cmd[0] = "grep";
@@ -152,14 +161,20 @@ int main(int ac, char **av, char **env)
     data->elem_start->next->next->next->next->cmd = cmd5;
 	data->elem_start->next->next->next->next->cmd[0] = "/Users/fcody/Desktop/minishell/out.txt";
 	data->elem_start->next->next->next->next->cmd[1] = 0;
-	data->elem_start->next->next->next->next->type = SIMPLE_REDIRECT_OUTPUT;
+	data->elem_start->next->next->next->next->type = DOUBLE_REDIRECT_OUTPUT;
 
 	data->elem_start->next->next->next->next->next->cmd = cmd6;
-	data->elem_start->next->next->next->next->next->cmd[0] = "/Users/fcody/Desktop/minishell/test";
+	data->elem_start->next->next->next->next->next->cmd[0] = "/Users/fcody/Desktop/minishell/in.txt";
 	data->elem_start->next->next->next->next->next->cmd[1] = 0;
 	data->elem_start->next->next->next->next->next->type = SIMPLE_REDIRECT_INPUT;
 
+	data->elem_start->next->next->next->next->next->next->cmd = cmd7;
+	data->elem_start->next->next->next->next->next->next->cmd[0] = "/Users/fcody/Desktop/minishell/out.txt";
+	data->elem_start->next->next->next->next->next->next->cmd[1] = 0;
+	data->elem_start->next->next->next->next->next->next->type = DOUBLE_REDIRECT_OUTPUT;
+
 	simple_redirects(data);
+//	printf(">>> DO %d SO %d SI %d\n", data->double_redirect_output_fd,data->simple_redirect_output_fd,data->simple_redirect_input_fd);
     execution(data->elem_start);
 //    print_elems(data->elem_start);
     return 0;

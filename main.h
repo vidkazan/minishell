@@ -43,6 +43,7 @@ typedef struct s_data
     t_elem *elem_start;
     int simple_redirect_input_fd;
     int simple_redirect_output_fd;
+    int double_redirect_output_fd;
 }              t_data;
 
 t_elem  *create_elem(t_data *data);
@@ -52,6 +53,7 @@ void print_elems(t_elem *ptr);
 void	env_path_find(t_data *data);
 void	find_path(t_elem *elem);
 void simple_redirects(t_data *data);
-t_elem 	*delete_current_node(t_elem *elem);
+t_elem 	*delete_current_node(t_elem	*elem);
+t_elem	*double_redirect_output(t_elem	*elem);
 
 #endif
