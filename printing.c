@@ -9,7 +9,6 @@
 //perror, isatty, ttyname, ttyslot, ioctl, getenv,
 //tcsetattr, tcgetattr, tgetent, tgetflag, tgetnum,
 //tgetstr, tgoto, tputs
-#include <stdlib.h>
 
 void print_current_elem(t_elem *ptr,int id)
 {

@@ -15,8 +15,8 @@
 #define ELEM_COUNT 5
 #define CMD 1
 #define PIPE 2
-#define REDIRECT_INPUT 3
-#define REDIRECT_OUTPUT 4
+#define SIMPLE_REDIRECT_INPUT 3
+#define SIMPLE_REDIRECT_OUTPUT 4
 #define DOUBLE_REDIRECT_INPUT 5
 #define DOUBLE_REDIRECT_OUTPUT 6
 
@@ -41,6 +41,8 @@ typedef struct s_data
     char **envp;
     int error;
     t_elem *elem_start;
+    int simple_redirect_input_fd;
+    int simple_redirect_output_fd;
 }              t_data;
 
 t_elem  *create_elem(t_data *data);
@@ -49,5 +51,7 @@ void print_current_elem(t_elem *ptr,int id);
 void print_elems(t_elem *ptr);
 void	env_path_find(t_data *data);
 void	find_path(t_elem *elem);
+void simple_redirects(t_data *data);
+t_elem 	*delete_current_node(t_elem *elem);
 
 #endif

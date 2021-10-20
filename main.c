@@ -10,6 +10,20 @@
 //tcsetattr, tcgetattr, tgetent, tgetflag, tgetnum,
 //tgetstr, tgoto, tputs
 
+void close_fd(t_elem *elem)
+{
+	if(elem->prev)
+	{
+		//            ft_putstr_fd(">>> closing prev read pfd\n", 2);
+		close(elem->prev->pfd[0]);
+	}
+	if(elem->pfd[1] != -1)
+	{
+		//            ft_putstr_fd(">>> closing write pfd\n", 2);
+		close(elem->pfd[1]);
+	}
+}
+
 void execution(t_elem *elem)
 {
     while(elem)
@@ -19,7 +33,18 @@ void execution(t_elem *elem)
         {
 //            ft_putstr_fd(">>> last_cmd\n", 2);
             dup2(elem->prev->pfd[0], 0);
-            dup2(elem->data->std_out, 1);
+            if(elem->data->simple_redirect_output_fd)
+				dup2(elem->data->simple_redirect_output_fd, 1);
+			else
+            	dup2(elem->data->std_out, 1);
+        }
+        else if(elem->type == CMD && !elem->prev && !elem->next)
+        {
+//      		ft_putstr_fd(">>> first_cmd\n", 2);
+			if(elem->data->simple_redirect_output_fd)
+				dup2(elem->data->simple_redirect_output_fd, 1);
+			if(elem->data->simple_redirect_input_fd)
+				dup2(elem->data->simple_redirect_input_fd, 0);
         }
         if (elem->type == PIPE)
         {
@@ -27,6 +52,8 @@ void execution(t_elem *elem)
             pipe(elem->pfd);
             if(!elem->prev)
             {
+            	if(elem->data->simple_redirect_input_fd)
+            		dup2(elem->data->simple_redirect_input_fd, 0);
 //                ft_putstr_fd(">>> first_pipe\n", 2);
                 dup2(elem->pfd[1], 1);
             }
@@ -38,6 +65,8 @@ void execution(t_elem *elem)
             }
         }
 //        ft_putstr_fd(">>> fork\n", 2);
+
+
         elem->pid = fork();
         if (elem->pid == 0)
         {
@@ -47,16 +76,8 @@ void execution(t_elem *elem)
         }
         else
             wait(0);
-        if(elem->prev)
-        {
-//            ft_putstr_fd(">>> closing prev read pfd\n", 2);
-            close(elem->prev->pfd[0]);
-        }
-        if(elem->pfd[1] != -1)
-        {
-//            ft_putstr_fd(">>> closing write pfd\n", 2);
-            close(elem->pfd[1]);
-        }
+
+		close_fd(elem);
         if (elem->next)
             elem = elem->next;
         else
@@ -79,16 +100,20 @@ void init(t_data *data, char **env)
     data->std_in = dup(0);
     data->std_out = dup(1);
     data->error = 0;
+    data->elem_start = NULL;
+    data->simple_redirect_input_fd = -1;
+    data->simple_redirect_output_fd = -1;
     env_path_find(data);
 }
 
 int main(int ac, char **av, char **env)
 {
-    int i = 5;
     char *cmd[4];
     char *cmd2[3];
     char *cmd3[3];
     char *cmd4[3];
+    char *cmd5[2];
+    char *cmd6[2];
     t_data *data = malloc(sizeof (t_data));
 
     init(data, env);
@@ -96,11 +121,13 @@ int main(int ac, char **av, char **env)
     data->elem_start = push_back(data->elem_start, data);
     data->elem_start->next = push_back(data->elem_start->next, data);
     data->elem_start->next->next = push_back(data->elem_start->next->next, data);
+    data->elem_start->next->next->next = push_back(data->elem_start->next->next->next, data);
+    data->elem_start->next->next->next->next = push_back(data->elem_start->next->next->next->next, data);
 
     data->elem_start->cmd = cmd;
-    data->elem_start->cmd[0] = "ls";
-    data->elem_start->cmd[1] = "-la";
-    data->elem_start->cmd[2] = "/";
+    data->elem_start->cmd[0] = "grep";
+    data->elem_start->cmd[1] = "0";
+    data->elem_start->cmd[2] = 0;
     data->elem_start->cmd[3] = 0;
     data->elem_start->type = PIPE;
 
@@ -114,15 +141,26 @@ int main(int ac, char **av, char **env)
     data->elem_start->next->next->cmd[0] = "grep";
     data->elem_start->next->next->cmd[1] = "6";
     data->elem_start->next->next->cmd[2] = 0;
-    data->elem_start->next->next->type = PIPE;
+    data->elem_start->next->next->type = CMD;
 
     data->elem_start->next->next->next->cmd = cmd4;
-    data->elem_start->next->next->next->cmd[0] = "grep";
-    data->elem_start->next->next->next->cmd[1] = "9";
-    data->elem_start->next->next->next->cmd[2] = 0;
-    data->elem_start->next->next->next->type = CMD;
+    data->elem_start->next->next->next->cmd[0] = "/Users/fcody/Desktop/minishell/old.txt";
+	data->elem_start->next->next->next->cmd[1] = 0;
+	data->elem_start->next->next->next->cmd[2] = 0;
+    data->elem_start->next->next->next->type = SIMPLE_REDIRECT_INPUT;
 
+    data->elem_start->next->next->next->next->cmd = cmd5;
+	data->elem_start->next->next->next->next->cmd[0] = "/Users/fcody/Desktop/minishell/out.txt";
+	data->elem_start->next->next->next->next->cmd[1] = 0;
+	data->elem_start->next->next->next->next->type = SIMPLE_REDIRECT_OUTPUT;
+
+	data->elem_start->next->next->next->next->next->cmd = cmd6;
+	data->elem_start->next->next->next->next->next->cmd[0] = "/Users/fcody/Desktop/minishell/test";
+	data->elem_start->next->next->next->next->next->cmd[1] = 0;
+	data->elem_start->next->next->next->next->next->type = SIMPLE_REDIRECT_INPUT;
+
+	simple_redirects(data);
     execution(data->elem_start);
-    print_elems(data->elem_start);
+//    print_elems(data->elem_start);
     return 0;
 }

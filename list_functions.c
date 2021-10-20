@@ -27,6 +27,48 @@ t_elem  *create_elem(t_data *data)
     return ptr;
 }
 
+t_elem	*delete_current_node(t_elem *elem)
+{
+	t_elem	*prev_elem;
+	t_elem	*next_elem;
+
+	prev_elem = NULL;
+	next_elem = NULL;
+	if(elem->prev)
+		prev_elem = elem->prev;
+	if(elem->next)
+		next_elem = elem->next;
+	elem->cmd = NULL;
+	if(!next_elem && !prev_elem)
+	{
+		elem->data->elem_start = NULL;
+		return NULL;
+	}
+	else if(!next_elem)
+	{
+		elem->prev = NULL;
+		elem = NULL;
+		prev_elem->next = NULL;
+		return (prev_elem);
+	}
+	else if(!prev_elem)
+	{
+		elem->next = NULL;
+		elem->data->elem_start = next_elem;
+		elem = NULL;
+		return (next_elem);
+	}
+	else
+	{
+		elem->next = NULL;
+		elem->prev = NULL;
+		prev_elem->next = next_elem;
+		next_elem->prev = prev_elem;
+		elem = NULL;
+		return prev_elem;
+	}
+}
+
 t_elem  *push_back(t_elem *ptr, t_data *data)
 {
     t_elem *new_elem;
