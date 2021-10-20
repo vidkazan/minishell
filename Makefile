@@ -1,4 +1,4 @@
-SRC = main.c libft/*.c
+SRC = *.c libft/*.c
 
 MSG = OK!
 

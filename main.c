@@ -11,101 +11,129 @@
 //tgetstr, tgoto, tputs
 #include <stdlib.h>
 
+//void execution(t_elem *elem)
+//{
+//    pipe(elem->pfd);
+//    elem->pid = fork();
+//    pid_t pid2 = fork();
+//    if(elem->pid == 0)
+//    {
+//        printf(">>> 1\n");
+//        if(elem->type == PIPE)
+//            dup2(elem->pfd[1], 1);
+//        if(execve(elem->cmd[0], elem->cmd, elem->data->envp) < 0)
+//            ft_putstr_fd(strerror(errno), 2);
+//    }
+//    if(pid2 == 0)
+//    {
+//        printf(">>> waiting 2\n");
+//        waitpid(pid1, NULL, 0);
+//        printf(">>> 2\n");
+//        close(elem->pfd[1]);
+//        dup2(elem->pfd[0], 0);
+//        if(execve(elem->next->cmd[0], elem->next->cmd, elem->data->envp) < 0)
+//            printf("%s\n", strerror(errno));
+//    }
+//    else
+//    {
+//        wait(0);
+//        printf(">>> parent\n");
+//    }
+//}
 
-
-t_elem  *create_elem()
+void execution(t_elem *elem)
 {
-    t_elem *ptr;
-    ptr = malloc(sizeof(t_elem));
-    ptr->type = 0;
-    ptr->cmd = NULL;
-    ptr->args = NULL;
-    ptr->next = NULL;
-    ptr->prev = NULL;
-    return ptr;
-}
-
-t_elem  *push_back(t_elem *ptr)
-{
-    t_elem *new_elem;
-    t_elem *ptr_prev;
-
-    if(ptr == NULL)
-        ptr = create_elem();
-    else
+    while(elem)
     {
-        while(ptr->next != NULL)
+        if (elem->type == CMD && elem->prev && !elem->next)
         {
-            ptr_prev = ptr;
-            ptr = ptr->next;
+            dup2(elem->prev->pfd[0], 0);
+            dup2(elem->data->std_out, 1);
         }
-        new_elem = create_elem();
-        ptr->next = new_elem;
-        new_elem->prev = ptr;
-    }
-    return ptr;
-}
-
-void print_current_elem(t_elem *ptr,int id)
-{
-    printf("| %d | %s |",id, ptr->cmd);
-    if(ptr->args && *ptr->args)
-    {
-        while(*ptr->args)
-            printf(" %s | ",*ptr->args++);
-        printf("\n");
-    }
-    else
-        printf("| noargs |\n");
-}
-
-void print_elems(t_elem *ptr)
-{
-    int id = 1;
-    while(ptr)
-    {
-        print_current_elem(ptr, id++);
-        if(ptr->next == NULL)
+        if (elem->type == PIPE)
+        {
+            ft_putstr_fd(">>> pipe\n", 2);
+            pipe(elem->pfd);
+            if(!elem->prev)
+            {
+                ft_putstr_fd(">>> first_pipe\n", 2);
+                dup2(elem->pfd[1], 1);
+            }
+            else if(elem->prev && elem->next)
+            {
+                ft_putstr_fd(">>> middle_pipe\n", 2);
+                dup2(elem->pfd[1], 1);
+                dup2(elem->prev->pfd[0], 0);
+            }
+        }
+        ft_putstr_fd(">>> fork\n", 2);
+        elem->pid = fork();
+        if (elem->pid == 0)
+        {
+            ft_putstr_fd(">>> child\n", 2);
+            if (execve(elem->cmd[0], elem->cmd, elem->data->envp) < 0)
+                ft_putstr_fd(strerror(errno), 2);
+        }
+        else
+            wait(0);
+        if(elem->prev)
+        {
+            ft_putstr_fd(">>> closing prev read pfd\n", 2);
+            close(elem->prev->pfd[0]);
+        }
+        if(elem->pfd[1] != -1)
+        {
+            ft_putstr_fd(">>> closing write pfd\n", 2);
+            close(elem->pfd[1]);
+        }
+        if (elem->next)
+            elem = elem->next;
+        else
+        {
+            ft_putstr_fd(">>> breaking\n", 2);
+            if(elem->pfd[1] != -1)
+            {
+                close(elem->pfd[1]);
+                close(elem->pfd[0]);
+            }
             break;
-        ptr = ptr->next;
+        }
+        ft_putstr_fd(">>> next_elem\n", 2);
     }
 }
 
-void execution(t_data *data)
+void init(t_data *data, char **env)
 {
-	char *args[2];
-	args[0] = "-l"
-	pid_t pid1 = fork();
-	if(pid1 == 0)
-	{
-		write(1, "here\n", 5);
-		if(execve(data->elem_start->cmd, , data->envp) < 0)
-			write(1, "error", 6);
-	}
-	else
-	{
-		wait(0);
-		write(1, "\nweeeee\n", 8);
-	}
+    data->envp = env;
+    data->std_in = dup(0);
+    data->std_out = dup(1);
+    data->error = 0;
 }
-
 
 int main(int ac, char **av, char **env)
 {
     int i = 5;
-    char *arg[3];
-    t_data data;
-    t_elem *root_ptr = NULL;
+    char *cmd[4];
+    char *cmd2[3];
+    t_data *data = malloc(sizeof (t_data));
 
-    data.envp = env;
-    arg[0] = "-l";
-//    arg[1] = "456";
-//    arg[1] = 0;
-    root_ptr = push_back(root_ptr);
-    root_ptr->cmd = "/bin/ls";
-    root_ptr->args = arg;
-    data.elem_start = root_ptr;
-    print_elems(data.elem_start);
-    execution(&data);
+    init(data, env);
+    data->elem_start = push_back(data->elem_start, data);
+    data->elem_start->cmd = cmd;
+    data->elem_start->cmd[0] = "/bin/echo";
+    data->elem_start->cmd[1] = "blaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa";
+    data->elem_start->cmd[2] = "-l";
+    data->elem_start->cmd[3] = 0;
+    data->elem_start->type = PIPE;
+
+    data->elem_start = push_back(data->elem_start, data);
+    data->elem_start->next->cmd = cmd2;
+    data->elem_start->next->cmd[0] = "/usr/bin/wc";
+    data->elem_start->next->cmd[1] = 0;
+    data->elem_start->next->cmd[2] = 0;
+    data->elem_start->next->type = CMD;
+
+    execution(data->elem_start);
+//    print_elems(data->elem_start);
     return 0;
 }
