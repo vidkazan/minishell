@@ -10,11 +10,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="2a6d7134-8fc0-426d-a5a9-e803cafd4028" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/list_functions.c" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/printing.c" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/test" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/path_finding.c" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Makefile" beforeDir="false" afterPath="$PROJECT_DIR$/Makefile" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/list_functions.c" beforeDir="false" afterPath="$PROJECT_DIR$/list_functions.c" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/main.c" beforeDir="false" afterPath="$PROJECT_DIR$/main.c" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/main.h" beforeDir="false" afterPath="$PROJECT_DIR$/main.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/minishell" beforeDir="false" afterPath="$PROJECT_DIR$/minishell" afterDir="false" />
@@ -107,7 +105,7 @@
       <workItem from="1634730263345" duration="21000" />
       <workItem from="1634730607582" duration="41000" />
       <workItem from="1634730662455" duration="10691000" />
-      <workItem from="1634742499720" duration="3472000" />
+      <workItem from="1634742499720" duration="7414000" />
     </task>
     <servers />
   </component>

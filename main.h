@@ -1,6 +1,8 @@
 #ifndef MAIN_H
 #define MAIN_H
 
+# include <sys/wait.h>
+# include <fcntl.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <unistd.h>
@@ -33,6 +35,7 @@ typedef struct s_elem
 
 typedef struct s_data
 {
+    char *path;
     int std_in;
     int std_out;
     char **envp;
@@ -44,5 +47,7 @@ t_elem  *create_elem(t_data *data);
 t_elem  *push_back(t_elem *ptr, t_data *data);
 void print_current_elem(t_elem *ptr,int id);
 void print_elems(t_elem *ptr);
+void	env_path_find(t_data *data);
+void	find_path(t_elem *elem);
 
 #endif
