@@ -172,7 +172,7 @@ int main(int ac, char **av, char **env)
 
     data->elem_start->cmd = cmd;
     data->elem_start->cmd[0] = "cd";
-    data->elem_start->cmd[1] = "";
+    data->elem_start->cmd[1] = "-";
     data->elem_start->cmd[2] = 0;
     data->elem_start->cmd[3] = 0;
     data->elem_start->type = CMD;

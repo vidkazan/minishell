@@ -11,19 +11,48 @@ void builtin_pwd(t_elem *elem)
     write(1, "\n", 1);
     free(pwd);
 }
-
-void builtin_cd(t_elem *elem)
+char *search_strings_in_array(char **arr, char *search_word)
 {
-    char *PWD
+	int i = -1;
+
+	while(arr[++i])
+	{
+		if(!ft_strncmp(arr[i], search_word, ft_strlen(search_word)))
+			return (arr[i] + ft_strlen(search_word));
+	}
+	return NULL;
+}
+
+void builtin_cd(t_elem *elem) // no handling deleted dir error / no writing PWD OLDPWD to ENV
+{
+	char *home;
+	char *res_path;
+
+
     if(!elem->cmd[1])
     {
-        if(chdir("/Users/fcody"))
+    	home = search_strings_in_array(elem->data->envp, "HOME=");
+        if(chdir(home))
             write(1, "error: chdir\n", 13);
     }
-    else
+    else if(elem->cmd[1][0] == '~')
     {
-        if(chdir(elem->cmd[1]))
-            write(1, "error: chdir\n", 13);
+    	elem->cmd[1]++;
+		res_path = ft_strjoin(home, elem->cmd[1]);
+		if(chdir(res_path))
+			write(1, "error: chdir\n", 13);
+		free(res_path);
+	}
+    else if(elem->cmd[1][0] == '-')
+    {
+    	res_path = search_strings_in_array(elem->data->envp, "OLDPWD=");
+    	if(chdir(res_path))
+    		write(1, "error: chdir\n", 13);
+    	else
+    	{
+			write(elem->data->std_out, res_path, ft_strlen(res_path));
+			write(1, "\n", 1);
+		}
     }
-    builtin_pwd(elem);
+	builtin_pwd(elem);
 }
