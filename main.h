@@ -11,8 +11,8 @@
 #include <string.h>
 #include <sys/errno.h>
 #include "libft/libft.h"
+#include <dirent.h>
 
-#define ELEM_COUNT 5
 #define CMD 1
 #define PIPE 2
 #define SIMPLE_REDIRECT_INPUT 3
@@ -20,11 +20,13 @@
 #define DOUBLE_REDIRECT_INPUT 5
 #define DOUBLE_REDIRECT_OUTPUT 6
 
+
 typedef struct s_data t_data;
 
 typedef struct s_elem
 {
     int type;
+    int is_builtin;
     int pfd[2];
     pid_t pid;
     char **cmd;
@@ -44,6 +46,7 @@ typedef struct s_data
     int simple_redirect_input_fd;
     int simple_redirect_output_fd;
     int double_redirect_output_fd;
+    int debug;
 }              t_data;
 
 t_elem  *create_elem(t_data *data);
@@ -55,5 +58,9 @@ void	find_path(t_elem *elem);
 void simple_redirects(t_data *data);
 t_elem 	*delete_current_node(t_elem	*elem);
 t_elem	*double_redirect_output(t_elem	*elem);
+void    builtin_check(t_elem *elem);
+void    builtin_echo(t_elem *elem);
+void    builtin_cd(t_elem *elem);
+void builtin_pwd(t_elem *elem);
 
 #endif
