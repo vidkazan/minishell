@@ -58,9 +58,14 @@ void	find_path(t_elem *elem);
 void simple_redirects(t_data *data);
 t_elem 	*delete_current_node(t_elem	*elem);
 t_elem	*double_redirect_output(t_elem	*elem);
+char	*search_strings_in_array(char **arr, char *search_word, int *index);
+void	edit_env_keys(int env_index, char *new_value, t_data *data);
+
 void    builtin_check(t_elem *elem);
 void    builtin_echo(t_elem *elem);
 void    builtin_cd(t_elem *elem);
 void builtin_pwd(t_elem *elem);
+void builtin_env(t_elem *elem);
+
 
 #endif

@@ -26,6 +26,8 @@ void builtin_exec(t_elem *elem)
         builtin_cd(elem);
     if(!ft_strncmp(elem->cmd[0], "pwd", 3))
         builtin_pwd(elem);
+    if(!ft_strncmp(elem->cmd[0], "env", 3))
+    	builtin_env(elem);
 }
 
 void builtin_check(t_elem *elem)
@@ -42,16 +44,16 @@ void execution(t_elem *elem)
     while(elem)
     {
         if(elem->data->debug)
-            dprintf(2,">>> now %p\n", elem);
+        	dprintf(2,"\n>>> %.05d: now %p\n", elem->pid, elem);
         builtin_check(elem);
         if(!elem->is_builtin)
             find_path(elem);
         if(elem->data->debug)
-        dprintf(2,">>> %s \n", elem->cmd[0]);
+        	dprintf(2,">>> %.05d: %s \n", elem->pid, elem->cmd[0]);
 		if (elem->type == CMD && elem->prev && !elem->next)
         {
             if(elem->data->debug)
-            dprintf(2,">>> last_cmd\n");
+            	dprintf(2,">>> %.05d: last_cmd\n", elem->pid);
             dup2(elem->prev->pfd[0], 0);
             if(elem->data->double_redirect_output_fd)
 				dup2(elem->data->double_redirect_output_fd, 1);
@@ -63,7 +65,7 @@ void execution(t_elem *elem)
         else if(elem->type == CMD && !elem->prev && !elem->next)
         {
             if(elem->data->debug)
-			dprintf(2,">>> first_cmd\n");
+            	dprintf(2,">>> %.05d: first_cmd\n", elem->pid);
 			if(elem->data->double_redirect_output_fd)
 				dup2(elem->data->double_redirect_output_fd, 1);
 			if(elem->data->simple_redirect_output_fd)
@@ -74,20 +76,20 @@ void execution(t_elem *elem)
         if (elem->type == PIPE)
         {
             if(elem->data->debug)
-            dprintf(2,">>> pipe\n");
+            	dprintf(2,">>> %.05d: pipe\n", elem->pid);
             pipe(elem->pfd);
             if(!elem->prev)
             {
             	if(elem->data->simple_redirect_input_fd)
             		dup2(elem->data->simple_redirect_input_fd, 0);
                 if(elem->data->debug)
-                dprintf(2,">>> first_pipe\n");
+                	dprintf(2,">>> %.05d: first_pipe\n", elem->pid);
                 dup2(elem->pfd[1], 1);
             }
             else if(elem->prev && elem->next)
             {
                 if(elem->data->debug)
-                dprintf(2,">>> middle_pipe\n");
+                	dprintf(2,">>> %.05d: middle_pipe\n", elem->pid);
                 dup2(elem->pfd[1], 1);
                 dup2(elem->prev->pfd[0], 0);
             }
@@ -95,41 +97,46 @@ void execution(t_elem *elem)
         if(!elem->is_builtin)
         {
             if(elem->data->debug)
-                dprintf(2,">>> fork\n");
+            	dprintf(2,">>> %.05d: fork\n", elem->pid);
             elem->pid = fork();
             if (elem->pid == 0)
             {
                 if (elem->data->debug)
-                    dprintf(2, ">>> child\n");
-                else if (!elem->is_builtin && (execve(elem->cmd[0], elem->cmd, elem->data->envp) < 0))
+                	dprintf(2, ">>> %.05d: child\n", elem->pid);
+                if (!elem->is_builtin && (execve(elem->cmd[0], elem->cmd, elem->data->envp) < 0))
                     ft_putstr_fd(strerror(errno), 2);
             }
             else
-                wait(0);
+            {
+				wait(0);
+				if (elem->data->debug)
+					dprintf(2, ">>> %.05d: join\n", elem->pid);
+			}
         }
-        else {
+        else
+        {
             if(elem->data->debug)
-                dprintf(2,">>> builtin\n");
+            	dprintf(2,">>> %.05d: builtin\n", elem->pid);
             builtin_exec(elem);
         }
 		close_fd(elem);
         if(elem->data->debug)
-            dprintf(2,">>> end of %p\n", elem);
+        	dprintf(2,">>> %.05d: end of %p\n",elem->pid, elem);
         if (elem->next)
         {
+        	if(elem->data->debug)
+        		dprintf(2,">>> %.05d: moving to %p\n",elem->pid, elem);
             elem = elem->next;
-            if(elem->data->debug)
-            dprintf(2,">>> moving to %p\n", elem);
         }
         else
         {
-            if(elem->pfd[1] != -1)
-            {
-                if(elem->data->debug)
-                dprintf(2,">>> closing current pipe\n");
-                close(elem->pfd[1]);
-                close(elem->pfd[0]);
-            }
+//            if(elem->pfd[1] != -1)
+//            {
+//                if(elem->data->debug)
+//                dprintf(2,">>> closing current pipe\n");
+//                close(elem->pfd[1]);
+//                close(elem->pfd[0]);
+//            }
             break;
         }
     }
@@ -137,7 +144,7 @@ void execution(t_elem *elem)
 
 void init(t_data *data, char **env)
 {
-    data->envp = env;
+    data->envp = env; // need to malloc every line?
     data->std_in = dup(0);
     data->std_out = dup(1);
     data->error = 0;
@@ -151,12 +158,12 @@ void init(t_data *data, char **env)
 int main(int ac, char **av, char **env)
 {
     char *cmd[4];
-    char *cmd2[3];
-    char *cmd3[3];
-    char *cmd4[3];
-    char *cmd5[2];
-    char *cmd6[2];
-    char *cmd7[2];
+    char *cmd2[4];
+    char *cmd3[4];
+    char *cmd4[4];
+    char *cmd5[4];
+    char *cmd6[4];
+    char *cmd7[4];
     t_data *data = malloc(sizeof (t_data));
 
     init(data, env);
@@ -172,20 +179,21 @@ int main(int ac, char **av, char **env)
 
     data->elem_start->cmd = cmd;
     data->elem_start->cmd[0] = "cd";
-    data->elem_start->cmd[1] = "-";
+    data->elem_start->cmd[1] = "test";
     data->elem_start->cmd[2] = 0;
     data->elem_start->cmd[3] = 0;
     data->elem_start->type = CMD;
 
 //    data->elem_start->next->cmd = cmd2;
-//    data->elem_start->next->cmd[0] = "env";
-//    data->elem_start->next->cmd[1] = 0;
-//    data->elem_start->next->cmd[2] = 0;
-//    data->elem_start->next->type = CMD;
+//    data->elem_start->next->cmd[0] = "rm";
+//    data->elem_start->next->cmd[1] = "-rf";
+//    data->elem_start->next->cmd[2] = "../test";
+//    data->elem_start->next->cmd[3] = 0;
+//    data->elem_start->next->type = PIPE;
 //
 //    data->elem_start->next->next->cmd = cmd3;
-//    data->elem_start->next->next->cmd[0] = "grep";
-//    data->elem_start->next->next->cmd[1] = "2";
+//    data->elem_start->next->next->cmd[0] = "env";
+//    data->elem_start->next->next->cmd[1] = 0;
 //    data->elem_start->next->next->cmd[2] = 0;
 //    data->elem_start->next->next->type = CMD;
 //

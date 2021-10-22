@@ -25,6 +25,7 @@ t_elem  *create_elem(t_data *data)
     ptr->pfd[0] = -1;
     ptr->pfd[1] = -1;
     ptr->is_builtin = 0;
+    ptr->pid = -1;
     return ptr;
 }
 

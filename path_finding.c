@@ -59,13 +59,27 @@ void	env_path_find(t_data *data)
     i = -1;
     while (data->envp[++i])
     {
-        if ((data->envp[i][0]) == 'P' && (data->envp[i][1]) == 'A' && \
-		(data->envp[i][2]) == 'T' && (data->envp[i][3]) == 'H' && (data->envp[i][4]) == '=')
+        if (!ft_strncmp(data->envp[i], "PATH=", 5))
         {
             data->envp[i] += 5;
             data->path = data->envp[i];
         }
     }
+}
+
+char *search_strings_in_array(char **arr, char *search_word, int *index)
+{
+	int i = -1;
+
+	while(arr[++i])
+	{
+		if(!ft_strncmp(arr[i], search_word, ft_strlen(search_word)))
+		{
+			*index = i;
+			return (arr[i] + ft_strlen(search_word));
+		}
+	}
+	return NULL;
 }
 
 void	find_path(t_elem *elem)

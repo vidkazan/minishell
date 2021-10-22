@@ -14,20 +14,19 @@ void print_current_elem(t_elem *ptr,int id)
 {
     if(ptr->cmd&& *ptr->cmd)
     {
-        ft_putstr_fd(">>> ", 2);
-        while(*ptr->cmd) {
-            ft_putstr_fd(*ptr->cmd++, 2);
-            ft_putstr_fd(" ", 2);
-        }
-        ft_putstr_fd("\n", 2);
+        dprintf(2,">>> ");
+        while(*ptr->cmd)
+        	dprintf(2,"%s ", *ptr->cmd++);
+        dprintf(2,"\n");
     }
     else
-        ft_putstr_fd(">>> nocmd \n", 2);
+    	dprintf(2,">>> nocmd \n");
 }
 
 void print_elems(t_elem *ptr)
 {
     int id = 1;
+    dprintf(2,"\n");
     while(ptr)
     {
         print_current_elem(ptr, id++);
