@@ -8,7 +8,6 @@
   <component name="ChangeListManager">
     <list default="true" id="016fef2b-8bdf-4261-aeba-e62e3c272dc9" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/builtins_echo.c" beforeDir="false" afterPath="$PROJECT_DIR$/builtins_echo.c" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/main.c" beforeDir="false" afterPath="$PROJECT_DIR$/main.c" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/minishell" beforeDir="false" afterPath="$PROJECT_DIR$/minishell" afterDir="false" />
     </list>
@@ -52,13 +51,6 @@
       <recent name="$PROJECT_DIR$" />
     </key>
   </component>
-  <component name="RunManager">
-    <configuration default="true" type="GradleAppRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" PASS_PARENT_ENVS_2="true">
-      <method v="2">
-        <option name="com.jetbrains.cidr.cpp.gradle.execution.GradleNativeBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
-      </method>
-    </configuration>
-  </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
@@ -77,6 +69,9 @@
       <workItem from="1634841362723" duration="41000" />
       <workItem from="1634902695747" duration="10189000" />
       <workItem from="1635002050446" duration="2074000" />
+      <workItem from="1635007121299" duration="2006000" />
+      <workItem from="1635011806085" duration="2492000" />
+      <workItem from="1635022156511" duration="2000" />
     </task>
     <servers />
   </component>
