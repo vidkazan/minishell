@@ -170,7 +170,7 @@ int main(int ac, char **av, char **env)
     if(ac == 2)
         data->debug = 1;
     data->elem_start = push_back(data->elem_start, data);
-//    data->elem_start = push_back(data->elem_start, data);
+    data->elem_start = push_back(data->elem_start, data);
 //    data->elem_start->next = push_back(data->elem_start->next, data);
 //    data->elem_start->next->next = push_back(data->elem_start->next->next, data);
 //    data->elem_start->next->next->next = push_back(data->elem_start->next->next->next, data);
@@ -178,21 +178,21 @@ int main(int ac, char **av, char **env)
 //    data->elem_start->next->next->next->next->next = push_back(data->elem_start->next->next->next->next->next, data);
 
     data->elem_start->cmd = cmd;
-    data->elem_start->cmd[0] = "cd";
-    data->elem_start->cmd[1] = "test";
+    data->elem_start->cmd[0] = "cat";
+    data->elem_start->cmd[1] = 0;
     data->elem_start->cmd[2] = 0;
     data->elem_start->cmd[3] = 0;
-    data->elem_start->type = CMD;
+    data->elem_start->type = PIPE;
 
-//    data->elem_start->next->cmd = cmd2;
-//    data->elem_start->next->cmd[0] = "rm";
-//    data->elem_start->next->cmd[1] = "-rf";
-//    data->elem_start->next->cmd[2] = "../test";
-//    data->elem_start->next->cmd[3] = 0;
-//    data->elem_start->next->type = PIPE;
+    data->elem_start->next->cmd = cmd2;
+    data->elem_start->next->cmd[0] = "ls";
+    data->elem_start->next->cmd[1] = 0;
+    data->elem_start->next->cmd[2] = 0;
+    data->elem_start->next->cmd[3] = 0;
+    data->elem_start->next->type = CMD;
 //
 //    data->elem_start->next->next->cmd = cmd3;
-//    data->elem_start->next->next->cmd[0] = "env";
+//    data->elem_start->next->next->cmd[0] = "ls";
 //    data->elem_start->next->next->cmd[1] = 0;
 //    data->elem_start->next->next->cmd[2] = 0;
 //    data->elem_start->next->next->type = CMD;

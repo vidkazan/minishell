@@ -8,6 +8,11 @@ void builtin_echo(t_elem *elem)
 {
     int is_n_flag = 0;
     int i = 0;
+    if(!elem->cmd[1])
+    {
+		write(elem->data->std_out, "\n", 1);
+		return;
+    }
     if(!ft_strncmp(elem->cmd[1],"-n", 2))
     {
         i++;
