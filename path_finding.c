@@ -8,9 +8,9 @@ void	free_arr(char **str)
 {
     int	i;
 
-    i = 0;
-    while (str[i])
-        free(str[i++]);
+    i = -1;
+    while (str[++i + 1])
+        free(str[i]);
     free(str);
     str = NULL;
 }
@@ -60,10 +60,7 @@ void	env_path_find(t_data *data)
     while (data->envp[++i])
     {
         if (!ft_strncmp(data->envp[i], "PATH=", 5))
-        {
-            data->envp[i] += 5;
-            data->path = data->envp[i];
-        }
+            data->path = (data->envp[i] + 5);
     }
 }
 
@@ -71,6 +68,8 @@ char *search_strings_in_array(char **arr, char *search_word, int *index)
 {
 	int i = -1;
 
+	if(!search_word || index == NULL)
+        return NULL;
 	while(arr[++i])
 	{
 		if(!ft_strncmp(arr[i], search_word, ft_strlen(search_word)))

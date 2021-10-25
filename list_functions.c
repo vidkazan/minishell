@@ -90,3 +90,30 @@ t_elem  *push_back(t_elem *ptr, t_data *data)
     }
     return ptr;
 }
+
+int ft_strlen_arr(char **arr)
+{
+    int i;
+
+    i = 0;
+    if(!arr || !arr[0])
+        return 0;
+    while(arr[i])
+        i++;
+    return i;
+}
+
+char    **ft_arrdup(char **env)
+{
+    char **arr_dup;
+    int i = -1;
+    int arr_len = ft_strlen_arr(env);
+
+    if(!env || !env[0])
+        return NULL;
+    arr_dup = (char **)malloc(sizeof(char *) * (arr_len + 1));
+    while (++i < arr_len)
+        arr_dup[i] = ft_strdup(env[i]);
+    arr_dup[arr_len] = NULL;
+    return arr_dup;
+}

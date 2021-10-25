@@ -28,6 +28,10 @@ void builtin_exec(t_elem *elem)
         builtin_pwd(elem);
     if(!ft_strncmp(elem->cmd[0], "env", 3))
     	builtin_env(elem);
+    if(!ft_strncmp(elem->cmd[0], "exit", 4))
+        builtin_exit(elem);
+    if(!ft_strncmp(elem->cmd[0], "unset", 5))
+        builtin_unset(elem);
 }
 
 void builtin_check(t_elem *elem)
@@ -45,7 +49,7 @@ void execution(t_elem *elem)
     {
         if(elem->data->debug)
         	dprintf(2,"\n>>> %.05d: now %p\n", elem->pid, elem);
-        //builtin_check(elem);
+        builtin_check(elem);
         if(!elem->is_builtin)
             find_path(elem);
         if(elem->data->debug)
@@ -105,7 +109,7 @@ void execution(t_elem *elem)
                 	dprintf(2, ">>> %.05d: child\n", elem->pid);
                 if (!elem->is_builtin && (execve(elem->cmd[0], elem->cmd, elem->data->envp) < 0))
                 {
-					ft_putstr_fd(strerror(errno), 2);
+                    dprintf(2, ">>> %s\n", strerror(errno));
 					exit(1);
 				}
             }
@@ -132,7 +136,7 @@ void execution(t_elem *elem)
 
 void init(t_data *data, char **env)
 {
-    data->envp = env; // need to malloc every line?
+    data->envp = ft_arrdup(env);
     data->std_in = dup(0);
     data->std_out = dup(1);
     data->error = 0;
@@ -156,8 +160,14 @@ void waiting(t_data *data)
 	}
 }
 
+void closing(t_data *data)
+{
+    free_arr(data->envp);
+}
+
 int main(int ac, char **av, char **env)
 {
+    int n = 0;
     char *cmd[4];
     char *cmd2[4];
     char *cmd3[4];
@@ -171,43 +181,45 @@ int main(int ac, char **av, char **env)
     if(ac == 2)
         data->debug = 1;
     data->elem_start = push_back(data->elem_start, data);
-    data->elem_start = push_back(data->elem_start, data);
-    data->elem_start->next = push_back(data->elem_start->next, data);
+//    data->elem_start = push_back(data->elem_start, data);
+//    data->elem_start->next = push_back(data->elem_start->next, data);
 //    data->elem_start->next->next = push_back(data->elem_start->next->next, data);
-//    data->elem_start->next->next->next = push_back(data->elem_start->next->next->next, data);
+//    data->elem_start->next->next->nexst = push_back(data->elem_start->next->next->next, data);
 //    data->elem_start->next->next->next->next = push_back(data->elem_start->next->next->next->next, data);
 //    data->elem_start->next->next->next->next->next = push_back(data->elem_start->next->next->next->next->next, data);
 
     data->elem_start->cmd = cmd;
-    data->elem_start->cmd[0] = "echo";
-    data->elem_start->cmd[1] = "test";
+    data->elem_start->cmd[0] = "ls";
+    data->elem_start->cmd[1] = 0;
     data->elem_start->cmd[2] = 0;
     data->elem_start->cmd[3] = 0;
-    data->elem_start->type = PIPE;
+    data->elem_start->type = CMD;
 
-    data->elem_start->next->cmd = cmd2;
-    data->elem_start->next->cmd[0] = "cat";
-    data->elem_start->next->cmd[1] = "-e";
-    data->elem_start->next->cmd[2] = 0;
-    data->elem_start->next->cmd[3] = 0;
-    data->elem_start->next->type = PIPE;
-
-    data->elem_start->next->next->cmd = cmd3;
-    data->elem_start->next->next->cmd[0] = "cat";
-    data->elem_start->next->next->cmd[1] = "-e";
-    data->elem_start->next->next->cmd[2] = 0;
-    data->elem_start->next->next->type = CMD;
+//    data->elem_start->next->cmd = cmd2;
+//    data->elem_start->next->cmd[0] = "env";
+//    data->elem_start->next->cmd[1] = 0;
+//    data->elem_start->next->cmd[2] = 0;
+//    data->elem_start->next->cmd[3] = 0;
+//    data->elem_start->next->type = CMD;
+//
+//    data->elem_start->next->next->cmd = cmd3;
+//    data->elem_start->next->next->cmd[0] = "cd";
+//    data->elem_start->next->next->cmd[1] = "./";
+//    data->elem_start->next->next->cmd[2] = 0;
+//    data->elem_start->next->next->cmd[3] = 0;
+//    data->elem_start->next->next->type = PIPE;
 
 //    data->elem_start->next->next->next->cmd = cmd4;
-//    data->elem_start->next->next->next->cmd[0] = "./text/old.txt";
-//	data->elem_start->next->next->next->cmd[1] = 0;
+//    data->elem_start->next->next->next->cmd[0] = "mkdir";
+//	data->elem_start->next->next->next->cmd[1] = "1";
 //	data->elem_start->next->next->next->cmd[2] = 0;
-//    data->elem_start->next->next->next->type = SIMPLE_REDIRECT_INPUT;
+//    data->elem_start->next->next->next->cmd[3] = 0;
+//    data->elem_start->next->next->next->type = CMD;
 //
 //    data->elem_start->next->next->next->next->cmd = cmd5;
-//	data->elem_start->next->next->next->next->cmd[0] = "./text/out.txt";
+//	data->elem_start->next->next->next->next->cmd[0] = "pwd";
 //	data->elem_start->next->next->next->next->cmd[1] = 0;
-//	data->elem_start->next->next->next->next->type = DOUBLE_REDIRECT_OUTPUT;
+//	data->elem_start->next->next->next->next->type = CMD;
 //
 //	data->elem_start->next->next->next->next->next->cmd = cmd6;
 //	data->elem_start->next->next->next->next->next->cmd[0] = "./text/in.txt";
@@ -223,6 +235,7 @@ int main(int ac, char **av, char **env)
 //	printf(">>> DO %d SO %d SI %d\n", data->double_redirect_output_fd,data->simple_redirect_output_fd,data->simple_redirect_input_fd);
     execution(data->elem_start);
     waiting(data);
+//    closing(data);
 //    print_elems(data->elem_start);
     return 0;
 }

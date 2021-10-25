@@ -2,14 +2,21 @@
 <project version="4">
   <component name="CMakeSettings">
     <configurations>
-      <configuration PROFILE_NAME="Debug" ENABLED="true" CONFIG_NAME="Debug" />
+      <configuration PROFILE_NAME="Debug" CONFIG_NAME="Debug" ENABLED="true" />
     </configurations>
   </component>
   <component name="ChangeListManager">
     <list default="true" id="016fef2b-8bdf-4261-aeba-e62e3c272dc9" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/builtins_echo.c" beforeDir="false" afterPath="$PROJECT_DIR$/builtins_echo.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/builtins_env.c" beforeDir="false" afterPath="$PROJECT_DIR$/builtins_env.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/builtins_pwd_cd.c" beforeDir="false" afterPath="$PROJECT_DIR$/builtins_pwd_cd.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/list_functions.c" beforeDir="false" afterPath="$PROJECT_DIR$/list_functions.c" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/main.c" beforeDir="false" afterPath="$PROJECT_DIR$/main.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main.h" beforeDir="false" afterPath="$PROJECT_DIR$/main.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/minishell" beforeDir="false" afterPath="$PROJECT_DIR$/minishell" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/path_finding.c" beforeDir="false" afterPath="$PROJECT_DIR$/path_finding.c" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -17,10 +24,12 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="ClangdSettings">
+    <option name="clangTidyViaClangd" value="false" />
     <option name="formatViaClangd" value="false" />
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+    <option name="ROOT_SYNC" value="SYNC" />
   </component>
   <component name="GitSEFilterConfiguration">
     <file-type-list>
@@ -29,6 +38,11 @@
       <filtered-out-file-type name="TAG" />
       <filtered-out-file-type name="COMMIT_BY_MESSAGE" />
     </file-type-list>
+  </component>
+  <component name="HighlightingSettingsPerFile">
+    <setting file="file://$PROJECT_DIR$/builtins_env.c" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/main.c" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/builtins_echo.c" root0="FORCE_HIGHLIGHTING" />
   </component>
   <component name="ProjectId" id="1zoFrLojgflqoV1pGHaww9QXrYm" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
@@ -72,6 +86,14 @@
       <workItem from="1635007121299" duration="2006000" />
       <workItem from="1635011806085" duration="2492000" />
       <workItem from="1635022156511" duration="2000" />
+      <workItem from="1635030137555" duration="647000" />
+      <workItem from="1635072520857" duration="2709000" />
+      <workItem from="1635075854960" duration="3974000" />
+      <workItem from="1635082198795" duration="931000" />
+      <workItem from="1635083223936" duration="10517000" />
+      <workItem from="1635099345618" duration="3208000" />
+      <workItem from="1635104667619" duration="1018000" />
+      <workItem from="1635194713604" duration="3116000" />
     </task>
     <servers />
   </component>
