@@ -182,8 +182,8 @@ int main(int ac, char **av, char **env)
     if(ac == 2)
         data->debug = 1;
     data->elem_start = push_back(data->elem_start, data);
-//    data->elem_start = push_back(data->elem_start, data);
-//    data->elem_start->next = push_back(data->elem_start->next, data);
+    push_back(data->elem_start, data);
+    push_back(data->elem_start->next, data);
 //    data->elem_start->next->next = push_back(data->elem_start->next->next, data);
 //    data->elem_start->next->next->nexst = push_back(data->elem_start->next->next->next, data);
 //    data->elem_start->next->next->next->next = push_back(data->elem_start->next->next->next->next, data);
@@ -194,21 +194,21 @@ int main(int ac, char **av, char **env)
     data->elem_start->cmd[1] = 0;
     data->elem_start->cmd[2] = 0;
     data->elem_start->cmd[3] = 0;
-    data->elem_start->type = CMD;
+    data->elem_start->type = PIPE;
 
-//    data->elem_start->next->cmd = cmd2;
-//    data->elem_start->next->cmd[0] = "env";
-//    data->elem_start->next->cmd[1] = 0;
-//    data->elem_start->next->cmd[2] = 0;
-//    data->elem_start->next->cmd[3] = 0;
-//    data->elem_start->next->type = CMD;
+    data->elem_start->next->cmd = cmd2;
+    data->elem_start->next->cmd[0] = "grep";
+    data->elem_start->next->cmd[1] = "m";
+    data->elem_start->next->cmd[2] = 0;
+    data->elem_start->next->cmd[3] = 0;
+    data->elem_start->next->type = PIPE;
 //
-//    data->elem_start->next->next->cmd = cmd3;
-//    data->elem_start->next->next->cmd[0] = "cd";
-//    data->elem_start->next->next->cmd[1] = "./";
-//    data->elem_start->next->next->cmd[2] = 0;
-//    data->elem_start->next->next->cmd[3] = 0;
-//    data->elem_start->next->next->type = PIPE;
+    data->elem_start->next->next->cmd = cmd3;
+    data->elem_start->next->next->cmd[0] = "unset";
+    data->elem_start->next->next->cmd[1] = "PATH";
+    data->elem_start->next->next->cmd[2] = 0;
+    data->elem_start->next->next->cmd[3] = 0;
+    data->elem_start->next->next->type = CMD;
 
 //    data->elem_start->next->next->next->cmd = cmd4;
 //    data->elem_start->next->next->next->cmd[0] = "mkdir";
@@ -236,7 +236,7 @@ int main(int ac, char **av, char **env)
 //	printf(">>> DO %d SO %d SI %d\n", data->double_redirect_output_fd,data->simple_redirect_output_fd,data->simple_redirect_input_fd);
     execution(data->elem_start);
     waiting(data);
-//    closing(data);
+    closing(data);
 //    print_elems(data->elem_start);
     return 0;
 }

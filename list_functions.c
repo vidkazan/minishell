@@ -71,24 +71,22 @@ t_elem	*delete_current_node(t_elem *elem)
 	}
 }
 
-t_elem  *push_back(t_elem *ptr, t_data *data)
+t_elem  *push_back(t_elem *elem, t_data *data)
 {
+    t_elem *ptr = elem;
     t_elem *new_elem;
-    t_elem *ptr_prev;
+
     if(ptr == NULL)
-        ptr = create_elem(data);
+        elem = create_elem(data);
     else
     {
         while(ptr->next != NULL)
-        {
-            ptr_prev = ptr;
             ptr = ptr->next;
-        }
         new_elem = create_elem(data);
         ptr->next = new_elem;
         new_elem->prev = ptr;
     }
-    return ptr;
+    return elem;
 }
 
 int ft_strlen_arr(char **arr)
