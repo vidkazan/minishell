@@ -6,14 +6,15 @@
 
 void builtin_pwd(t_elem *elem)
 {
-    char *pwd = getcwd(NULL, 1024);
-    if(!pwd)
+    int i = 0;
+    char *res;
+    res = search_strings_in_array(elem->data->envp, "PWD=", &i);
+    if(!res)
     {
-		dprintf(2, "pwd:getcwd: error");
-		return;
-	}
-    dprintf(2,"pwd: %s\n", pwd);
-    free(pwd);
+        dprintf(2, "pwd:error: no env PATH");
+        return;
+    }
+    dprintf(2,"%s\n", res);
 }
 
 void builtin_cd(t_elem *elem) // no handling deleted dir error
@@ -37,6 +38,8 @@ void builtin_cd(t_elem *elem) // no handling deleted dir error
         	return;
         }
     }
+    if(!elem->cmd[1][0])
+        return;
     else if(elem->cmd[1][0] == '~')
     {
     	elem->cmd[1]++;
@@ -63,12 +66,13 @@ void builtin_cd(t_elem *elem) // no handling deleted dir error
     }
     else
     {
-    	res_path = ft_strdup(elem->cmd[1]);
-    	if(getcwd(NULL, 1024) || (ft_strncmp(elem->cmd[1], ".", 1) && ft_strlen(elem->cmd[1]) == 1))
+//        (ft_strncmp(elem->cmd[1], ".", 1) &&
+                 res_path = ft_strdup(elem->cmd[1]);
+    	if(getcwd(NULL, 1024) ||ft_strlen(elem->cmd[1]) == 1)
     	{
 			if (chdir(res_path))
 			{
-				write(1, "error: chdir\n", 13);
+                dprintf(2, "getcwd:error: no directory\n");
 				return;
 			}
 		}
@@ -79,7 +83,7 @@ void builtin_cd(t_elem *elem) // no handling deleted dir error
     }
 	edit_env_keys(pwd_index, getcwd(NULL, 1024), elem->data);
     edit_env_keys(old_pwd_index, current_pwd_env, elem->data);
-	builtin_pwd(elem);
+//	builtin_pwd(elem);
     free(res_path);
     free(current_pwd_env);
 }

@@ -27,3 +27,8 @@ void builtin_echo(t_elem *elem)
     if(!is_n_flag)
         write(1, "\n", 1);
 }
+
+void    builtin_exit(t_elem *elem)
+{
+    exit(0);
+}
