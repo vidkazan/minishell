@@ -41,6 +41,7 @@ void builtin_check(t_elem *elem)
     !ft_strncmp(elem->cmd[0], "unset", 5) || !ft_strncmp(elem->cmd[0], "env", 3) || \
     !ft_strncmp(elem->cmd[0], "exit", 4))
         elem->is_builtin = 1;
+    
 }
 
 void execution(t_elem *elem)
