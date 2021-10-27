@@ -51,91 +51,94 @@ void execution(t_elem *elem)
     {
         if(elem->data->debug)
         	dprintf(2,"\n>>> %.05d: now %p\n", elem->pid, elem);
-        builtin_check(elem);
         if(!elem->is_builtin)
             find_path(elem);
         if(elem->data->debug)
         	dprintf(2,">>> %.05d: %s \n", elem->pid, elem->cmd[0]);
-		if (elem->type == CMD && elem->prev && !elem->next)
-        {
-            if(elem->data->debug)
-            	dprintf(2,">>> %.05d: last_cmd\n", elem->pid);
-            dup2(elem->prev->pfd[0], 0);
-            if(elem->data->double_redirect_output_fd)
-				dup2(elem->data->double_redirect_output_fd, 1);
-			if(elem->data->simple_redirect_output_fd)
-				dup2(elem->data->simple_redirect_output_fd, 1);
-            if(elem->data->simple_redirect_output_fd < 0 && elem->data->double_redirect_output_fd < 0)
-                dup2(elem->data->std_out, 1);
-        }
-        else if(elem->type == CMD && !elem->prev && !elem->next)
-        {
-            if(elem->data->debug)
-            	dprintf(2,">>> %.05d: first_cmd\n", elem->pid);
-			if(elem->data->double_redirect_output_fd)
-				dup2(elem->data->double_redirect_output_fd, 1);
-			if(elem->data->simple_redirect_output_fd)
-				dup2(elem->data->simple_redirect_output_fd, 1);
-			if(elem->data->simple_redirect_input_fd)
-				dup2(elem->data->simple_redirect_input_fd, 0);
-		}
+
         if (elem->type == PIPE)
         {
             if(elem->data->debug)
             	dprintf(2,">>> %.05d: pipe\n", elem->pid);
             pipe(elem->pfd);
-            if(!elem->prev)
+        }
+        if(elem->data->debug)
+            dprintf(2,">>> %.05d: fork\n", elem->pid);
+        elem->pid = fork();
+        if (elem->pid == 0)
+        {
+            if (elem->data->debug)
+                dprintf(2, ">>> %.05d: child\n", elem->pid);
+            if (elem->type == CMD && elem->prev && !elem->next)
             {
-            	if(elem->data->simple_redirect_input_fd)
-            		dup2(elem->data->simple_redirect_input_fd, 0);
                 if(elem->data->debug)
-                	dprintf(2,">>> %.05d: first_pipe\n", elem->pid);
-                dup2(elem->pfd[1], 1);
+                    dprintf(2,">>> %.05d: last_cmd\n", elem->pid);
+                dup2(elem->prev->pfd[0], 0);
+                close(elem->prev->pfd[0]);
+                close(elem->prev->pfd[1]);
+                if(elem->data->double_redirect_output_fd)
+                    dup2(elem->data->double_redirect_output_fd, 1);
+                if(elem->data->simple_redirect_output_fd)
+                    dup2(elem->data->simple_redirect_output_fd, 1);
+                if(elem->data->simple_redirect_output_fd < 0 && elem->data->double_redirect_output_fd < 0)
+                    dup2(elem->data->std_out, 1);
             }
-            else if(elem->prev && elem->next)
+            else if(elem->type == CMD && !elem->prev && !elem->next)
             {
                 if(elem->data->debug)
-                	dprintf(2,">>> %.05d: middle_pipe\n", elem->pid);
+                    dprintf(2,">>> %.05d: first_cmd\n", elem->pid);
+                if(elem->data->double_redirect_output_fd)
+                    dup2(elem->data->double_redirect_output_fd, 1);
+                if(elem->data->simple_redirect_output_fd)
+                    dup2(elem->data->simple_redirect_output_fd, 1);
+                if(elem->data->simple_redirect_input_fd)
+                    dup2(elem->data->simple_redirect_input_fd, 0);
+            }
+            else if(elem->type == PIPE && !elem->prev)
+            {
+                if(elem->data->simple_redirect_input_fd)
+                    dup2(elem->data->simple_redirect_input_fd, 0);
+                if(elem->data->debug)
+                    dprintf(2,">>> %.05d: first_pipe\n", elem->pid);
+                dup2(elem->pfd[1], 1);
+                close(elem->pfd[0]);
+                close(elem->pfd[1]);
+            }
+            else if(elem->type == PIPE && elem->prev && elem->next)
+            {
+                if(elem->data->debug)
+                    dprintf(2,">>> %.05d: middle_pipe\n", elem->pid);
                 dup2(elem->pfd[1], 1);
                 dup2(elem->prev->pfd[0], 0);
+                close(elem->pfd[0]);
+                close(elem->pfd[1]);
+                close(elem->prev->pfd[0]);
+                close(elem->prev->pfd[1]);
             }
-        }
-        if(!elem->is_builtin)
-        {
-            if(elem->data->debug)
-            	dprintf(2,">>> %.05d: fork\n", elem->pid);
-            elem->pid = fork();
-            if (elem->pid == 0)
+            if (execve(elem->cmd[0], elem->cmd, elem->data->envp) < 0)
             {
-                if (elem->data->debug)
-                	dprintf(2, ">>> %.05d: child\n", elem->pid);
-                if (!elem->is_builtin && (execve(elem->cmd[0], elem->cmd, elem->data->envp) < 0))
-                {
-					ft_putstr_fd(strerror(errno), 2);
-					exit(1);
-				}
+                ft_putstr_fd(strerror(errno), 2);
+                exit(1);
             }
         }
         else
         {
-            if(elem->data->debug)
-            	dprintf(2,">>> %.05d: builtin\n", elem->pid);
-            builtin_exec(elem);
+            if (elem->type == CMD && elem->prev && !elem->next) // last_CMD
+                close(elem->prev->pfd[0]);
+            else if(elem->type == PIPE && !elem->prev) // first_PIPE
+                close(elem->pfd[1]);
+            else if(elem->type == PIPE && elem->prev && elem->next) // middle_PIPE
+                close(elem->prev->pfd[0]);
+                close(elem->pfd[1]);
         }
-        if(elem->pid != 0)
+        if (elem->next)
         {
-            close_fd(elem);
             if (elem->data->debug)
-                dprintf(2, ">>> %.05d: end of %p\n", elem->pid, elem);
-            if (elem->next)
-            {
-                if (elem->data->debug)
-                    dprintf(2, ">>> %.05d: moving to %p\n", elem->pid, elem->next);
-                elem = elem->next;
-            }
-            else
-                break;
+                dprintf(2, ">>> %.05d: moving to %p\n", elem->pid, elem->next);
+            elem = elem->next;
         }
+        else
+            break;
     }
 }
 
@@ -161,11 +164,9 @@ void waiting(t_data *data)
 	{
         if(data->debug)
             printf(">>> %d wait %s\n",elem->pid, elem->cmd[0]);
-        if(elem->prev)
-		kill(elem->prev->pid,1);
-        wait(0);
+        waitpid(elem->pid, 0,0);
         if(data->debug)
-        printf(">>> %d killed %s\n",elem->pid, elem->cmd[0]);
+            printf(">>> %d killed %s\n",elem->pid, elem->cmd[0]);
 		if(elem->next)
 			elem = elem->next;
 		else
@@ -242,7 +243,8 @@ int main(int ac, char **av, char **env)
             waiting(data);
             dup2(data->std_out,1);
             dup2(data->std_in,0);
-//             print_elems(data->elem_start);
+            if(data->debug)
+                print_elems(data->elem_start);
 			data_reboot(data, NULL, 0);
 		}
     }

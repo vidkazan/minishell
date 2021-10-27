@@ -8,16 +8,9 @@
   <component name="ChangeListManager">
     <list default="true" id="016fef2b-8bdf-4261-aeba-e62e3c272dc9" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Makefile" beforeDir="false" afterPath="$PROJECT_DIR$/Makefile" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/list_functions.c" beforeDir="false" afterPath="$PROJECT_DIR$/list_functions.c" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/main.c" beforeDir="false" afterPath="$PROJECT_DIR$/main.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/main.h" beforeDir="false" afterPath="$PROJECT_DIR$/main.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/minishell" beforeDir="false" afterPath="$PROJECT_DIR$/minishell" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pipex" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/text/in.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/text/old.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/text/out.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/text/test_cases.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/preparsing.c" beforeDir="false" afterPath="$PROJECT_DIR$/preparsing.c" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -42,9 +35,9 @@
     </file-type-list>
   </component>
   <component name="HighlightingSettingsPerFile">
+    <setting file="file://$PROJECT_DIR$/builtins_echo.c" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/main.c" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/builtins_env.c" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/builtins_echo.c" root0="FORCE_HIGHLIGHTING" />
   </component>
   <component name="ProjectId" id="1zoFrLojgflqoV1pGHaww9QXrYm" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
@@ -59,7 +52,7 @@
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="cf.first.check.clang-format" value="false" />
     <property name="cidr.known.project.marker" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/Makefile" />
     <property name="nodejs_package_manager_path" value="npm" />
   </component>
   <component name="RecentsManager">
@@ -99,6 +92,8 @@
       <workItem from="1635200853296" duration="7000" />
       <workItem from="1635201901112" duration="849000" />
       <workItem from="1635328628514" duration="373000" />
+      <workItem from="1635372279283" duration="351000" />
+      <workItem from="1635372703681" duration="1692000" />
     </task>
     <servers />
   </component>
