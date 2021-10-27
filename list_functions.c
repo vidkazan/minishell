@@ -76,8 +76,12 @@ t_elem  *push_back(t_elem *elem, t_data *data)
     t_elem *ptr = elem;
     t_elem *new_elem;
 
+//    printf(">>> here21\n");
     if(ptr == NULL)
+    {
+//        printf(">>> here22\n");
         elem = create_elem(data);
+    }
     else
     {
         while(ptr->next != NULL)
@@ -85,7 +89,9 @@ t_elem  *push_back(t_elem *elem, t_data *data)
         new_elem = create_elem(data);
         ptr->next = new_elem;
         new_elem->prev = ptr;
+        elem = new_elem;
     }
+//    printf(">>> here23\n");
     return elem;
 }
 
@@ -114,4 +120,9 @@ char    **ft_arrdup(char **env)
         arr_dup[i] = ft_strdup(env[i]);
     arr_dup[arr_len] = NULL;
     return arr_dup;
+}
+
+void	list_cleaner(t_elem *elem)
+{
+	elem = NULL;
 }

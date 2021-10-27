@@ -1,0 +1,7 @@
+cat /dev/random | head -c 100 | wc -c
+cat many | wc
+ls -lAR / | cat | grep '/'
+cat /dev/random | head -n 1 | cat -e
+cat Makefile | grep pr | head -n 5 | cd test
+cat Makefile | grep pr | head -n 5 | hello
+cat Makefile | grep pr | head -n 5 | yes | head

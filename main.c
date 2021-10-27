@@ -12,6 +12,8 @@
 
 void close_fd(t_elem *elem)
 {
+    if(elem->data->debug)
+        dprintf(2, ">>> %d closing fd\n", elem->pid);
 	if(elem->prev && elem->prev->pfd[0] > 2)
 		close(elem->prev->pfd[0]);
 	if(elem->pfd[1] != -1)
@@ -41,7 +43,6 @@ void builtin_check(t_elem *elem)
     !ft_strncmp(elem->cmd[0], "unset", 5) || !ft_strncmp(elem->cmd[0], "env", 3) || \
     !ft_strncmp(elem->cmd[0], "exit", 4))
         elem->is_builtin = 1;
-    
 }
 
 void execution(t_elem *elem)
@@ -110,7 +111,7 @@ void execution(t_elem *elem)
                 	dprintf(2, ">>> %.05d: child\n", elem->pid);
                 if (!elem->is_builtin && (execve(elem->cmd[0], elem->cmd, elem->data->envp) < 0))
                 {
-                    dprintf(2, ">>> %s\n", strerror(errno));
+					ft_putstr_fd(strerror(errno), 2);
 					exit(1);
 				}
             }
@@ -121,23 +122,26 @@ void execution(t_elem *elem)
             	dprintf(2,">>> %.05d: builtin\n", elem->pid);
             builtin_exec(elem);
         }
-		close_fd(elem);
-        if(elem->data->debug)
-        	dprintf(2,">>> %.05d: end of %p\n",elem->pid, elem);
-        if (elem->next)
+        if(elem->pid != 0)
         {
-        	if(elem->data->debug)
-        		dprintf(2,">>> %.05d: moving to %p\n",elem->pid, elem);
-            elem = elem->next;
+            close_fd(elem);
+            if (elem->data->debug)
+                dprintf(2, ">>> %.05d: end of %p\n", elem->pid, elem);
+            if (elem->next)
+            {
+                if (elem->data->debug)
+                    dprintf(2, ">>> %.05d: moving to %p\n", elem->pid, elem->next);
+                elem = elem->next;
+            }
+            else
+                break;
         }
-        else
-            break;
     }
 }
 
 void init(t_data *data, char **env)
 {
-    data->envp = ft_arrdup(env);
+//    data->envp = ft_arrdup(env);
     data->std_in = dup(0);
     data->std_out = dup(1);
     data->error = 0;
@@ -145,7 +149,9 @@ void init(t_data *data, char **env)
     data->simple_redirect_input_fd = -1;
     data->simple_redirect_output_fd = -1;
     data->double_redirect_output_fd = -1;
-    env_path_find(data);
+//    env_path_find(data);
+	data->q1 = 0;
+	data->q2 = 0;
 }
 
 void waiting(t_data *data)
@@ -153,90 +159,93 @@ void waiting(t_data *data)
 	t_elem *elem = data->elem_start;
 	while (elem)
 	{
-		wait(0);
+        if(data->debug)
+            printf(">>> %d wait %s\n",elem->pid, elem->cmd[0]);
+        if(elem->prev)
+		kill(elem->prev->pid,1);
+        wait(0);
+        if(data->debug)
+        printf(">>> %d killed %s\n",elem->pid, elem->cmd[0]);
 		if(elem->next)
 			elem = elem->next;
 		else
-			break;
+		{
+            if(data->debug)
+            printf(">>> %d kill end s\n",elem->pid);
+            break;
+        }
 	}
 }
+
+void	ft_strip(char **str)
+{
+	int i;
+
+	if (*str != NULL)
+	{
+		i = ft_strlen(*str);
+		while ((*str)[i - 1] == ' ' && i > 0)
+			i--;
+		(*str)[i] = '\0';
+		while (**str && **str == ' ')
+			(*str)++;
+	}
+}
+
+void	data_reboot(t_data *data, char *message, int mode)
+{
+	if (mode)
+		printf("%s\n", message);
+	list_cleaner(data->elem_start);
+	init(data, data->envp);		//	need to init everytime?
+}
+
 
 void closing(t_data *data)
 {
     free_arr(data->envp);
 }
 
+void	read_line_and_add_history(char **line)
+{
+	if (*line)
+	{
+		free(*line);
+		*line = (char *)NULL;
+	}
+	*line = readline("minishell $> ");
+	if (*line && **line)
+		add_history (*line);
+}
+
 int main(int ac, char **av, char **env)
 {
-    int n = 0;
-    char *cmd[4];
-    char *cmd2[4];
-    char *cmd3[4];
-    char *cmd4[4];
-    char *cmd5[4];
-    char *cmd6[4];
-    char *cmd7[4];
     t_data *data = malloc(sizeof (t_data));
+	int		exit_flag = 0;
 
     init(data, env);
+    data->envp = ft_arrdup(env);
+    env_path_find(data);
     if(ac == 2)
         data->debug = 1;
-    data->elem_start = push_back(data->elem_start, data);
-    push_back(data->elem_start, data);
-    push_back(data->elem_start->next, data);
-//    data->elem_start->next->next = push_back(data->elem_start->next->next, data);
-//    data->elem_start->next->next->nexst = push_back(data->elem_start->next->next->next, data);
-//    data->elem_start->next->next->next->next = push_back(data->elem_start->next->next->next->next, data);
-//    data->elem_start->next->next->next->next->next = push_back(data->elem_start->next->next->next->next->next, data);
-
-    data->elem_start->cmd = cmd;
-    data->elem_start->cmd[0] = "ls";
-    data->elem_start->cmd[1] = 0;
-    data->elem_start->cmd[2] = 0;
-    data->elem_start->cmd[3] = 0;
-    data->elem_start->type = PIPE;
-
-    data->elem_start->next->cmd = cmd2;
-    data->elem_start->next->cmd[0] = "grep";
-    data->elem_start->next->cmd[1] = "m";
-    data->elem_start->next->cmd[2] = 0;
-    data->elem_start->next->cmd[3] = 0;
-    data->elem_start->next->type = PIPE;
-//
-    data->elem_start->next->next->cmd = cmd3;
-    data->elem_start->next->next->cmd[0] = "unset";
-    data->elem_start->next->next->cmd[1] = "PATH";
-    data->elem_start->next->next->cmd[2] = 0;
-    data->elem_start->next->next->cmd[3] = 0;
-    data->elem_start->next->next->type = CMD;
-
-//    data->elem_start->next->next->next->cmd = cmd4;
-//    data->elem_start->next->next->next->cmd[0] = "mkdir";
-//	data->elem_start->next->next->next->cmd[1] = "1";
-//	data->elem_start->next->next->next->cmd[2] = 0;
-//    data->elem_start->next->next->next->cmd[3] = 0;
-//    data->elem_start->next->next->next->type = CMD;
-//
-//    data->elem_start->next->next->next->next->cmd = cmd5;
-//	data->elem_start->next->next->next->next->cmd[0] = "pwd";
-//	data->elem_start->next->next->next->next->cmd[1] = 0;
-//	data->elem_start->next->next->next->next->type = CMD;
-//
-//	data->elem_start->next->next->next->next->next->cmd = cmd6;
-//	data->elem_start->next->next->next->next->next->cmd[0] = "./text/in.txt";
-//	data->elem_start->next->next->next->next->next->cmd[1] = 0;
-//	data->elem_start->next->next->next->next->next->type = SIMPLE_REDIRECT_INPUT;
-//
-//	data->elem_start->next->next->next->next->next->next->cmd = cmd7;
-//	data->elem_start->next->next->next->next->next->next->cmd[0] = "./text/out.txt";
-//	data->elem_start->next->next->next->next->next->next->cmd[1] = 0;
-//	data->elem_start->next->next->next->next->next->next->type = DOUBLE_REDIRECT_OUTPUT;
-
-	simple_redirects(data);
-//	printf(">>> DO %d SO %d SI %d\n", data->double_redirect_output_fd,data->simple_redirect_output_fd,data->simple_redirect_input_fd);
-    execution(data->elem_start);
-    waiting(data);
+	while (!exit_flag)
+	{
+		read_line_and_add_history(&data->line);
+		// ft_strip(&line);
+		if (data->line && !ft_strncmp(data->line, "exit", 5))
+			exit_flag = 1;
+		else
+		{
+			main_preparser(data, data->line, env);
+            simple_redirects(data);
+            execution(data->elem_start);
+            waiting(data);
+            dup2(data->std_out,1);
+            dup2(data->std_in,0);
+//             print_elems(data->elem_start);
+			data_reboot(data, NULL, 0);
+		}
+    }
     closing(data);
-//    print_elems(data->elem_start);
     return 0;
 }
