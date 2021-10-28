@@ -20,16 +20,19 @@ void	edit_env_keys(int env_index, char *new_value, t_data *data)
 	data->envp[env_index] = ft_strjoin(env_name, new_value);
 }
 
-void builtin_env(t_elem *elem)
+void builtin_env(t_elem *elem, int write_fd)
 {
 	int i;
 
 	i = -1;
 	while (elem->data->envp[++i])
-		dprintf(elem->data->std_out,"%s\n",elem->data->envp[i]);
+	{
+	    ft_putstr_fd(elem->data->envp[i], write_fd);
+        ft_putchar_fd('\n', write_fd);
+	}
 }
 
-void builtin_unset(t_elem *elem)
+void builtin_unset(t_elem *elem, int write_fd)
 {
     int index = 0;
     int i;
@@ -55,4 +58,9 @@ void builtin_unset(t_elem *elem)
         i++;
     }
     elem->data->envp[i] = 0;
+}
+
+void builtin_export(t_elem *elem, int write_fd)
+{
+
 }

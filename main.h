@@ -73,13 +73,15 @@ void	edit_env_keys(int env_index, char *new_value, t_data *data);
 char    **ft_arrdup(char **env);
 void	free_arr(char **str);
 
-void    builtin_exit(t_elem *elem);
-void    builtin_unset(t_elem *elem);
+void    builtin_exit(t_elem *elem,int write_fd);
+void    builtin_unset(t_elem *elem,int write_fd);
 void    builtin_check(t_elem *elem);
-void    builtin_echo(t_elem *elem);
-void    builtin_cd(t_elem *elem);
-void builtin_pwd(t_elem *elem);
-void builtin_env(t_elem *elem);
+void    builtin_echo(t_elem *elem,int write_fd);
+void    builtin_cd(t_elem *elem,int write_fd);
+void builtin_pwd(t_elem *elem,int write_fd);
+void builtin_env(t_elem *elem,int write_fd);
+void builtin_export(t_elem *elem,int write_fd);
+int   builtin_fd_gen(t_elem *elem);
 
 void	list_cleaner(t_elem *elem);
 void	main_preparser(t_data *data, char *line, char **env);

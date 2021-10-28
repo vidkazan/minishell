@@ -4,20 +4,21 @@
 
 #include "main.h"
 
-void builtin_pwd(t_elem *elem)
+void builtin_pwd(t_elem *elem, int write_fd)
 {
     int i = 0;
     char *res;
     res = search_strings_in_array(elem->data->envp, "PWD=", &i);
     if(!res)
     {
-        dprintf(2, "pwd:error: no env PATH");
+        ft_putstr_fd("pwd:error: no env PATH", 2);
         return;
     }
-    dprintf(2,"%s\n", res);
+    ft_putendl_fd(res, write_fd);
+
 }
 
-void builtin_cd(t_elem *elem) // no handling deleted dir error
+void builtin_cd(t_elem *elem,int write_fd) // no handling deleted dir error
 {
 	char *home;
 	char *res_path;

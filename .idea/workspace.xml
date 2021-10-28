@@ -8,9 +8,13 @@
   <component name="ChangeListManager">
     <list default="true" id="016fef2b-8bdf-4261-aeba-e62e3c272dc9" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/builtins_echo.c" beforeDir="false" afterPath="$PROJECT_DIR$/builtins_echo.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/builtins_env.c" beforeDir="false" afterPath="$PROJECT_DIR$/builtins_env.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/builtins_pwd_cd.c" beforeDir="false" afterPath="$PROJECT_DIR$/builtins_pwd_cd.c" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/main.c" beforeDir="false" afterPath="$PROJECT_DIR$/main.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main.h" beforeDir="false" afterPath="$PROJECT_DIR$/main.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/minishell" beforeDir="false" afterPath="$PROJECT_DIR$/minishell" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/preparsing.c" beforeDir="false" afterPath="$PROJECT_DIR$/preparsing.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/path_finding.c" beforeDir="false" afterPath="$PROJECT_DIR$/path_finding.c" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -93,7 +97,7 @@
       <workItem from="1635201901112" duration="849000" />
       <workItem from="1635328628514" duration="373000" />
       <workItem from="1635372279283" duration="351000" />
-      <workItem from="1635372703681" duration="1692000" />
+      <workItem from="1635372703681" duration="7386000" />
     </task>
     <servers />
   </component>

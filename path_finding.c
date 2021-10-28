@@ -38,13 +38,13 @@ void	path_check(t_elem *elem, char **path_arr, char *file_no_path)
     {
         filename_with_slash = ft_strjoin(path_arr[i], "/");
         if (!filename_with_slash)
-            exit(1);
+            return;
         filename_with_path = \
 			ft_strjoin(filename_with_slash, file_no_path);
         free(filename_with_slash);
         filename_with_slash = NULL;
         if (!filename_with_path)
-            exit(1);
+            return;
         if (access_granted(elem, filename_with_path) == 1)
             break ;
         free(filename_with_path);
@@ -90,7 +90,7 @@ void	find_path(t_elem *elem)
         return ;
     path_arr = ft_split(elem->data->path, ':');
     if (!path_arr)
-        exit(1);
+        return;
     filename_no_path = elem->cmd[0];
     path_check(elem, path_arr, filename_no_path);
     free_arr(path_arr);

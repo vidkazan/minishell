@@ -4,31 +4,32 @@
 
 #include "main.h"
 
-void builtin_echo(t_elem *elem)
+void builtin_echo(t_elem *elem,int write_fd)
 {
     int is_n_flag = 0;
-    int i = 0;
+    int i = 1;
     if(!elem->cmd[1])
     {
-		write(elem->data->std_out, "\n", 1);
+        ft_putstr_fd("\n", write_fd);
 		return;
     }
-    if(!ft_strncmp(elem->cmd[1],"-n", 2))
+    while (elem->cmd[i] && !ft_strncmp(elem->cmd[i],"-n", 2))
     {
         i++;
         is_n_flag++;
     }
-    while(elem->cmd[++i])
+    while(elem->cmd[i])
     {
-        write(1, elem->cmd[i], ft_strlen(elem->cmd[i]));
+        ft_putstr_fd(elem->cmd[i], write_fd);
         if(elem->cmd[i + 1])
             write(1, " ", 1);
+        i++;
     }
     if(!is_n_flag)
-        write(1, "\n", 1);
+        ft_putstr_fd("\n", write_fd);
 }
 
-void    builtin_exit(t_elem *elem)
+void    builtin_exit(t_elem *elem, int write_fd)
 {
     exit(0);
 }
