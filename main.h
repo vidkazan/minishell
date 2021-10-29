@@ -47,7 +47,7 @@ typedef struct s_data
     int std_in;
     int std_out;
     char **envp;
-    int error;
+    int exit_status;
     t_elem *elem_start;
     int simple_redirect_input_fd;
     int simple_redirect_output_fd;

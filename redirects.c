@@ -11,7 +11,6 @@ t_elem	*simple_redirect_input(t_elem *elem)
 	fd = open(elem->cmd[0], O_RDONLY);
 	if (fd < 0)
 	{
-		elem->data->error = 1;
 		ft_putstr_fd("error: ", 2);
 		ft_putstr_fd(strerror(errno), 2);
 		ft_putstr_fd("\n", 2);
@@ -34,7 +33,6 @@ t_elem	*simple_redirect_output(t_elem *elem)
 	fd = open(elem->cmd[0], O_RDWR | O_CREAT | O_TRUNC, 0777);
 	if (fd < 0)
 	{
-		elem->data->error = 1;
 		ft_putstr_fd("error: ", 2);
 		ft_putstr_fd(strerror(errno), 2);
 		ft_putstr_fd("\n", 2);
@@ -58,7 +56,6 @@ t_elem	*double_redirect_output(t_elem	*elem)
 	fd = open(elem->cmd[0], O_RDWR | O_CREAT | O_APPEND, 0777);
 	if (fd < 0)
 	{
-		elem->data->error = 1;
 		ft_putstr_fd("error: ", 2);
 		ft_putstr_fd(strerror(errno), 2);
 		ft_putstr_fd("\n", 2);
@@ -79,7 +76,6 @@ void simple_redirects(t_data *data)
 	t_elem *elem = data->elem_start;
 	while(elem)
 	{
-//		printf(">>> %s\n", elem->cmd[0]);
 		if(elem->type == SIMPLE_REDIRECT_INPUT)
 			elem = simple_redirect_input(elem);
 		if(elem->type == SIMPLE_REDIRECT_OUTPUT)

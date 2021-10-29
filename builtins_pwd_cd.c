@@ -15,7 +15,6 @@ void builtin_pwd(t_elem *elem, int write_fd)
         return;
     }
     ft_putendl_fd(res, write_fd);
-
 }
 
 void builtin_cd(t_elem *elem,int write_fd) // no handling deleted dir error

@@ -64,23 +64,6 @@ void	env_path_find(t_data *data)
     }
 }
 
-char *search_strings_in_array(char **arr, char *search_word, int *index)
-{
-	int i = -1;
-
-	if(!search_word || index == NULL)
-        return NULL;
-	while(arr[++i])
-	{
-		if(!ft_strncmp(arr[i], search_word, ft_strlen(search_word)))
-		{
-			*index = i;
-			return (arr[i] + ft_strlen(search_word));
-		}
-	}
-	return NULL;
-}
-
 void	find_path(t_elem *elem)
 {
     char	*filename_no_path;

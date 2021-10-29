@@ -39,7 +39,8 @@ int make_new_elem(int start, int end, t_data *data)
 	new->cmd = ft_split(new->cal, ' ');
 	if (!data->elem_start)
 		data->elem_start = new;
-//	printf("%d %d | cmd=^^%s^^, type = %d\n", start, end, new->cal, new->type);
+	if(data->debug)
+	    printf("%d %d | cmd=^^%s^^, type = %d\n", start, end, new->cal, new->type);
 	return(return_value);
 }
 

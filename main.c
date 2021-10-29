@@ -55,29 +55,38 @@ void builtin_exec(t_elem *elem)
 {
     int write_fd;
     write_fd = builtin_fd_gen(elem);
-    if(!ft_strncmp(elem->cmd[0], "echo", 4)  && ft_strlen(elem->cmd[0]) == 4)
+    if(elem->is_builtin == 1)
         builtin_echo(elem, write_fd);
-    if(!ft_strncmp(elem->cmd[0], "cd", 2)  && ft_strlen(elem->cmd[0]) == 2)
+    if(elem->is_builtin == 2)
         builtin_cd(elem, write_fd);
-    if(!ft_strncmp(elem->cmd[0], "pwd", 3)  && ft_strlen(elem->cmd[0]) == 3)
+    if(elem->is_builtin == 3)
         builtin_pwd(elem, write_fd);
-    if(!ft_strncmp(elem->cmd[0], "env", 3)  && ft_strlen(elem->cmd[0]) == 3)
+    if(elem->is_builtin == 4)
     	builtin_env(elem, write_fd);
-    if(!ft_strncmp(elem->cmd[0], "exit", 4)  && ft_strlen(elem->cmd[0]) == 4)
+    if(elem->is_builtin == 5)
         builtin_exit(elem, write_fd);
-    if(!ft_strncmp(elem->cmd[0], "unset", 5)  && ft_strlen(elem->cmd[0]) == 5)
+    if(elem->is_builtin == 6)
         builtin_unset(elem, write_fd);
-    if(!ft_strncmp(elem->cmd[0], "export", 6) && ft_strlen(elem->cmd[0]) == 6)
+    if(elem->is_builtin == 7)
         builtin_export(elem, write_fd);
 }
 
 void builtin_check(t_elem *elem)
 {
-    if(!ft_strncmp(elem->cmd[0], "echo", 4) || !ft_strncmp(elem->cmd[0], "cd", 2) || \
-    !ft_strncmp(elem->cmd[0], "pwd", 3) || !ft_strncmp(elem->cmd[0], "export", 6) || \
-    !ft_strncmp(elem->cmd[0], "unset", 5) || !ft_strncmp(elem->cmd[0], "env", 3) || \
-    !ft_strncmp(elem->cmd[0], "exit", 4))
+    if(!ft_strncmp(elem->cmd[0], "echo", 4)  && ft_strlen(elem->cmd[0]) == 4)
         elem->is_builtin = 1;
+    if(!ft_strncmp(elem->cmd[0], "cd", 2)  && ft_strlen(elem->cmd[0]) == 2)
+        elem->is_builtin = 2;
+    if(!ft_strncmp(elem->cmd[0], "pwd", 3)  && ft_strlen(elem->cmd[0]) == 3)
+        elem->is_builtin = 3;
+    if(!ft_strncmp(elem->cmd[0], "env", 3)  && ft_strlen(elem->cmd[0]) == 3)
+        elem->is_builtin = 4;
+    if(!ft_strncmp(elem->cmd[0], "exit", 4)  && ft_strlen(elem->cmd[0]) == 4)
+        elem->is_builtin = 5;
+    if(!ft_strncmp(elem->cmd[0], "unset", 5)  && ft_strlen(elem->cmd[0]) == 5)
+        elem->is_builtin = 6;
+    if(!ft_strncmp(elem->cmd[0], "export", 6) && ft_strlen(elem->cmd[0]) == 6)
+        elem->is_builtin = 7;
 }
 
 void execution(t_elem *elem)
@@ -121,8 +130,6 @@ void execution(t_elem *elem)
                     dup2(elem->data->double_redirect_output_fd, 1);
                 if(elem->data->simple_redirect_output_fd)
                     dup2(elem->data->simple_redirect_output_fd, 1);
-//                if(elem->data->simple_redirect_output_fd < 0 && elem->data->double_redirect_output_fd < 0)
-//                    dup2(elem->data->std_out, 1);
             }
             else if(elem->type == CMD && !elem->prev && !elem->next) // first_CMD
             {
@@ -152,8 +159,12 @@ void execution(t_elem *elem)
             }
             if (execve(elem->cmd[0], elem->cmd, elem->data->envp) < 0)
             {
-                ft_putstr_fd(strerror(errno), 2);
-                exit(1);
+                ft_putstr_fd("minishell: ",2);
+                ft_putstr_fd(elem->cmd[0],2);
+                ft_putstr_fd(": ",2);
+                ft_putnbr_fd(errno,2);
+                ft_putendl_fd(strerror(errno),2);
+                exit(errno);
             }
         }
         else
@@ -180,7 +191,6 @@ void init(t_data *data, char **env)
 //    data->envp = ft_arrdup(env);
     data->std_in = dup(0);
     data->std_out = dup(1);
-    data->error = 0;
     data->elem_start = NULL;
     data->simple_redirect_input_fd = -1;
     data->simple_redirect_output_fd = -1;
@@ -192,16 +202,23 @@ void init(t_data *data, char **env)
 
 void waiting(t_data *data)
 {
+    int status = -1;
 	t_elem *elem = data->elem_start;
 	while (elem)
 	{
 	    if(!elem->is_builtin)
-            waitpid(elem->pid, 0,0);
+	    {
+	        waitpid(elem->pid, &status, 0);
+	        if(data->debug)
+            dprintf(2, ">>> pid exit code %d\n", status);
+	    }
 		if(elem->next)
 			elem = elem->next;
 		else
             break;
 	}
+	if(status != -1)
+	    data->exit_status = status;
 }
 
 void	ft_strip(char **str)
@@ -251,6 +268,7 @@ int main(int ac, char **av, char **env)
 
     init(data, env);
     data->envp = ft_arrdup(env);
+    data->exit_status = 0;
     env_path_find(data);
     if(ac == 2)
         data->debug = 1;
