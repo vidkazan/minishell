@@ -8,8 +8,9 @@ void exit_code_print(t_elem *elem)
 {
     if(elem->data->exit_status > 255)
         elem->data->exit_status = elem->data->exit_status % 255;
-    dprintf(2,"%d",elem->data->exit_status);
+    ft_putnbr_fd(elem->data->exit_status, 2);
 }
+
 void builtin_echo(t_elem *elem,int write_fd)
 {
     int is_n_flag = 0;

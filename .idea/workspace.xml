@@ -7,20 +7,19 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="016fef2b-8bdf-4261-aeba-e62e3c272dc9" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/arr_functions.c" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/builtins_main.c" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/closing.c" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/execution.c" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/exit_status.c" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/init.c" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/big" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/arr_functions.c" beforeDir="false" afterPath="$PROJECT_DIR$/arr_functions.c" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/builtins_echo.c" beforeDir="false" afterPath="$PROJECT_DIR$/builtins_echo.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/builtins_env.c" beforeDir="false" afterPath="$PROJECT_DIR$/builtins_env.c" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/builtins_pwd_cd.c" beforeDir="false" afterPath="$PROJECT_DIR$/builtins_pwd_cd.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/list_functions.c" beforeDir="false" afterPath="$PROJECT_DIR$/list_functions.c" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/main.c" beforeDir="false" afterPath="$PROJECT_DIR$/main.c" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/main.h" beforeDir="false" afterPath="$PROJECT_DIR$/main.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/minishell" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/minishell.dSYM/Contents/Info.plist" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/minishell.dSYM/Contents/Resources/DWARF/minishell" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/path_finding.c" beforeDir="false" afterPath="$PROJECT_DIR$/path_finding.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/preparsing.c" beforeDir="false" afterPath="$PROJECT_DIR$/preparsing.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/redirects.c" beforeDir="false" afterPath="$PROJECT_DIR$/redirects.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/minishell" beforeDir="false" afterPath="$PROJECT_DIR$/minishell" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -70,13 +69,6 @@
       <recent name="$PROJECT_DIR$" />
     </key>
   </component>
-  <component name="RunManager">
-    <configuration default="true" type="GradleAppRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" PASS_PARENT_ENVS_2="true">
-      <method v="2">
-        <option name="com.jetbrains.cidr.cpp.gradle.execution.GradleNativeBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
-      </method>
-    </configuration>
-  </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
@@ -112,7 +104,10 @@
       <workItem from="1635372279283" duration="351000" />
       <workItem from="1635372703681" duration="7591000" />
       <workItem from="1635430301753" duration="8242000" />
-      <workItem from="1635470523714" duration="100000" />
+      <workItem from="1635470523714" duration="413000" />
+      <workItem from="1635587278220" duration="7081000" />
+      <workItem from="1635677916955" duration="344000" />
+      <workItem from="1635679104508" duration="958000" />
     </task>
     <servers />
   </component>

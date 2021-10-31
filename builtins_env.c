@@ -39,13 +39,13 @@ void builtin_unset(t_elem *elem, int write_fd)
     char *find;
     if(!elem->cmd[1] || !elem->cmd[1][0])
     {
-        dprintf(2, "unset: not enough arguments\n");
+        builtins_exit_status(elem, "unset",NULL, "not enough arguments");
         return;
     }
     find = ft_strjoin(elem->cmd[1], "=");
     if(!search_strings_in_array(elem->data->envp, find, &index))
     {
-        dprintf(2, "unset: not found\n");
+        builtins_exit_status(elem, "unset", elem->cmd[1],"not a valid identifier");
         free(find);
         return;
     }

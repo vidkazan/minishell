@@ -59,6 +59,18 @@ typedef struct s_data
     char *line;
 }              t_data;
 
+
+void close_fd(t_elem *elem);
+void closing(t_data *data);
+
+
+void execution(t_elem *elem);
+void waiting(t_data *data);
+
+
+void init(t_data *data, char **env);
+void	data_reboot(t_data *data, char *message, int mode);
+
 t_elem  *create_elem(t_data *data);
 t_elem  *push_back(t_elem *ptr, t_data *data);
 void print_current_elem(t_elem *ptr,int id);
@@ -73,6 +85,13 @@ void	edit_env_keys(int env_index, char *new_value, t_data *data);
 char    **ft_arrdup(char **env);
 void	free_arr(char **str);
 
+
+
+int   builtin_fd_gen(t_elem *elem);
+void builtin_exec(t_elem *elem);
+void builtin_check(t_elem *elem);
+
+void builtins_exit_status(t_elem *elem, char *cmd, char *arg, char *msg);
 void    builtin_exit(t_elem *elem,int write_fd);
 void    builtin_unset(t_elem *elem,int write_fd);
 void    builtin_check(t_elem *elem);

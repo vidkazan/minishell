@@ -42,15 +42,31 @@ char *search_strings_in_array(char **arr, char *search_word, int *index)
 {
     int i = -1;
 
-    if(!search_word || index == NULL)
+    if(!search_word)
         return NULL;
     while(arr[++i])
     {
         if(!ft_strncmp(arr[i], search_word, ft_strlen(search_word)))
         {
-            *index = i;
+            if(index)
+                *index = i;
             return (arr[i] + ft_strlen(search_word));
         }
     }
     return NULL;
+}
+
+void	ft_strip(char **str)
+{
+    int i;
+
+    if (*str != NULL)
+    {
+        i = ft_strlen(*str);
+        while ((*str)[i - 1] == ' ' && i > 0)
+            i--;
+        (*str)[i] = '\0';
+        while (**str && **str == ' ')
+            (*str)++;
+    }
 }
