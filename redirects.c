@@ -3,7 +3,7 @@
 //
 
 #include "main.h"
-
+/*
 t_elem	*simple_redirect_input(t_elem *elem)
 {
 	int    fd;
@@ -87,4 +87,4 @@ void simple_redirects(t_data *data)
 		else
 			break ;
 	}
-}
+}*/

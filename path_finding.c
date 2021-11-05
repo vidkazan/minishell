@@ -78,5 +78,3 @@ void	find_path(t_elem *elem)
     path_check(elem, path_arr, filename_no_path);
     free_arr(path_arr);
 }
-
-

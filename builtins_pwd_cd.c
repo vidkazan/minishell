@@ -3,7 +3,7 @@
 //
 
 #include "main.h"
-
+/*
 void builtin_pwd(t_elem *elem, int write_fd)
 {
     int i = 0;
@@ -84,4 +84,4 @@ void builtin_cd(t_elem *elem,int write_fd) // relative path cd NOT working if cu
     edit_env_keys(old_pwd_index, current_pwd_env, elem->data);
     free(res_path);
     free(current_pwd_env);
-}
+}*/

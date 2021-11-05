@@ -9,7 +9,7 @@
 //perror, isatty, ttyname, ttyslot, ioctl, getenv,
 //tcsetattr, tcgetattr, tgetent, tgetflag, tgetnum,
 //tgetstr, tgoto, tputs
-
+/*
 int   builtin_fd_gen(t_elem *elem)
 {
     if (elem->type == CMD && elem->prev && !elem->next) // last_CMD
@@ -76,3 +76,4 @@ void builtin_check(t_elem *elem)
     if(!ft_strncmp(elem->cmd[0], "export", 6) && ft_strlen(elem->cmd[0]) == 6)
         elem->is_builtin = 7;
 }
+*/

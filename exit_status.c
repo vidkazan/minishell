@@ -1,5 +1,5 @@
 #include "main.h"
-
+/*
 void builtins_exit_status(t_elem *elem, char *cmd, char *arg, char *msg)
 {
     ft_putstr_fd("minishell: ",2);
@@ -17,3 +17,4 @@ void builtins_exit_status(t_elem *elem, char *cmd, char *arg, char *msg)
         ft_putendl_fd(msg, 2);
     elem->data->exit_status = 1;
 }
+*/

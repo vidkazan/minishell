@@ -9,7 +9,7 @@
 //perror, isatty, ttyname, ttyslot, ioctl, getenv,
 //tcsetattr, tcgetattr, tgetent, tgetflag, tgetnum,
 //tgetstr, tgoto, tputs
-
+/*
 void close_fd(t_elem *elem)
 {
     if (elem->type == CMD && elem->prev && !elem->next) // last_CMD
@@ -22,7 +22,7 @@ void close_fd(t_elem *elem)
         close(elem->pfd[1]);
     }
 }
-
+*/
 void closing(t_data *data)
 {
     free_arr(data->envp);

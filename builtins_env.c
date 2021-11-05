@@ -3,7 +3,7 @@
 //
 
 #include "main.h"
-
+/*
 void	edit_env_keys(int env_index, char *new_value, t_data *data)
 {
 	char *env_name;
@@ -63,4 +63,4 @@ void builtin_unset(t_elem *elem, int write_fd)
 void builtin_export(t_elem *elem, int write_fd)
 {
 
-}
+}*/

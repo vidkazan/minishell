@@ -22,12 +22,13 @@ void	read_line_and_add_history(char **line)
 		add_history (*line);
 }
 
+
 int main(int ac, char **av, char **env)
 {
     t_data *data = malloc(sizeof (t_data));
 	int		exit_flag = 0;
 
-    init(data, env);
+    init(data);
     data->envp = ft_arrdup(env);
     data->exit_status = 0;
     env_path_find(data);
@@ -41,11 +42,13 @@ int main(int ac, char **av, char **env)
 			exit_flag = 1;
 		else
 		{
-			main_preparser(data, data->line, env);
-            simple_redirects(data);
-            execution(data->elem_start);
-            waiting(data);
-            if(data->debug)
+			main_preparser(data, data->line);
+            while(data->elem_start->prev)
+            data->elem_start = data->elem_start->prev;
+            // simple_redirects(data);
+            // execution(data->elem_start);
+            // waiting(data);
+            // if(data->debug)
                 print_elems(data->elem_start);
 			data_reboot(data, NULL, 0);
 		}
@@ -53,3 +56,24 @@ int main(int ac, char **av, char **env)
     closing(data);
     return 0;
 }
+
+// int main(int argc, char **argv, char **env)
+// {
+//     t_data data;
+//     int exit_flag = 0;
+//     // char *line;
+
+//     init(&data);
+//     data.envp = ft_arrdup(env);
+//     data.exit_status = 0;
+//     env_path_find(&data);
+//     while(!exit_flag)
+//     {
+//         data.line = calloc(sizeof(char), 100);
+//         scanf("%s", data.line);
+//         // printf("%s\n", line);
+//         main_preparser(&data, data.line);
+//         print_elems(data.elem_start);
+//         free(data.line);
+//     }
+// }

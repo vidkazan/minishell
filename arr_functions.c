@@ -37,7 +37,7 @@ char    **ft_arrdup(char **env)
     arr_dup[arr_len] = NULL;
     return arr_dup;
 }
-
+/*
 char *search_strings_in_array(char **arr, char *search_word, int *index)
 {
     int i = -1;
@@ -55,7 +55,7 @@ char *search_strings_in_array(char **arr, char *search_word, int *index)
     }
     return NULL;
 }
-
+*/
 void	ft_strip(char **str)
 {
     int i;

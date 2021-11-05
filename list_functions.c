@@ -21,6 +21,7 @@ t_elem  *create_elem(t_data *data)
     ptr->cmd = NULL;
     ptr->next = NULL;
     ptr->prev = NULL;
+	ptr->cal = NULL;
     ptr->data = data;
     ptr->pfd[0] = -1;
     ptr->pfd[1] = -1;
@@ -28,7 +29,7 @@ t_elem  *create_elem(t_data *data)
     ptr->pid = -1;
     return ptr;
 }
-
+/*
 t_elem	*delete_current_node(t_elem *elem)
 {
 	t_elem	*prev_elem;
@@ -69,18 +70,16 @@ t_elem	*delete_current_node(t_elem *elem)
 		elem = NULL;
 		return prev_elem;
 	}
-}
+}*/
 
-t_elem  *push_back(t_elem *elem, t_data *data)
+t_elem  *push_back(t_elem *start, t_data *data)
 {
-    t_elem *ptr = elem;
+    t_elem *ptr = start;
     t_elem *new_elem;
 
-//    printf(">>> here21\n");
-    if(ptr == NULL)
+	if(ptr == NULL)
     {
-//        printf(">>> here22\n");
-        elem = create_elem(data);
+        new_elem = create_elem(data);
     }
     else
     {
@@ -89,10 +88,10 @@ t_elem  *push_back(t_elem *elem, t_data *data)
         new_elem = create_elem(data);
         ptr->next = new_elem;
         new_elem->prev = ptr;
-        elem = new_elem;
+        //  = new_elem;
     }
 //    printf(">>> here23\n");
-    return elem;
+    return new_elem;
 }
 
 void	list_cleaner(t_elem *elem)

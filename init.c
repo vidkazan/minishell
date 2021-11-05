@@ -10,7 +10,7 @@
 //tcsetattr, tcgetattr, tgetent, tgetflag, tgetnum,
 //tgetstr, tgoto, tputs
 
-void init(t_data *data, char **env)
+void init(t_data *data)
 {
 //    data->envp = ft_arrdup(env);
     data->std_in = dup(0);
@@ -29,5 +29,5 @@ void	data_reboot(t_data *data, char *message, int mode)
 	if (mode)
 		printf("%s\n", message);
 	list_cleaner(data->elem_start);
-	init(data, data->envp);		//	need to init everytime?
+	init(data);		//	need to init everytime?
 }

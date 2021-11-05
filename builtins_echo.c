@@ -3,7 +3,7 @@
 //
 
 #include "main.h"
-
+/*
 void exit_code_print(t_elem *elem)
 {
     if(elem->data->exit_status > 255)
@@ -70,4 +70,4 @@ void    builtin_exit(t_elem *elem, int write_fd)
     code = ft_atoi(elem->cmd[1]);
     ft_putendl_fd("exit",2);
     exit(code);
-}
+}*/

@@ -12,21 +12,56 @@
 
 void print_current_elem(t_elem *ptr,int id)
 {
-    if(ptr->cmd&& *ptr->cmd)
+    if(ptr->cmd && *ptr->cmd)
     {
-        dprintf(2,">>> ");
+        if (ptr->type == 1)
+            printf(">>> CMD:\n");
+        if (ptr->type == 2)
+            printf(">>> PIPE:\n");
+        if (ptr->type == 3)
+            printf(">>> S. REDIRECT IN:\n");
+        if (ptr->type == 4)
+            printf(">>> S. REDIRECT OUT:\n");
+        if (ptr->type == 5)
+            printf(">>> D. REDIRECT IN:\n");
+        if (ptr->type == 6)
+            printf(">>> D. REDIRECT OUT:\n");
+        /**/printf("^^ ");
         while(*ptr->cmd)
-        	dprintf(2,"%s ", *ptr->cmd++);
-        dprintf(2,"\n");
+        	/**/printf("%s ", *ptr->cmd++);
+        /**/printf("\n\n");
     }
     else
-    	dprintf(2,">>> nocmd \n");
+    	/**/printf(">>> nocmd \n");
+}
+
+void print_count_elems(t_elem *ptr)
+{
+    int i = 0;
+    printf("1\n");
+
+    while (ptr)
+    {
+        i++;
+        ptr = ptr->prev;
+    }
+    printf("count of prev elems=%d\n\n", i);
+    i = 0;
+    while (ptr)
+    {
+        i++;
+        ptr = ptr->next;
+    }
+    printf("count of elems=%d\n\n", i);
 }
 
 void print_elems(t_elem *ptr)
 {
     int id = 1;
-    dprintf(2,"\n");
+    /**/printf("\n");
+    while(ptr->prev)
+        ptr = ptr->prev;
+    // print_count_elems(ptr);
     while(ptr)
     {
         print_current_elem(ptr, id++);
