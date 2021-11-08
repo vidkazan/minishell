@@ -43,6 +43,7 @@ typedef struct s_elem
 
 typedef struct s_data
 {
+    int exit_flag;
     char *path;
     int std_in;
     int std_out;
@@ -64,6 +65,7 @@ typedef struct s_data
 
 void    data_reboot(t_data *data, char *message, int mode);
 void    init(t_data *data, char **env);
+void    start_init(t_data *data, char **env);
 void    closing(t_data *data);
 
 // exec

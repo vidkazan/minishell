@@ -2,7 +2,7 @@
 // Created by fcody on 10/20/21.
 //
 
-#include "main.h"
+#include "../main.h"
 
 void	free_arr(char **str)
 {

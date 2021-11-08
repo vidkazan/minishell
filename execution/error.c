@@ -1,4 +1,4 @@
-#include "main.h"
+#include "../main.h"
 
 void builtins_error(t_elem *elem, char *cmd, char *arg, char *msg, int code)
 {

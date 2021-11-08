@@ -2,7 +2,7 @@
 // Created by Felipe Cody on 10/20/21.
 //
 
-#include "main.h"
+#include "../main.h"
 
 t_elem	*double_redirect_output(t_elem	*elem)
 {

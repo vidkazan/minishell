@@ -2,7 +2,7 @@
 // Created by Felipe Cody on 10/20/21.
 //
 
-#include "main.h"
+#include "../main.h"
 
 void redirects(t_data *data)
 {

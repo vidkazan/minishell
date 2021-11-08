@@ -10,8 +10,16 @@
 //tcsetattr, tcgetattr, tgetent, tgetflag, tgetnum,
 //tgetstr, tgoto, tputs
 
-void init(t_data *data, char **env)
+
+void start_init(t_data *data, char **env)
 {
+    data->envp = ft_arrdup(env);
+    data->exit_status = 0;
+    data->debug = 0;
+    data->exec = 1;
+    data->exit_flag = 0;
+    env_path_find(data);
+    rl_outstream = stderr;
     data->std_in = dup(0);
     data->std_out = dup(1);
     data->elem_start = NULL;
@@ -19,7 +27,18 @@ void init(t_data *data, char **env)
     data->simple_redirect_output_fd = -1;
     data->double_redirect_output_fd = -1;
     data->double_redirect_input_fd = -1;
-//    env_path_find(data);
+    data->q1 = 0;
+    data->q2 = 0;
+}
+
+
+void init(t_data *data, char **env)
+{
+    data->elem_start = NULL;
+    data->simple_redirect_input_fd = -1;
+    data->simple_redirect_output_fd = -1;
+    data->double_redirect_output_fd = -1;
+    data->double_redirect_input_fd = -1;
 	data->q1 = 0;
 	data->q2 = 0;
 }

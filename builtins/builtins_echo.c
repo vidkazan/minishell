@@ -2,7 +2,7 @@
 // Created by fcody on 10/21/21.
 //
 
-#include "main.h"
+#include "../main.h"
 
 void builtin_echo_main(int i, t_elem *elem, int write_fd)
 {

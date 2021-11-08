@@ -2,7 +2,7 @@
 // Created by fcody on 10/21/21.
 //
 
-#include "main.h"
+#include "../main.h"
 
 void export_sort_print(t_elem *elem, int write_fd)
 {

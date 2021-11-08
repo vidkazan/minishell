@@ -1,4 +1,4 @@
-#include "main.h"
+#include "../main.h"
 
 int error_code_transform()
 {
@@ -21,15 +21,15 @@ void    builtin_exit(t_elem *elem)
     long long code;
     int i = -1;
 
-    if(elem->cmd[2])
-    {
-        builtins_error(elem,"exit", NULL, "too many arguments", 0);
-        exit(1);
-    }
     if(!elem->cmd[1] || !*elem->cmd[1])
     {
         ft_putendl_fd("exit",2);
         exit(0);
+    }
+    if(elem->cmd[2])
+    {
+        builtins_error(elem,"exit", NULL, "too many arguments", 0);
+        exit(1);
     }
     else
     {

@@ -15,19 +15,33 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="05c57aff-0105-474e-9bec-95a3c37232f2" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/error.c" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/redirects_di.c" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/redirects_do.c" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/redirects_si.c" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/redirects_so.c" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/builtins_main.c" beforeDir="false" afterPath="$PROJECT_DIR$/builtins_main.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/exit_status.c" beforeDir="false" afterPath="$PROJECT_DIR$/exit_status.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Makefile" beforeDir="false" afterPath="$PROJECT_DIR$/Makefile" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/arr_functions.c" beforeDir="false" afterPath="$PROJECT_DIR$/arr_list_str_functions/arr_functions.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/builtins_echo.c" beforeDir="false" afterPath="$PROJECT_DIR$/builtins/builtins_echo.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/builtins_env.c" beforeDir="false" afterPath="$PROJECT_DIR$/builtins/builtins_env.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/builtins_export_main.c" beforeDir="false" afterPath="$PROJECT_DIR$/builtins/builtins_export_main.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/builtins_export_set.c" beforeDir="false" afterPath="$PROJECT_DIR$/builtins/builtins_export_set.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/builtins_export_sorting.c" beforeDir="false" afterPath="$PROJECT_DIR$/builtins/builtins_export_sorting.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/builtins_main.c" beforeDir="false" afterPath="$PROJECT_DIR$/builtins/builtins_main.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/builtins_pwd_cd.c" beforeDir="false" afterPath="$PROJECT_DIR$/builtins/builtins_pwd_cd.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/closing.c" beforeDir="false" afterPath="$PROJECT_DIR$/execution/closing.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/error.c" beforeDir="false" afterPath="$PROJECT_DIR$/execution/error.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/execution.c" beforeDir="false" afterPath="$PROJECT_DIR$/execution/execution.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/exit_status.c" beforeDir="false" afterPath="$PROJECT_DIR$/execution/exit_status.c" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/init.c" beforeDir="false" afterPath="$PROJECT_DIR$/init.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/list_functions.c" beforeDir="false" afterPath="$PROJECT_DIR$/arr_list_str_functions/list_functions.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main.c" beforeDir="false" afterPath="$PROJECT_DIR$/main.c" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/main.h" beforeDir="false" afterPath="$PROJECT_DIR$/main.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/minishell" beforeDir="false" afterPath="$PROJECT_DIR$/minishell" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/redirects.c" beforeDir="false" afterPath="$PROJECT_DIR$/redirects.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/str_functions.c" beforeDir="false" afterPath="$PROJECT_DIR$/str_functions.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/path_finding.c" beforeDir="false" afterPath="$PROJECT_DIR$/execution/path_finding.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/preparsing.c" beforeDir="false" afterPath="$PROJECT_DIR$/parcing/preparsing.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/redirects.c" beforeDir="false" afterPath="$PROJECT_DIR$/redirects/redirects.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/redirects_di.c" beforeDir="false" afterPath="$PROJECT_DIR$/redirects/redirects_di.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/redirects_do.c" beforeDir="false" afterPath="$PROJECT_DIR$/redirects/redirects_do.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/redirects_si.c" beforeDir="false" afterPath="$PROJECT_DIR$/redirects/redirects_si.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/redirects_so.c" beforeDir="false" afterPath="$PROJECT_DIR$/redirects/redirects_so.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/str_functions.c" beforeDir="false" afterPath="$PROJECT_DIR$/arr_list_str_functions/str_functions.c" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -44,6 +58,11 @@
     </projectState>
   </component>
   <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="dev" />
+      </map>
+    </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
     <option name="ROOT_SYNC" value="DONT_SYNC" />
   </component>
@@ -102,11 +121,23 @@
     <key name="CopyFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$" />
     </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/parcing" />
+      <recent name="$PROJECT_DIR$/execution" />
+      <recent name="$PROJECT_DIR$/arr_list_str_functions" />
+      <recent name="$PROJECT_DIR$/redirects" />
+      <recent name="$PROJECT_DIR$/builtins" />
+    </key>
   </component>
   <component name="RunManager">
     <configuration name="all" type="CLionNativeAppRunConfigurationType" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="minishell_new_pipes" TARGET_NAME="all" CONFIG_NAME="all" version="1">
       <method v="2">
         <option name="CLION.COMPOUND.BUILD" enabled="true" />
+      </method>
+    </configuration>
+    <configuration default="true" type="GradleAppRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" PASS_PARENT_ENVS_2="true">
+      <method v="2">
+        <option name="com.jetbrains.cidr.cpp.gradle.execution.GradleNativeBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
       </method>
     </configuration>
   </component>
@@ -122,11 +153,22 @@
       <workItem from="1636367177078" duration="6609000" />
       <workItem from="1636374599548" duration="1819000" />
       <workItem from="1636382241049" duration="252000" />
-      <workItem from="1636384146783" duration="3920000" />
+      <workItem from="1636384146783" duration="4467000" />
     </task>
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
   </component>
 </project>

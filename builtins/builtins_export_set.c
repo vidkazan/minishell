@@ -2,7 +2,7 @@
 // Created by fcody on 10/21/21.
 //
 
-#include "main.h"
+#include "../main.h"
 
 void export_set(t_elem  *elem)
 {
