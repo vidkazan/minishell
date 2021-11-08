@@ -109,7 +109,6 @@ void builtin_exec(t_elem *elem)
     if(elem->is_builtin == 8)
         builtin_debug(elem);
 }
-
 void builtin_check(t_elem *elem)
 {
     if(!ft_strncmp(elem->cmd[0], "echo", 4)  && ft_strlen(elem->cmd[0]) == 4)

@@ -45,6 +45,7 @@ void builtin_echo(t_elem *elem,int write_fd)
 void    builtin_exit(t_elem *elem, int write_fd)
 {
     long long code;
+    int overflow_flag;
     int i = -1;
 
     if(elem->cmd[2])
@@ -70,9 +71,10 @@ void    builtin_exit(t_elem *elem, int write_fd)
             }
         }
     }
-    code = ft_atoi(elem->cmd[1]);
-    dprintf(2,"%llu\n",code);
-    if(code > 9223372036854775807 || code < -9223372036854775807)
+    code = ft_atoi_overflow(elem->cmd[1]);
+    if(elem->data->debug)
+        dprintf(2,"%llu\n",code);
+    if(code == 255)
     {
         builtins_error(elem,"exit", NULL, "numeric argument required", 0);
         exit(255);

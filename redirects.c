@@ -115,7 +115,6 @@ t_elem *double_redirect_input(t_elem *elem)
         close(elem->data->simple_redirect_input_fd);
     }
     elem->data->double_redirect_input_fd = heredoc_pfd[0];
-
     elem = delete_current_node(elem);
     if(elem->data->debug)
         dprintf(2, ">>> %d DOUBLE_REDIRECT_INPUT si %d di %d so %d do %d\n", getpid(), elem->data->simple_redirect_input_fd, elem->data->double_redirect_input_fd, elem->data->simple_redirect_output_fd, elem->data->double_redirect_output_fd);

@@ -1,33 +1,33 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="CMakeRunConfigurationManager" shouldGenerate="true" shouldDeleteObsolete="true">
+    <generated>
+      <config projectName="minishell_new_pipes" targetName="all" />
+    </generated>
+  </component>
   <component name="CMakeSettings">
     <configurations>
       <configuration PROFILE_NAME="Debug" CONFIG_NAME="Debug" ENABLED="true" />
     </configurations>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="016fef2b-8bdf-4261-aeba-e62e3c272dc9" name="Default Changelist" comment="">
+    <list default="true" id="05c57aff-0105-474e-9bec-95a3c37232f2" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/minishell.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/arr_functions.c" beforeDir="false" afterPath="$PROJECT_DIR$/arr_functions.c" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/builtins_echo.c" beforeDir="false" afterPath="$PROJECT_DIR$/builtins_echo.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/builtins_env.c" beforeDir="false" afterPath="$PROJECT_DIR$/builtins_env.c" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/builtins_main.c" beforeDir="false" afterPath="$PROJECT_DIR$/builtins_main.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/builtins_pwd_cd.c" beforeDir="false" afterPath="$PROJECT_DIR$/builtins_pwd_cd.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cases" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/execution.c" beforeDir="false" afterPath="$PROJECT_DIR$/execution.c" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/exit_status.c" beforeDir="false" afterPath="$PROJECT_DIR$/exit_status.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/init.c" beforeDir="false" afterPath="$PROJECT_DIR$/init.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/list_functions.c" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/main.c" beforeDir="false" afterPath="$PROJECT_DIR$/main.c" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/main.h" beforeDir="false" afterPath="$PROJECT_DIR$/main.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/minishell" beforeDir="false" afterPath="$PROJECT_DIR$/minishell" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/msh_tester" beforeDir="false" afterPath="$PROJECT_DIR$/msh_tester" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/msh_tester/test.sh" beforeDir="false" afterPath="$PROJECT_DIR$/msh_tester/test.sh" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/path_finding.c" beforeDir="false" afterPath="$PROJECT_DIR$/path_finding.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/preparsing.c" beforeDir="false" afterPath="$PROJECT_DIR$/preparsing.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/printing.c" beforeDir="false" afterPath="$PROJECT_DIR$/printing.c" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/redirects.c" beforeDir="false" afterPath="$PROJECT_DIR$/redirects.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/text/many" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -38,10 +38,13 @@
     <option name="clangTidyViaClangd" value="false" />
     <option name="formatViaClangd" value="false" />
   </component>
+  <component name="ExternalProjectsData">
+    <projectState path="$PROJECT_DIR$">
+      <ProjectState />
+    </projectState>
+  </component>
   <component name="Git.Settings">
-    <option name="RECENT_COMMON_BRANCH" value="master" />
-    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
-    <option name="ROOT_SYNC" value="SYNC" />
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/msh_tester" />
   </component>
   <component name="GitSEFilterConfiguration">
     <file-type-list>
@@ -51,12 +54,34 @@
       <filtered-out-file-type name="COMMIT_BY_MESSAGE" />
     </file-type-list>
   </component>
-  <component name="HighlightingSettingsPerFile">
-    <setting file="file://$PROJECT_DIR$/builtins_echo.c" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/main.c" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/builtins_env.c" root0="FORCE_HIGHLIGHTING" />
+  <component name="MakefileLocalSettings">
+    <option name="availableProjects">
+      <map>
+        <entry>
+          <key>
+            <ExternalProjectPojo>
+              <option name="name" value="minishell_new_pipes" />
+              <option name="path" value="$PROJECT_DIR$" />
+            </ExternalProjectPojo>
+          </key>
+          <value>
+            <list>
+              <ExternalProjectPojo>
+                <option name="name" value="minishell_new_pipes" />
+                <option name="path" value="$PROJECT_DIR$" />
+              </ExternalProjectPojo>
+            </list>
+          </value>
+        </entry>
+      </map>
+    </option>
+    <option name="projectSyncType">
+      <map>
+        <entry key="$PROJECT_DIR$" value="RE_IMPORT" />
+      </map>
+    </option>
   </component>
-  <component name="ProjectId" id="1zoFrLojgflqoV1pGHaww9QXrYm" />
+  <component name="ProjectId" id="20d8vLUub1H20qWFrQ2VbHplaiy" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
@@ -69,94 +94,40 @@
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="cf.first.check.clang-format" value="false" />
     <property name="cidr.known.project.marker" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/Makefile" />
     <property name="nodejs_package_manager_path" value="npm" />
   </component>
-  <component name="RecentsManager">
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$" />
-      <recent name="$PROJECT_DIR$/msh_tester" />
-    </key>
+  <component name="RunManager">
+    <configuration name="all" type="CLionNativeAppRunConfigurationType" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="minishell_new_pipes" TARGET_NAME="all" CONFIG_NAME="all" version="1">
+      <method v="2">
+        <option name="CLION.COMPOUND.BUILD" enabled="true" />
+      </method>
+    </configuration>
+    <configuration default="true" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" PASS_PARENT_ENVS_2="true">
+      <method v="2">
+        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
+    <configuration default="true" type="GradleAppRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" PASS_PARENT_ENVS_2="true">
+      <method v="2">
+        <option name="com.jetbrains.cidr.cpp.gradle.execution.GradleNativeBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="016fef2b-8bdf-4261-aeba-e62e3c272dc9" name="Default Changelist" comment="" />
-      <created>1634806738094</created>
+      <changelist id="05c57aff-0105-474e-9bec-95a3c37232f2" name="Default Changelist" comment="" />
+      <created>1636363334991</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
-      <updated>1634806738094</updated>
-      <workItem from="1634806741560" duration="179000" />
-      <workItem from="1634807175733" duration="3573000" />
-      <workItem from="1634810952547" duration="54000" />
-      <workItem from="1634811019763" duration="812000" />
-      <workItem from="1634811857053" duration="6000" />
-      <workItem from="1634820917668" duration="8279000" />
-      <workItem from="1634835314568" duration="2266000" />
-      <workItem from="1634841362723" duration="41000" />
-      <workItem from="1634902695747" duration="10189000" />
-      <workItem from="1635002050446" duration="2074000" />
-      <workItem from="1635007121299" duration="2006000" />
-      <workItem from="1635011806085" duration="2492000" />
-      <workItem from="1635022156511" duration="2000" />
-      <workItem from="1635030137555" duration="647000" />
-      <workItem from="1635072520857" duration="2709000" />
-      <workItem from="1635075854960" duration="3974000" />
-      <workItem from="1635082198795" duration="931000" />
-      <workItem from="1635083223936" duration="10517000" />
-      <workItem from="1635099345618" duration="3208000" />
-      <workItem from="1635104667619" duration="1018000" />
-      <workItem from="1635194713604" duration="4313000" />
-      <workItem from="1635200853296" duration="7000" />
-      <workItem from="1635201901112" duration="849000" />
-      <workItem from="1635328628514" duration="373000" />
-      <workItem from="1635372279283" duration="351000" />
-      <workItem from="1635372703681" duration="7591000" />
-      <workItem from="1635430301753" duration="8242000" />
-      <workItem from="1635470523714" duration="413000" />
-      <workItem from="1635587278220" duration="7081000" />
-      <workItem from="1635677916955" duration="344000" />
-      <workItem from="1635679104508" duration="1262000" />
-      <workItem from="1635701164653" duration="5160000" />
-      <workItem from="1635714724964" duration="8393000" />
-      <workItem from="1635795523051" duration="13003000" />
-      <workItem from="1635850558942" duration="3818000" />
-      <workItem from="1635863916547" duration="5361000" />
-      <workItem from="1635880132051" duration="10733000" />
-      <workItem from="1635893445218" duration="3182000" />
-      <workItem from="1635922203215" duration="197000" />
-      <workItem from="1635924001654" duration="10652000" />
-      <workItem from="1635943675898" duration="1067000" />
-      <workItem from="1635948876973" duration="1376000" />
-      <workItem from="1636064973000" duration="3252000" />
-      <workItem from="1636071931175" duration="127000" />
-      <workItem from="1636098888645" duration="1405000" />
-      <workItem from="1636100884699" duration="3252000" />
-      <workItem from="1636109675951" duration="829000" />
-      <workItem from="1636111428780" duration="741000" />
-      <workItem from="1636124536652" duration="1655000" />
-      <workItem from="1636171425271" duration="8822000" />
-      <workItem from="1636219801566" duration="7149000" />
-      <workItem from="1636227052612" duration="4060000" />
-      <workItem from="1636272916876" duration="7381000" />
-      <workItem from="1636282268083" duration="3513000" />
-      <workItem from="1636324678464" duration="4878000" />
+      <updated>1636363334991</updated>
+      <workItem from="1636363336844" duration="1978000" />
+      <workItem from="1636367177078" duration="2809000" />
     </task>
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
-  </component>
-  <component name="Vcs.Log.Tabs.Properties">
-    <option name="TAB_STATES">
-      <map>
-        <entry key="MAIN">
-          <value>
-            <State />
-          </value>
-        </entry>
-      </map>
-    </option>
-    <option name="oldMeFiltersMigrated" value="true" />
   </component>
 </project>

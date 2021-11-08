@@ -12,7 +12,6 @@
 
 int ft_strlen_arr(char **arr)
 {
-//        dprintf(2, ">>> arrlen\n");
     int i;
 
     i = 0;
@@ -25,7 +24,6 @@ int ft_strlen_arr(char **arr)
 
 char    **ft_arrdup(char **arr)
 {
-//        dprintf(2, ">>> arrdup\n");
     char **arr_dup;
     int i = -1;
     int arr_len = ft_strlen_arr(arr);
@@ -73,7 +71,6 @@ char	**ft_arrjoin(char **s1, char **s2)
 
 char *search_strings_in_array(char **arr, char *search_word, int *index)
 {
-//    dprintf(2, ">>> search_str_in_arr\n");
     int i = -1;
 
     if(!search_word)
@@ -117,4 +114,31 @@ int	ft_strcmp(const char *s1, const char *s2)
     while (s1[i] == s2[i] && s1[i] && s2[i])
         i++;
     return (s1[i] - s2[i]);
+}
+
+long long	ft_atoi_overflow(const char *str)
+{
+    int	neg;
+    long long	res;
+
+    res = 0;
+    neg = 1;
+    while (*str == 32 || *str == '\n' || *str == '\f' \
+		|| *str == '\v' || *str == '\r' || *str == '\t')
+        str++;
+    if (*str == '-')
+        neg = -1;
+    if (*str == '+' || *str == '-')
+        str++;
+    while (*str >= '0' && *str <= '9')
+    {
+        res = (res * 10) + (((int) *str++) - 48);
+        if(*str && ((INT64_MAX / 10 < res * neg) || (INT64_MIN / 10 > res * neg) || ((INT64_MAX / 10 == res * neg) && ((*str - 48) > INT64_MAX % 10)) || (INT64_MIN / 10 == res * neg) && (-(*str - 48) > INT64_MIN % 10)))
+        {
+//            if((INT64_MIN / 10 == res * neg) && ((*str - 48) > INT64_MIN % 10))
+//                dprintf(2, "(%lld == %lld) && ((%lld) > %lld)))\n", INT64_MIN / 10,res * neg,(long long )-(*str - 48),INT64_MIN % 10);
+            return 255;
+        }
+    }
+    return (res * neg);
 }

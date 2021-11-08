@@ -67,7 +67,7 @@ void closing(t_data *data);
 
 void execution(t_elem *elem);
 void waiting(t_data *data);
-
+long long	ft_atoi_overflow(const char *str);
 
 void init(t_data *data, char **env);
 void	data_reboot(t_data *data, char *message, int mode);

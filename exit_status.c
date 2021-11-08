@@ -20,7 +20,6 @@ void builtins_error(t_elem *elem, char *cmd, char *arg, char *msg, int code)
 
 int error_code_transform()
 {
-//    dprintf(2, "%d\n", errno);
     if(errno == 2) // command not found
         return 127;
     if(errno == 13) // permission denied
@@ -36,20 +35,18 @@ void execve_error(t_elem *elem, char *cmd, char *arg, char *msg)
 
     elem->data->exit_status = error_code_transform();
 
-    if(elem->data->exit_status == 127)
+    if(arg && *arg)
     {
-        ft_putendl_fd("command not found", 2);
+        ft_putstr_fd("`",2);
+        ft_putstr_fd(arg,2);
+        ft_putstr_fd("': ",2);
     }
+    if(elem->data->exit_status == 127)
+        ft_putendl_fd("command not found", 2);
     else if(elem->data->exit_status == 126)
         ft_putendl_fd("permission denied", 2);
-//    if(arg && *arg)
-//    {
-//        ft_putstr_fd("`",2);
-//        ft_putstr_fd(arg,2);
-//        ft_putstr_fd("': ",2);
-//    }
     else if(!msg || !*msg)
         ft_putendl_fd(strerror(errno), 2);
-//    else
-//        ft_putendl_fd(msg, 2);
+    else
+        ft_putendl_fd(msg, 2);
 }
