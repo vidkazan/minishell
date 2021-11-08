@@ -4,15 +4,17 @@
 
 #include "main.h"
 
-void exit_code_print(t_elem *elem)
+void exit_code_print(t_elem *elem, int write_fd)
 {
     if(elem->data->exit_status > 255)
         elem->data->exit_status = elem->data->exit_status % 255;
-    ft_putnbr_fd(elem->data->exit_status, 2);
+    ft_putnbr_fd(elem->data->exit_status, write_fd);
 }
 
 void builtin_echo(t_elem *elem,int write_fd)
 {
+    if(elem->data->debug)
+        dprintf(2, ">>> %d echo fd %d error code %d\n", getpid(),write_fd, elem->data->exit_status);
     int is_n_flag = 0;
     int i = 1;
     if(!elem->cmd[1])
@@ -25,16 +27,14 @@ void builtin_echo(t_elem *elem,int write_fd)
         i++;
         is_n_flag++;
     }
-    if(elem->cmd[i] && !ft_strncmp(elem->cmd[i], "$?", 2)  && ft_strlen(elem->cmd[i]) == 2)
+    while (elem->cmd[i])
     {
-        exit_code_print(elem);
-        i++;
-    }
-    while(elem->cmd[i])
-    {
-        ft_putstr_fd(elem->cmd[i], write_fd);
-        if(elem->cmd[i + 1])
-            write(1, " ", 1);
+        if(elem->cmd[i] && !ft_strncmp(elem->cmd[i], "$?", 2)  && ft_strlen(elem->cmd[i]) == 2)
+            exit_code_print(elem,write_fd);
+        else
+            ft_putstr_fd(elem->cmd[i], write_fd);
+        if (elem->cmd[i + 1])
+            write(write_fd, " ", 1);
         i++;
     }
     if(!is_n_flag)
@@ -44,9 +44,14 @@ void builtin_echo(t_elem *elem,int write_fd)
 
 void    builtin_exit(t_elem *elem, int write_fd)
 {
-    int code;
+    long long code;
     int i = -1;
 
+    if(elem->cmd[2])
+    {
+        builtins_error(elem,"exit", NULL, "too many arguments", 0);
+        exit(1);
+    }
     if(!elem->cmd[1] || !*elem->cmd[1])
     {
         ft_putendl_fd("exit",2);
@@ -60,14 +65,18 @@ void    builtin_exit(t_elem *elem, int write_fd)
         {
             if(!ft_isdigit(elem->cmd[1][i]))
             {
-                ft_putstr_fd("minishell: exit:", 2);
-                ft_putstr_fd(elem->cmd[1], 2);
-                ft_putendl_fd(": numeric argument required", 2);
-                exit(0);
+                builtins_error(elem,"exit", NULL, "numeric argument required", 0);
+                exit(255);
             }
         }
     }
     code = ft_atoi(elem->cmd[1]);
+    dprintf(2,"%llu\n",code);
+    if(code > 9223372036854775807 || code < -9223372036854775807)
+    {
+        builtins_error(elem,"exit", NULL, "numeric argument required", 0);
+        exit(255);
+    }
     ft_putendl_fd("exit",2);
     exit(code);
 }

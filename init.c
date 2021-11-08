@@ -12,13 +12,13 @@
 
 void init(t_data *data, char **env)
 {
-//    data->envp = ft_arrdup(env);
     data->std_in = dup(0);
     data->std_out = dup(1);
     data->elem_start = NULL;
     data->simple_redirect_input_fd = -1;
     data->simple_redirect_output_fd = -1;
     data->double_redirect_output_fd = -1;
+    data->double_redirect_input_fd = -1;
 //    env_path_find(data);
 	data->q1 = 0;
 	data->q2 = 0;

@@ -1,6 +1,6 @@
 #include "main.h"
 
-void builtins_exit_status(t_elem *elem, char *cmd, char *arg, char *msg)
+void builtins_error(t_elem *elem, char *cmd, char *arg, char *msg, int code)
 {
     ft_putstr_fd("minishell: ",2);
     ft_putstr_fd(cmd,2);
@@ -16,4 +16,40 @@ void builtins_exit_status(t_elem *elem, char *cmd, char *arg, char *msg)
     else
         ft_putendl_fd(msg, 2);
     elem->data->exit_status = 1;
+}
+
+int error_code_transform()
+{
+//    dprintf(2, "%d\n", errno);
+    if(errno == 2) // command not found
+        return 127;
+    if(errno == 13) // permission denied
+        return 126;
+    return 0;
+}
+
+void execve_error(t_elem *elem, char *cmd, char *arg, char *msg)
+{
+    ft_putstr_fd("minishell: ",2);
+    ft_putstr_fd(cmd,2);
+    ft_putstr_fd(": ",2);
+
+    elem->data->exit_status = error_code_transform();
+
+    if(elem->data->exit_status == 127)
+    {
+        ft_putendl_fd("command not found", 2);
+    }
+    else if(elem->data->exit_status == 126)
+        ft_putendl_fd("permission denied", 2);
+//    if(arg && *arg)
+//    {
+//        ft_putstr_fd("`",2);
+//        ft_putstr_fd(arg,2);
+//        ft_putstr_fd("': ",2);
+//    }
+    else if(!msg || !*msg)
+        ft_putendl_fd(strerror(errno), 2);
+//    else
+//        ft_putendl_fd(msg, 2);
 }

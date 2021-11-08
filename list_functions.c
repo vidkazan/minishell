@@ -40,6 +40,8 @@ t_elem	*delete_current_node(t_elem *elem)
 		prev_elem = elem->prev;
 	if(elem->next)
 		next_elem = elem->next;
+	if(elem->data->debug)
+        dprintf(2,">>> %d DELNODE %p prev %p next %p %s\n", getpid(),elem, prev_elem, next_elem, elem->cmd[0]);
 	elem->cmd = NULL;
 	if(!next_elem && !prev_elem)
 	{
@@ -55,6 +57,7 @@ t_elem	*delete_current_node(t_elem *elem)
 	}
 	else if(!prev_elem)
 	{
+		elem->next->prev = NULL;
 		elem->next = NULL;
 		elem->data->elem_start = next_elem;
 		elem = NULL;
@@ -71,17 +74,13 @@ t_elem	*delete_current_node(t_elem *elem)
 	}
 }
 
-t_elem  *push_back(t_elem *elem, t_data *data)
+t_elem  *push_back(t_elem *start, t_data *data)
 {
-    t_elem *ptr = elem;
+    t_elem *ptr = start;
     t_elem *new_elem;
 
-//    printf(">>> here21\n");
     if(ptr == NULL)
-    {
-//        printf(">>> here22\n");
-        elem = create_elem(data);
-    }
+        new_elem = create_elem(data);
     else
     {
         while(ptr->next != NULL)
@@ -89,10 +88,9 @@ t_elem  *push_back(t_elem *elem, t_data *data)
         new_elem = create_elem(data);
         ptr->next = new_elem;
         new_elem->prev = ptr;
-        elem = new_elem;
+//        elem = new_elem;
     }
-//    printf(">>> here23\n");
-    return elem;
+    return new_elem;
 }
 
 void	list_cleaner(t_elem *elem)

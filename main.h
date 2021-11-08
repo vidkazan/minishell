@@ -52,8 +52,9 @@ typedef struct s_data
     int simple_redirect_input_fd;
     int simple_redirect_output_fd;
     int double_redirect_output_fd;
+    int double_redirect_input_fd;
     int debug;
-
+    int exec;
     int q1;
     int q2;
     char *line;
@@ -77,23 +78,22 @@ void print_current_elem(t_elem *ptr,int id);
 void print_elems(t_elem *ptr);
 void	env_path_find(t_data *data);
 void	find_path(t_elem *elem);
-void simple_redirects(t_data *data);
+void redirects(t_data *data);
 t_elem 	*delete_current_node(t_elem	*elem);
 t_elem	*double_redirect_output(t_elem	*elem);
 char	*search_strings_in_array(char **arr, char *search_word, int *index);
 void	edit_env_keys(int env_index, char *new_value, t_data *data);
 char    **ft_arrdup(char **env);
 void	free_arr(char **str);
-
-
+void execve_error(t_elem *elem, char *cmd, char *arg, char *msg);
 
 int   builtin_fd_gen(t_elem *elem);
 void builtin_exec(t_elem *elem);
 void builtin_check(t_elem *elem);
 
-void builtins_exit_status(t_elem *elem, char *cmd, char *arg, char *msg);
+void builtins_error(t_elem *elem, char *cmd, char *arg, char *msg, int code);
 void    builtin_exit(t_elem *elem,int write_fd);
-void    builtin_unset(t_elem *elem,int write_fd);
+void    builtin_unset(t_elem *elem);
 void    builtin_check(t_elem *elem);
 void    builtin_echo(t_elem *elem,int write_fd);
 void    builtin_cd(t_elem *elem,int write_fd);
@@ -103,8 +103,11 @@ void builtin_export(t_elem *elem,int write_fd);
 int   builtin_fd_gen(t_elem *elem);
 
 void	list_cleaner(t_elem *elem);
-void	main_preparser(t_data *data, char *line, char **env);
+void	main_preparser(t_data *data, char *line);
 void	data_reboot(t_data *data, char *message, int mode);
-
+int ft_strlen_arr(char **arr);
+char	**ft_arrjoin(char **s1, char **s2);
+char **ft_arrjoin_one_line(char **envp,char *new_arr);
+int	ft_strcmp(const char *s1, const char *s2);
 
 #endif

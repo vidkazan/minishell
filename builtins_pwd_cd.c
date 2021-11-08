@@ -15,9 +15,9 @@ void builtin_pwd(t_elem *elem, int write_fd)
 //        ft_putendl_fd(res, write_fd);
     res = getcwd(NULL, 0);
     if(!res)
-        builtins_exit_status(elem, "pwd", NULL, NULL);
+        builtins_error(elem, "pwd", NULL, NULL, 0);
     else
-        ft_putendl_fd(res, 2);
+        ft_putendl_fd(res, write_fd);
 }
 
 void builtin_cd(t_elem *elem,int write_fd) // relative path cd NOT working if current dir is removed
@@ -25,61 +25,45 @@ void builtin_cd(t_elem *elem,int write_fd) // relative path cd NOT working if cu
 	char *home;
 	char *res_path;
 	char *current_pwd_env;
-	char *old_pwd_env;
 	int	pwd_index = 0;
 	int	old_pwd_index = 0;
 	home = search_strings_in_array(elem->data->envp, "HOME=", NULL);
-	current_pwd_env = ft_strdup(search_strings_in_array(elem->data->envp, "PWD=", &pwd_index));
-	old_pwd_env = search_strings_in_array(elem->data->envp, "OLDPWD=", &old_pwd_index);
+	search_strings_in_array(elem->data->envp, "OLDPWD=", &old_pwd_index);
     if(!elem->cmd[1])
     {
-        if(chdir(home))
-        {
-            builtins_exit_status(elem, "cd",NULL, NULL);
-        	return;
-        }
+        if(!home || !*home)
+            builtins_error(elem, "cd",NULL, "HOME not set", 1);
+        else if(chdir(home))
+            builtins_error(elem, "cd",NULL, NULL, 0);
+        return;
     }
     if(!elem->cmd[1][0])
         return;
     else if(elem->cmd[1][0] == '~')
     {
-    	elem->cmd[1]++;
+        elem->cmd[1]++;
 		res_path = ft_strjoin(home, elem->cmd[1]);
 		if(chdir(res_path))
 		{
-            builtins_exit_status(elem, "cd",NULL, NULL);
+            builtins_error(elem, "cd",NULL, NULL, 0);
 			return;
 		}
 	}
-//    else if(elem->cmd[1][0] == '-' && old_pwd_env)
-//    {
-//    	res_path = ft_strdup(old_pwd_env);
-//
-//    	if(chdir(res_path))
-//    	{
-//            builtins_exit_status(elem, "cd");
-//    		return;
-//    	}
-//    	else
-//    	{
-//			write(2, res_path, ft_strlen(res_path));
-//			write(1, "\n", 1);
-//		}
-//    }
     else
     {
         res_path = ft_strdup(elem->cmd[1]);
         if(!getcwd(NULL, 0))
          {
-             builtins_exit_status(elem, "cd",NULL, NULL);
+             builtins_error(elem, "cd",elem->cmd[1], NULL, 0);
              return;
          }
         if (chdir(res_path))
         {
-            builtins_exit_status(elem, "cd",NULL, NULL);
+            builtins_error(elem, "cd",elem->cmd[1], NULL, 0);
             return;
         }
     }
+    current_pwd_env = ft_strdup(search_strings_in_array(elem->data->envp, "PWD=", &pwd_index));
 	edit_env_keys(pwd_index, getcwd(NULL, 1024), elem->data);
     edit_env_keys(old_pwd_index, current_pwd_env, elem->data);
     free(res_path);

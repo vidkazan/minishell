@@ -25,7 +25,7 @@ void execution(t_elem *elem)
             dprintf(2, ">>> %d pipe\n", getpid());
             if(pipe(elem->pfd))
             {
-                write(2, strerror(errno), ft_strlen(strerror(errno)));
+                builtins_error(elem, "pipe:", NULL, NULL, 0);
                 return;
             }
         }
@@ -34,7 +34,7 @@ void execution(t_elem *elem)
             elem->pid = fork();
             if (elem->pid < 0)
             {
-                write(2, strerror(errno), ft_strlen(strerror(errno)));
+                builtins_error(elem, "fork:", NULL, NULL, 0);
                 return;
             }
         }
@@ -44,6 +44,8 @@ void execution(t_elem *elem)
             dprintf(2, ">>> %d child\n", getpid());
             if (elem->type == CMD && elem->prev && !elem->next) // last_CMD
             {
+                if(elem->data->debug)
+                    dprintf(2, ">>> %d last_CMD\n", getpid());
                 dup2(elem->prev->pfd[0], 0);
                 close(elem->prev->pfd[0]);
                 close(elem->prev->pfd[1]);
@@ -54,23 +56,33 @@ void execution(t_elem *elem)
             }
             else if(elem->type == CMD && !elem->prev && !elem->next) // first_CMD
             {
+                if(elem->data->debug)
+                    dprintf(2, ">>> %d first_CMD\n", getpid());
                 if(elem->data->double_redirect_output_fd)
                     dup2(elem->data->double_redirect_output_fd, 1);
                 if(elem->data->simple_redirect_output_fd)
                     dup2(elem->data->simple_redirect_output_fd, 1);
                 if(elem->data->simple_redirect_input_fd)
                     dup2(elem->data->simple_redirect_input_fd, 0);
+                if(elem->data->double_redirect_input_fd)
+                    dup2(elem->data->double_redirect_input_fd, 0);
             }
             else if(elem->type == PIPE && !elem->prev) // first_PIPE
             {
+                if(elem->data->debug)
+                    dprintf(2, ">>> %d first_PIPE\n", getpid());
                 if(elem->data->simple_redirect_input_fd)
                     dup2(elem->data->simple_redirect_input_fd, 0);
+                if(elem->data->double_redirect_input_fd)
+                    dup2(elem->data->double_redirect_input_fd, 0);
                 dup2(elem->pfd[1], 1);
                 close(elem->pfd[0]);
                 close(elem->pfd[1]);
             }
             else if(elem->type == PIPE && elem->prev && elem->next) // middle_PIPE
             {
+                if(elem->data->debug)
+                    dprintf(2, ">>> %d middle_PIPE\n", getpid());
                 dup2(elem->pfd[1], 1);
                 dup2(elem->prev->pfd[0], 0);
                 close(elem->pfd[0]);
@@ -80,12 +92,8 @@ void execution(t_elem *elem)
             }
             if (execve(elem->cmd[0], elem->cmd, elem->data->envp) < 0)
             {
-                ft_putstr_fd("minishell: ",2);
-                ft_putstr_fd(elem->cmd[0],2);
-                ft_putstr_fd(": ",2);
-                ft_putnbr_fd(errno,2);
-                ft_putendl_fd(strerror(errno),2);
-                exit(errno);
+                execve_error(elem, elem->cmd[0], NULL,NULL);
+                exit(elem->data->exit_status);
             }
         }
         else
@@ -93,7 +101,7 @@ void execution(t_elem *elem)
             if(elem->is_builtin)
                 builtin_exec(elem);
             if(elem->data->debug)
-            dprintf(2, ">>> %d parent\n", getpid());
+                dprintf(2, ">>> %d parent\n", getpid());
             close_fd(elem);
         }
         if (elem->next)
