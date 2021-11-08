@@ -50,15 +50,15 @@ int main(int ac, char **av, char **env) // not save if no ENVP
 			main_preparser(data, data->line);
             while(data->elem_start->prev) // костыыыль
                 data->elem_start = data->elem_start->prev;
-            redirects(data);
-            if(data->exec)
-            {
-                execution(data->elem_start);
-                waiting(data);
-            }
-            data->exec = 1;
             if(data->debug)
-                print_elems(data->elem_start);
+                dprintf(2, ">>> %d REDIR_PROC_BEGIN\n", getpid());
+            redirects(data);
+            if(data->debug)
+                dprintf(2, ">>> %d EXEC_BEGIN\n", getpid());
+            execution(data->elem_start);
+            waiting(data);
+//            if(data->debug)
+//                print_elems(data->elem_start);
 			data_reboot(data, NULL, 0);
 		}
     }

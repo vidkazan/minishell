@@ -55,7 +55,7 @@ void builtin_unset(t_elem *elem)
         find = ft_strjoin(elem->cmd[count], "=");
         if (!search_strings_in_array(elem->data->envp, find, &index))
         {
-            builtins_error(elem, "unset", elem->cmd[count], "not a valid identifier", 0);
+//            builtins_error(elem, "unset", elem->cmd[count], "not a valid identifier", 0);
             flag = 1;
         }
         free(find);
@@ -146,15 +146,24 @@ void export_sort_print(t_elem *elem, int write_fd)
 
 int export_argument_check(char *arg)
 {
+    char *ptr;
+
+    ptr = arg;
 //        dprintf(2, ">>> export_arg_check\n");
-    if((!arg || !*arg) || (!ft_isalpha(*arg) && *arg != '_'))
+    if((!ptr || !*ptr) || (!ft_isalpha(*ptr) && *ptr != '_'))
         return 0;
+    while(*ptr)
+    {
+        if(!ft_isalpha(*ptr) && *ptr != '_' && *ptr != '=' && *ptr != '\'' && *ptr != '\"')
+            return 0;
+        ptr++;
+    }
     return 1;
 }
 
 char **ft_arrjoin_one_line(char **arr1,char *s2)
 {
-    dprintf(2, ">>> arrjoin_one_line\n");
+//    dprintf(2, ">>> arrjoin_one_line\n");
     char	**res;
     int		size_all;
     int     i;

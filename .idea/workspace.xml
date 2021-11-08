@@ -15,15 +15,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="05c57aff-0105-474e-9bec-95a3c37232f2" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/minishell.iml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/arr_functions.c" beforeDir="false" afterPath="$PROJECT_DIR$/arr_functions.c" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/builtins_echo.c" beforeDir="false" afterPath="$PROJECT_DIR$/builtins_echo.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/builtins_env.c" beforeDir="false" afterPath="$PROJECT_DIR$/builtins_env.c" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/builtins_main.c" beforeDir="false" afterPath="$PROJECT_DIR$/builtins_main.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/exit_status.c" beforeDir="false" afterPath="$PROJECT_DIR$/exit_status.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/main.h" beforeDir="false" afterPath="$PROJECT_DIR$/main.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/execution.c" beforeDir="false" afterPath="$PROJECT_DIR$/execution.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main.c" beforeDir="false" afterPath="$PROJECT_DIR$/main.c" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/minishell" beforeDir="false" afterPath="$PROJECT_DIR$/minishell" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/msh_tester" beforeDir="false" afterPath="$PROJECT_DIR$/msh_tester" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/msh_tester/test.sh" beforeDir="false" afterPath="$PROJECT_DIR$/msh_tester/test.sh" afterDir="false" />
@@ -103,11 +100,6 @@
         <option name="CLION.COMPOUND.BUILD" enabled="true" />
       </method>
     </configuration>
-    <configuration default="true" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" PASS_PARENT_ENVS_2="true">
-      <method v="2">
-        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
-      </method>
-    </configuration>
     <configuration default="true" type="GradleAppRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" PASS_PARENT_ENVS_2="true">
       <method v="2">
         <option name="com.jetbrains.cidr.cpp.gradle.execution.GradleNativeBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
@@ -123,7 +115,8 @@
       <option name="presentableId" value="Default" />
       <updated>1636363334991</updated>
       <workItem from="1636363336844" duration="1978000" />
-      <workItem from="1636367177078" duration="2809000" />
+      <workItem from="1636367177078" duration="6609000" />
+      <workItem from="1636374599548" duration="943000" />
     </task>
     <servers />
   </component>

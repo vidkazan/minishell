@@ -45,7 +45,6 @@ void builtin_echo(t_elem *elem,int write_fd)
 void    builtin_exit(t_elem *elem, int write_fd)
 {
     long long code;
-    int overflow_flag;
     int i = -1;
 
     if(elem->cmd[2])

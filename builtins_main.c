@@ -109,9 +109,10 @@ void builtin_exec(t_elem *elem)
     if(elem->is_builtin == 8)
         builtin_debug(elem);
 }
-void builtin_check(t_elem *elem)
+void builtin_check(t_elem *elem) // TODO #101 after #100 change all strNcmp to strcmp
 {
-    if(!ft_strncmp(elem->cmd[0], "echo", 4)  && ft_strlen(elem->cmd[0]) == 4)
+    if(!ft_strcmp(elem->cmd[0], "echo"))
+//    if(!ft_strncmp(elem->cmd[0], "echo", 4)  && ft_strlen(elem->cmd[0]) == 4)
         elem->is_builtin = 1;
     if(!ft_strncmp(elem->cmd[0], "cd", 2)  && ft_strlen(elem->cmd[0]) == 2)
         elem->is_builtin = 2;
