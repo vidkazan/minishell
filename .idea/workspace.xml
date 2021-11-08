@@ -15,16 +15,17 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="05c57aff-0105-474e-9bec-95a3c37232f2" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/builtins_export_main.c" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/builtins_export_set.c" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/builtins_export_sorting.c" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/str_functions.c" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/arr_functions.c" beforeDir="false" afterPath="$PROJECT_DIR$/arr_functions.c" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/builtins_echo.c" beforeDir="false" afterPath="$PROJECT_DIR$/builtins_echo.c" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/builtins_env.c" beforeDir="false" afterPath="$PROJECT_DIR$/builtins_env.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/builtins_main.c" beforeDir="false" afterPath="$PROJECT_DIR$/builtins_main.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/execution.c" beforeDir="false" afterPath="$PROJECT_DIR$/execution.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/main.c" beforeDir="false" afterPath="$PROJECT_DIR$/main.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/exit_status.c" beforeDir="false" afterPath="$PROJECT_DIR$/exit_status.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main.h" beforeDir="false" afterPath="$PROJECT_DIR$/main.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/minishell" beforeDir="false" afterPath="$PROJECT_DIR$/minishell" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/msh_tester" beforeDir="false" afterPath="$PROJECT_DIR$/msh_tester" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/msh_tester/test.sh" beforeDir="false" afterPath="$PROJECT_DIR$/msh_tester/test.sh" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/redirects.c" beforeDir="false" afterPath="$PROJECT_DIR$/redirects.c" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -41,7 +42,8 @@
     </projectState>
   </component>
   <component name="Git.Settings">
-    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/msh_tester" />
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+    <option name="ROOT_SYNC" value="DONT_SYNC" />
   </component>
   <component name="GitSEFilterConfiguration">
     <file-type-list>
@@ -91,18 +93,18 @@
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="cf.first.check.clang-format" value="false" />
     <property name="cidr.known.project.marker" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/Makefile" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="nodejs_package_manager_path" value="npm" />
+  </component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$" />
+    </key>
   </component>
   <component name="RunManager">
     <configuration name="all" type="CLionNativeAppRunConfigurationType" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="minishell_new_pipes" TARGET_NAME="all" CONFIG_NAME="all" version="1">
       <method v="2">
         <option name="CLION.COMPOUND.BUILD" enabled="true" />
-      </method>
-    </configuration>
-    <configuration default="true" type="GradleAppRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" PASS_PARENT_ENVS_2="true">
-      <method v="2">
-        <option name="com.jetbrains.cidr.cpp.gradle.execution.GradleNativeBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
       </method>
     </configuration>
   </component>
@@ -116,7 +118,9 @@
       <updated>1636363334991</updated>
       <workItem from="1636363336844" duration="1978000" />
       <workItem from="1636367177078" duration="6609000" />
-      <workItem from="1636374599548" duration="943000" />
+      <workItem from="1636374599548" duration="1819000" />
+      <workItem from="1636382241049" duration="252000" />
+      <workItem from="1636384146783" duration="3189000" />
     </task>
     <servers />
   </component>

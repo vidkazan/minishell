@@ -25,11 +25,13 @@ int ft_strlen_arr(char **arr)
 char    **ft_arrdup(char **arr)
 {
     char **arr_dup;
-    int i = -1;
-    int arr_len = ft_strlen_arr(arr);
+    int i;
+    int arr_len;
 
     if(!arr || !arr[0])
         return NULL;
+    i = -1;
+    arr_len = ft_strlen_arr(arr);
     arr_dup = (char **)malloc(sizeof(char *) * (arr_len + 1));
     while (++i < arr_len)
         arr_dup[i] = ft_strdup(arr[i]);
@@ -37,23 +39,18 @@ char    **ft_arrdup(char **arr)
     return arr_dup;
 }
 
-
 char	**ft_arrjoin(char **s1, char **s2)
 {
     char	**res;
     int		size_all;
     int     i;
     int     len1;
-    int     len2;
 
-    len1 = ft_strlen_arr(s1);
-    len2 = ft_strlen_arr(s2);
-    if (!s1 || !s2)
+    if (!s1 && !s2)
         return (NULL);
-    size_all = len1 + len2;
+    len1 = ft_strlen_arr(s1);
+    size_all = len1 + ft_strlen_arr(s2);
     res = malloc(sizeof(char*) * (size_all + 1));
-    if (!res)
-        return (0);
     res[size_all] = NULL;
     i = 0;
     while(i < len1)
@@ -71,8 +68,9 @@ char	**ft_arrjoin(char **s1, char **s2)
 
 char *search_strings_in_array(char **arr, char *search_word, int *index)
 {
-    int i = -1;
+    int i;
 
+    i = -1;
     if(!search_word)
         return NULL;
     while(arr[++i])
@@ -87,58 +85,31 @@ char *search_strings_in_array(char **arr, char *search_word, int *index)
     return NULL;
 }
 
-void	ft_strip(char **str)
+char **ft_arrjoin_one_line(char **arr1,char *s2)
 {
-    int i;
+//    dprintf(2, ">>> arrjoin_one_line\n");
+    char	**res;
+    int		size_all;
+    int     i;
+    int     len1;
 
-    if (*str != NULL)
-    {
-        i = ft_strlen(*str);
-        while ((*str)[i - 1] == ' ' && i > 0)
-            i--;
-        (*str)[i] = '\0';
-        while (**str && **str == ' ')
-            (*str)++;
-    }
-}
-
-int	ft_strcmp(const char *s1, const char *s2)
-{
-    unsigned int	i;
-
-    if(!s1 && !s2)
-        return 0;
-    else if(!s1 || !s2)
-        return 1;
+    len1 = ft_strlen_arr(arr1);
+    if (!arr1 || !s2)
+        return (NULL);
+    size_all = len1 + 1;
+    res = malloc(sizeof(char *) * (size_all + 1));
+    if (!res)
+        return (NULL);
+    res[size_all] = NULL;
     i = 0;
-    while (s1[i] == s2[i] && s1[i] && s2[i])
-        i++;
-    return (s1[i] - s2[i]);
-}
-
-long long	ft_atoi_overflow(const char *str)
-{
-    int	neg;
-    long long	res;
-
-    res = 0;
-    neg = 1;
-    while (*str == 32 || *str == '\n' || *str == '\f' \
-		|| *str == '\v' || *str == '\r' || *str == '\t')
-        str++;
-    if (*str == '-')
-        neg = -1;
-    if (*str == '+' || *str == '-')
-        str++;
-    while (*str >= '0' && *str <= '9')
+    while(i < len1)
     {
-        res = (res * 10) + (((int) *str++) - 48);
-        if(*str && ((INT64_MAX / 10 < res * neg) || (INT64_MIN / 10 > res * neg) || ((INT64_MAX / 10 == res * neg) && ((*str - 48) > INT64_MAX % 10)) || (INT64_MIN / 10 == res * neg) && (-(*str - 48) > INT64_MIN % 10)))
-        {
-//            if((INT64_MIN / 10 == res * neg) && ((*str - 48) > INT64_MIN % 10))
-//                dprintf(2, "(%lld == %lld) && ((%lld) > %lld)))\n", INT64_MIN / 10,res * neg,(long long )-(*str - 48),INT64_MIN % 10);
-            return 255;
-        }
+        res[i] = arr1[i];
+        i++;
     }
-    return (res * neg);
+    res[i] = s2;
+    free(arr1);
+    arr1 = NULL;
+    return (res);
 }
+
