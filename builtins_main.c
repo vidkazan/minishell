@@ -24,27 +24,10 @@ void builtin_debug(t_elem *elem)
         elem->data->debug = 0;
         return;
     }
-//    if(elem->cmd[1] && *elem->cmd[1] == 'f')
-//    {
-//        dprintf(2, ">>> debug exec OFF\n");
-//        elem->data->exec = 0;
-//    }
-//    if(elem->cmd[1] && *elem->cmd[1] == 'e')
-//    {
-//        dprintf(2, ">>> debug exec ON\n");
-//        elem->data->exec = 1;
-//    }
-//    if(elem->cmd[1] && *elem->cmd[1] == 'c')
-//    {
-//        dprintf(2, ">>> debug: debug %d exec %d\n", elem->data->debug, elem->data->exec);
-//        elem->data->exec = 1;
-//    }
 }
 
 int   builtin_fd_gen(t_elem *elem)
 {
-//    if(elem->data->debug)
-//        dprintf(2, ">>> %d FD gen prev: %p next: %p si %d so %d do %d\n", getpid(), elem->prev, elem->next, elem->data->simple_redirect_input_fd, elem->data->simple_redirect_output_fd, elem->data->double_redirect_output_fd);
     if (elem->type == CMD && elem->prev && !elem->next) // last_CMD
     {
         if(elem->data->debug)
@@ -70,8 +53,6 @@ int   builtin_fd_gen(t_elem *elem)
     }
     else if(elem->type == CMD && !elem->prev && !elem->next) // first_CMD
     {
-//        if(elem->data->debug)
-//            ft_putendl_fd("redirecting first CMD",2);
         if(elem->data->simple_redirect_output_fd < 0 && elem->data->double_redirect_output_fd < 0)
             return 1;
         if(elem->data->double_redirect_output_fd > 2)
@@ -101,7 +82,7 @@ void builtin_exec(t_elem *elem)
     if(elem->is_builtin == 4)
     	builtin_env(elem, write_fd);
     if(elem->is_builtin == 5)
-        builtin_exit(elem, write_fd);
+        builtin_exit(elem);
     if(elem->is_builtin == 6)
         builtin_unset(elem);
     if(elem->is_builtin == 7)
@@ -109,6 +90,7 @@ void builtin_exec(t_elem *elem)
     if(elem->is_builtin == 8)
         builtin_debug(elem);
 }
+
 void builtin_check(t_elem *elem) // TODO #101 after #100 change all strNcmp to strcmp
 {
     if(!ft_strcmp(elem->cmd[0], "echo"))

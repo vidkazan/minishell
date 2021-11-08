@@ -83,6 +83,10 @@ char	*search_strings_in_array(char **arr, char *search_word, int *index);
 
 void    redirects(t_data *data);
 t_elem	*double_redirect_output(t_elem	*elem);
+t_elem	*simple_redirect_input(t_elem *elem);
+t_elem	*simple_redirect_output(t_elem *elem);
+t_elem *double_redirect_input(t_elem *elem);
+
 
 // parsing
 
@@ -92,6 +96,7 @@ void	main_preparser(t_data *data, char *line);
 
 void execve_error(t_elem *elem, char *cmd, char *arg, char *msg);
 void exit_code_print(t_elem *elem, int write_fd);
+int error_code_transform();
 
 
 // list functions
@@ -119,7 +124,7 @@ int     builtin_fd_gen(t_elem *elem);
 void    builtin_exec(t_elem *elem);
 void    builtin_check(t_elem *elem);
 void    builtins_error(t_elem *elem, char *cmd, char *arg, char *msg, int code);
-void    builtin_exit(t_elem *elem,int write_fd);
+void    builtin_exit(t_elem *elem);
 void    builtin_unset(t_elem *elem);
 void    builtin_check(t_elem *elem);
 void    builtin_echo(t_elem *elem,int write_fd);

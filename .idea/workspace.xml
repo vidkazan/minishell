@@ -15,17 +15,19 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="05c57aff-0105-474e-9bec-95a3c37232f2" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/builtins_export_main.c" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/builtins_export_set.c" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/builtins_export_sorting.c" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/str_functions.c" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/error.c" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/redirects_di.c" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/redirects_do.c" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/redirects_si.c" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/redirects_so.c" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/arr_functions.c" beforeDir="false" afterPath="$PROJECT_DIR$/arr_functions.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/builtins_echo.c" beforeDir="false" afterPath="$PROJECT_DIR$/builtins_echo.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/builtins_env.c" beforeDir="false" afterPath="$PROJECT_DIR$/builtins_env.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/builtins_main.c" beforeDir="false" afterPath="$PROJECT_DIR$/builtins_main.c" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/exit_status.c" beforeDir="false" afterPath="$PROJECT_DIR$/exit_status.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/init.c" beforeDir="false" afterPath="$PROJECT_DIR$/init.c" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/main.h" beforeDir="false" afterPath="$PROJECT_DIR$/main.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/minishell" beforeDir="false" afterPath="$PROJECT_DIR$/minishell" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/redirects.c" beforeDir="false" afterPath="$PROJECT_DIR$/redirects.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/str_functions.c" beforeDir="false" afterPath="$PROJECT_DIR$/str_functions.c" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -120,7 +122,7 @@
       <workItem from="1636367177078" duration="6609000" />
       <workItem from="1636374599548" duration="1819000" />
       <workItem from="1636382241049" duration="252000" />
-      <workItem from="1636384146783" duration="3189000" />
+      <workItem from="1636384146783" duration="3920000" />
     </task>
     <servers />
   </component>

@@ -29,5 +29,5 @@ void	data_reboot(t_data *data, char *message, int mode)
 	if (mode)
 		printf("%s\n", message);
 	list_cleaner(data->elem_start);
-	init(data, data->envp);		//	need to init everytime?
+	init(data, data->envp);
 }
