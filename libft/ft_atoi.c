@@ -1,9 +1,9 @@
 #include "libft.h"
 
-int	ft_atoi(const char *str)
+long long	ft_atoi(const char *str)
 {
 	int	neg;
-	int	res;
+    long long	res;
 
 	res = 0;
 	neg = 1;

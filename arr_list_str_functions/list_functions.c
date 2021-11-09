@@ -1,4 +1,4 @@
-#include "main.h"
+#include "../main.h"
 
 //rl_clear_history, rl_on_new_line,
 //rl_replace_line, rl_redisplay, add_history, printf,
@@ -40,6 +40,8 @@ t_elem	*delete_current_node(t_elem *elem)
 		prev_elem = elem->prev;
 	if(elem->next)
 		next_elem = elem->next;
+	if(elem->data->debug)
+        dprintf(2,">>> %d DELNODE %p prev %p next %p %s\n", getpid(),elem, prev_elem, next_elem, elem->cmd[0]);
 	elem->cmd = NULL;
 	if(!next_elem && !prev_elem)
 	{
@@ -55,6 +57,7 @@ t_elem	*delete_current_node(t_elem *elem)
 	}
 	else if(!prev_elem)
 	{
+		elem->next->prev = NULL;
 		elem->next = NULL;
 		elem->data->elem_start = next_elem;
 		elem = NULL;
@@ -71,13 +74,13 @@ t_elem	*delete_current_node(t_elem *elem)
 	}
 }
 
-t_elem  *push_back(t_elem *elem, t_data *data)
+t_elem  *push_back(t_elem *start, t_data *data)
 {
-    t_elem *ptr = elem;
+    t_elem *ptr = start;
     t_elem *new_elem;
 
     if(ptr == NULL)
-        elem = create_elem(data);
+        new_elem = create_elem(data);
     else
     {
         while(ptr->next != NULL)
@@ -85,33 +88,12 @@ t_elem  *push_back(t_elem *elem, t_data *data)
         new_elem = create_elem(data);
         ptr->next = new_elem;
         new_elem->prev = ptr;
+//        elem = new_elem;
     }
-    return elem;
+    return new_elem;
 }
 
-int ft_strlen_arr(char **arr)
+void	list_cleaner(t_elem *elem)
 {
-    int i;
-
-    i = 0;
-    if(!arr || !arr[0])
-        return 0;
-    while(arr[i])
-        i++;
-    return i;
-}
-
-char    **ft_arrdup(char **env)
-{
-    char **arr_dup;
-    int i = -1;
-    int arr_len = ft_strlen_arr(env);
-
-    if(!env || !env[0])
-        return NULL;
-    arr_dup = (char **)malloc(sizeof(char *) * (arr_len + 1));
-    while (++i < arr_len)
-        arr_dup[i] = ft_strdup(env[i]);
-    arr_dup[arr_len] = NULL;
-    return arr_dup;
+	elem = NULL;
 }

@@ -12,15 +12,15 @@
 
 void print_current_elem(t_elem *ptr,int id)
 {
-    if(ptr->cmd&& *ptr->cmd)
+    if(ptr->cmd && *ptr->cmd)
     {
-        dprintf(2,">>> ");
+        dprintf(2,">>> %p, type %d next %p", ptr, ptr->type, ptr->next);
         while(*ptr->cmd)
-        	dprintf(2,"%s ", *ptr->cmd++);
+        	dprintf(2," %s ", *ptr->cmd++);
         dprintf(2,"\n");
     }
     else
-    	dprintf(2,">>> nocmd \n");
+    	dprintf(2,">>> printelems: nocmd \n");
 }
 
 void print_elems(t_elem *ptr)
