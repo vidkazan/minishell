@@ -29,5 +29,10 @@ void	data_reboot(t_data *data, char *message, int mode)
 	if (mode)
 		printf("%s\n", message);
 	list_cleaner(data->elem_start);
+	if(data->line)
+	{
+		free(data->line);
+		data->line = 0;
+	}
 	init(data, data->envp);
 }

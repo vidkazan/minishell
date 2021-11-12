@@ -42,15 +42,20 @@ t_elem	*delete_current_node(t_elem *elem)
 		next_elem = elem->next;
 	if(elem->data->debug)
         dprintf(2,">>> %d DELNODE %p prev %p next %p %s\n", getpid(),elem, prev_elem, next_elem, elem->cmd[0]);
+	free_arr(elem->cmd);
 	elem->cmd = NULL;
+	free(elem->comand_line);
+	elem->comand_line = NULL;
 	if(!next_elem && !prev_elem)
 	{
+		free(elem->data->elem_start);
 		elem->data->elem_start = NULL;
 		return NULL;
 	}
 	else if(!next_elem)
 	{
 		elem->prev = NULL;
+		free(elem);
 		elem = NULL;
 		prev_elem->next = NULL;
 		return (prev_elem);
@@ -60,6 +65,7 @@ t_elem	*delete_current_node(t_elem *elem)
 		elem->next->prev = NULL;
 		elem->next = NULL;
 		elem->data->elem_start = next_elem;
+		free(elem);
 		elem = NULL;
 		return (next_elem);
 	}
@@ -69,6 +75,7 @@ t_elem	*delete_current_node(t_elem *elem)
 		elem->prev = NULL;
 		prev_elem->next = next_elem;
 		next_elem->prev = prev_elem;
+		free(elem);
 		elem = NULL;
 		return prev_elem;
 	}
@@ -93,7 +100,33 @@ t_elem  *push_back(t_elem *start, t_data *data)
     return new_elem;
 }
 
-void	list_cleaner(t_elem *elem)
+void	list_cleaner(t_elem *elem_start)
 {
-	elem = NULL;
+	t_elem  *ptr;
+
+	ptr = elem_start;
+	while(ptr->next)
+		ptr = ptr->next;
+	while(ptr->prev)
+	{
+		free_arr(ptr->cmd);
+		ptr->cmd = NULL;
+		free(ptr->comand_line);
+		ptr->comand_line = NULL;
+		ptr = ptr->prev;
+		ptr->next->prev = NULL;
+		ptr->next->data = NULL;
+		free(ptr->next);
+		ptr->next = NULL;
+	}
+	free_arr(ptr->cmd);
+	ptr->cmd = NULL;
+	free(ptr->comand_line);
+	ptr->comand_line = NULL;
+//	ptr->next->prev = NULL;
+//	ptr->next->data = NULL;
+//	free(ptr->next);
+//	ptr->next = NULL;
+	free(ptr);
+	ptr = NULL;
 }

@@ -14,16 +14,18 @@ t_elem *double_redirect_input(t_elem *elem)
     pipe(heredoc_pfd);
     while(ft_strcmp(elem->cmd[0], line))
     {
+		if(line && *line)
+			free(line);
         line = readline("> ");
         line_nl = ft_strjoin(line, "\n");
         if (elem->data->debug)
             dprintf(2, ">>> heredoc: line_nl: %s\n", line_nl);
         if(strcmp(elem->cmd[0], line))
-        {
             write(heredoc_pfd[1], line_nl, ft_strlen(line_nl));
-            free(line_nl);
-        }
+		free(line_nl);
     }
+	if(line && *line)
+		free(line);
     close(heredoc_pfd[1]);
     if(elem->data->double_redirect_input_fd)
         close(elem->data->double_redirect_input_fd);

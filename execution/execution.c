@@ -12,6 +12,8 @@
 
 void execution(t_elem *elem)// TODO #100 after handling ""  - fix path finding with spaces etc + check by "echo " | "pwd "
 {
+	if(elem->data->debug)
+		dprintf(2, ">>> ADRESSES\n> data %p\n data.line %p\n> elem %p\n> elem.cmd %p\n> elem.line %p\n ", elem->data,elem->data->line, elem,elem->cmd, elem->comand_line);
     while(elem)
     {
         if(elem->data->exec)
@@ -97,6 +99,7 @@ void execution(t_elem *elem)// TODO #100 after handling ""  - fix path finding w
                 if (execve(elem->cmd[0], elem->cmd, elem->data->envp) < 0)
                 {
                     execve_error(elem, elem->cmd[0], NULL, NULL);
+					data_reboot(elem->data, NULL, 0);
                     exit(elem->data->exit_status);
                 }
             }

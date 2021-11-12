@@ -156,6 +156,6 @@ void vars(t_data *data)
     if(data->debug)
         printf(">>> handled line:|%s|\n", data->line);
 //    free(var.new);
-//    free(var.line);
+    free(var.line);
     vars_init(&var, data->envp);
 }

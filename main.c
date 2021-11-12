@@ -15,6 +15,13 @@
 //    dprintf(2, "\nminishell $>");
 //}
 
+/*
+ *  malloc:
+ *
+ *
+ *
+ * */
+
 void	read_line_and_add_history(char **line)
 {
 	if (*line)
@@ -28,20 +35,25 @@ void	read_line_and_add_history(char **line)
 		add_history (*line);
 }
 
+void start_init(t_data *data, char **env, int ac)
+{
+	init(data, env);
+	data->envp = ft_arrdup(env);
+	data->exit_status = 0;
+	data->debug = 0;
+	data->exec = 1;
+	env_path_find(data);
+	rl_outstream = stderr;
+	if(ac == 2)
+		data->debug = 1;
+}
+
 int main(int ac, char **av, char **env) // not save if no ENVP
 {
     t_data *data = malloc(sizeof (t_data));
 	int     exit_flag = 0;
-
-    init(data, env);
-    data->envp = ft_arrdup(env);
-    data->exit_status = 0;
-    data->debug = 0;
-    data->exec = 1;
-    env_path_find(data);
-    rl_outstream = stderr;
-    if(ac == 2)
-        data->debug = 1;
+	t_elem *ptr;
+	start_init(data,env,ac);
 	while (!exit_flag)
 	{
 		read_line_and_add_history(&data->line);
@@ -63,6 +75,17 @@ int main(int ac, char **av, char **env) // not save if no ENVP
                 data->elem_start = data->elem_start->prev;
             if(data->debug)
                 dprintf(2, ">>> %d REDIR_PROC_BEGIN\n", getpid());
+			if(data->debug)
+			{
+				dprintf(2 ,">>> ELEM_ADDR\n");
+				ptr = data->elem_start;
+				while(ptr->next)
+				{
+					dprintf(2, "> %p %s\n", ptr, ptr->cmd[0]);
+					ptr = ptr->next;
+				}
+				dprintf(2 ,"> %p %s\n", ptr, ptr->cmd[0]);
+			}
             redirects(data);
             if(data->debug)
                 dprintf(2, ">>> %d EXEC_BEGIN\n", getpid());
@@ -71,6 +94,10 @@ int main(int ac, char **av, char **env) // not save if no ENVP
 //            if(data->debug)
 //                print_elems(data->elem_start);
 			data_reboot(data, NULL, 0);
+//			while(1)
+//			{
+//
+//			}
 		}
     }
     closing(data);
