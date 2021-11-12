@@ -10,7 +10,7 @@ void redirects(t_data *data)
 	while(elem)
 	{
 	    if(data->debug)
-            dprintf(2, ">>> %d REDIRECTS %p %s\n",getpid(), elem, *elem->cmd);
+            dprintf(2, ">>> %d REDIRECTS %p <%s>\n",getpid(), elem, *elem->cmd);
 		if(elem->type == SIMPLE_REDIRECT_INPUT)
             elem = simple_redirect_input(elem);
         else if(elem->type == DOUBLE_REDIRECT_INPUT)

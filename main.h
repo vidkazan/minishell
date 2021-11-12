@@ -35,7 +35,7 @@ typedef struct s_elem
     int pfd[2];
     pid_t pid;
     char **cmd;
-    char *cal;
+    char *comand_line;
     struct s_elem *next;
     struct s_elem *prev;
     t_data  *data;
@@ -43,7 +43,6 @@ typedef struct s_elem
 
 typedef struct s_data
 {
-    int exit_flag;
     char *path;
     int std_in;
     int std_out;
@@ -65,7 +64,6 @@ typedef struct s_data
 
 void    data_reboot(t_data *data, char *message, int mode);
 void    init(t_data *data, char **env);
-void    start_init(t_data *data, char **env);
 void    closing(t_data *data);
 
 // exec
@@ -148,5 +146,7 @@ int export_argument_check(char *arg);
 void	edit_env_keys(int env_index, char *new_value, t_data *data);
 int is_in_export_line(char *line, char **export_arr);
 int is_min_arr_line(char *line, char **envp,char **export_arr);
+
+void    vars(t_data *data);
 
 #endif

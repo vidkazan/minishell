@@ -17,7 +17,7 @@ void execution(t_elem *elem)// TODO #100 after handling ""  - fix path finding w
         if(elem->data->exec)
         {
             if (elem->data->debug)
-                dprintf(2, ">>> %d NOW %p %s\n", getpid(), elem, elem->cmd[0]);
+                dprintf(2, ">>> %d NOW %p <%s>\n", getpid(), elem, elem->cmd[0]);
             builtin_check(elem);
             if (elem->data->debug && elem->is_builtin)
                 dprintf(2, ">>> %d builtin\n", getpid());
