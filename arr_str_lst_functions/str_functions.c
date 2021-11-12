@@ -56,9 +56,7 @@ long long	ft_atoi_overflow(const char *str)
     while (*str >= '0' && *str <= '9')
     {
         res = (res * 10) + (((int) *str++) - 48);
-        if(*str && ((INT64_MAX / 10 < res * neg) || (INT64_MIN / 10 > res * neg) \
-        || ((INT64_MAX / 10 == res * neg) && ((*str - 48) > INT64_MAX % 10)) || \
-        (INT64_MIN / 10 == res * neg) && (-(*str - 48) > INT64_MIN % 10)))
+        if(*str && ((INT64_MAX / 10 < res * neg) || (INT64_MIN / 10 > res * neg) || ((INT64_MAX / 10 == res * neg) && ((*str - 48) > INT64_MAX % 10)) || ((INT64_MIN / 10 == res * neg) && (-(*str - 48) > INT64_MIN % 10))))
             return 255;
     }
     return (res * neg);
