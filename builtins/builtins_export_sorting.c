@@ -55,7 +55,7 @@ int export_argument_check(char *arg)
         return 0;
     while(*ptr)
     {
-        if(!ft_isalpha(*ptr) && *ptr != '_' && *ptr != '=' && *ptr != '\'' && *ptr != '\"')
+        if(!ft_isalpha(*ptr) && !ft_isdigit(*ptr) && *ptr != '_' && *ptr != '=' && *ptr != '\'' && *ptr != '\"')
             return 0;
         ptr++;
     }
