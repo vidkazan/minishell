@@ -61,6 +61,10 @@ int new_pipe_elem(int start, int end, t_data *data)
     // redirectNullAfterWord(new);
     (new->comand_line)[end - start + 1] = 0;
     new->cmd = ft_split(new->comand_line, ' ');
+    int i = 0;
+    // while (new->cmd[i])
+        // i++;
+    // printf("split i = %d\n", i);
     // if (!data->elem_start)
     // data->elem_start = new;
     if(data->debug)
@@ -163,13 +167,21 @@ void	del_last_elem(t_data *data)
 {
     t_elem *elem_to_del;
     t_elem *prelast_elem;
+    int count = 0;
 
     elem_to_del = data->elem_start;
     while (elem_to_del->next)
+    {
+        count++;
         elem_to_del = elem_to_del->next;
-    prelast_elem = elem_to_del->prev;
+    }
+    if (count)
+    {
+        prelast_elem = elem_to_del->prev;
+    }
     free(elem_to_del);
-    prelast_elem->next = NULL;
+    if (count)
+        prelast_elem->next = NULL;
 }
 
 void	main_preparser(t_data *data, char *line)
@@ -192,8 +204,10 @@ void	main_preparser(t_data *data, char *line)
     }
     if (new_pipe_elem(prev_end, i, data))
         del_last_elem(data);
+    // printf("|%s|\n", data->elem_start->comand_line);
     while(data->elem_start->prev)
         data->elem_start = data->elem_start->prev;
+    // printf("%p\n", data->elem_start);
     if (data->q1 || data->q2)
         data_reboot(data, "Error: Unclosed quotes", 1);
 

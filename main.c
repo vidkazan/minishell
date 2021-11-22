@@ -58,6 +58,7 @@ int main(int ac, char **av, char **env) // not save if no ENVP
 	{
 		read_line_and_add_history(&data->line);
 		// ft_strip(&line);
+		vars(data);
 		if (data->line && !ft_strncmp(data->line, "exit", 5))
 		{
             ft_putstr_fd("exit\n", 2);
@@ -67,7 +68,6 @@ int main(int ac, char **av, char **env) // not save if no ENVP
 		{
             if(data->debug)
                 dprintf(2, ">>> %d VARS\n", getpid());
-			vars(data);
             if(data->debug)
                 dprintf(2, ">>> %d PARSING\n", getpid());
 			main_preparser(data, data->line);
