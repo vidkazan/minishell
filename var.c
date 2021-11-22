@@ -76,7 +76,7 @@ void find_value(t_vars *var)
         var->value = ft_strdup("");
 }
 
-int find_variable(t_vars *var)
+int find_variable(t_vars *var, t_data *data)
 {
     int i = var->end_i + 1;
     int j = 0;
@@ -85,6 +85,11 @@ int find_variable(t_vars *var)
     {
         var->value = ft_strdup("$");
         return(j);
+    }
+	else if (var->line[i] == '?')
+    {
+        var->value = ft_strdup(ft_itoa(data->exit_status));
+        return(++j);
     }
     else if (var->line[i] == '$')
     {
@@ -112,7 +117,7 @@ void	fresher(t_vars *var)
     var->var = NULL;
 }
 
-void handling_variables(t_vars *var)
+void handling_variables(t_vars *var, t_data *data)
 {
     int i = 0;
 
@@ -134,7 +139,7 @@ void handling_variables(t_vars *var)
         {
             var->end_i = i;
             concatenation(var->line, var->start_i, var->end_i - var->start_i, var);
-            i += find_variable(var); // должна вернуть количество символов имени переменной без учета знака бакса
+            i += find_variable(var, data); // должна вернуть количество символов имени переменной без учета знака бакса
             concatenation(var->value, 0, ft_strlen(var->value), var);
             var->start_i = i + 1;
             fresher(var);
@@ -150,7 +155,7 @@ void vars(t_data *data)
 
     vars_init(&var, data->envp);
     var.line = data->line;
-    handling_variables(&var);
+    handling_variables(&var, data);
     // free(var.line);
     data->line = var.new;
     if(data->debug)
