@@ -148,5 +148,7 @@ int is_in_export_line(char *line, char **export_arr);
 int is_min_arr_line(char *line, char **envp,char **export_arr);
 
 void    vars(t_data *data);
+char	**shell_split(char const *s, char c);
+void	quotes(int i, t_data *data);
 
 #endif

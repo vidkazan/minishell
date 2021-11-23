@@ -8,38 +8,38 @@
 // 	while (str)
 // }
 
-void	del_outer_quotes(char *line)
-{
-    int i = 0;
-    int j = 0;
-    int q1 = 0;
-    int q2 = 0;
-    int flag =0;
+// void	del_outer_quotes(char *line)
+// {
+//     int i = 0;
+//     int j = 0;
+//     int q1 = 0;
+//     int q2 = 0;
+//     int flag =0;
 
-    while (line[i])
-    {
-        if (line[i] == '\'' && !q2)
-        {
-            q1 += 1;
-            q1 %= 2;
-            flag = 1;
-        }
-        if (line[i] == '\"' && !q1)
-        {
-            q2 += 1;
-            q2 %= 2;
-            flag = 1;
-        }
-        line[j] = line[i];
-        // printf("q1 flag = %d, char = %c\n", q1, line[i]);
-        if (!flag)
-            j++;
-        i++;
-        flag = 0;
-    }
-    line[j] = 0;
-    // printf("\n");
-}
+//     while (line[i])
+//     {
+//         if (line[i] == '\'' && !q2)
+//         {
+//             q1 += 1;
+//             q1 %= 2;
+//             flag = 1;
+//         }
+//         if (line[i] == '\"' && !q1)
+//         {
+//             q2 += 1;
+//             q2 %= 2;
+//             flag = 1;
+//         }
+//         line[j] = line[i];
+//         // printf("q1 flag = %d, char = %c\n", q1, line[i]);
+//         if (!flag)
+//             j++;
+//         i++;
+//         flag = 0;
+//     }
+//     line[j] = 0;
+//     // printf("\n");
+// }
 
 int new_pipe_elem(int start, int end, t_data *data)
 {
@@ -56,11 +56,11 @@ int new_pipe_elem(int start, int end, t_data *data)
     if (data->line[end] == '|')
         new->type = 2;
     ft_strlcpy(new->comand_line, data->line + start, end - start + 1);
-    del_outer_quotes(new->comand_line);
+    // del_outer_quotes(new->comand_line);
     // if (new->type > 2)
     // redirectNullAfterWord(new);
     (new->comand_line)[end - start + 1] = 0;
-    new->cmd = ft_split(new->comand_line, ' ');
+    new->cmd = shell_split(new->comand_line, ' ');
     int i = 0;
     // while (new->cmd[i])
         // i++;
@@ -136,8 +136,8 @@ int	new_redirect_elem(int start, t_data *data)
             new->type = 5;
     }
     new->comand_line = ft_substr(data->line, start + 1 + (new->type > 4), count);
-    del_outer_quotes(new->comand_line);
-    new->cmd = ft_split(new->comand_line, ' ');
+    // del_outer_quotes(new->comand_line);
+    new->cmd = shell_split(new->comand_line, ' ');
     if (new->type == 5 || new->type == 6)
         data->line[start++] = ' ';
     data->line[start] = ' ';
