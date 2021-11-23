@@ -2,7 +2,7 @@
 // Created by fcody on 11/12/21.
 //
 
-#include "main.h"
+#include "../main.h"
 
 typedef struct s_vars
 {
@@ -81,7 +81,7 @@ int find_variable(t_vars *var, t_data *data)
     int i = var->end_i + 1;
     int j = 0;
 
-    if (!var->line[i] || var->line[i] == ' ')		// здесь добавить обработку одиночного доллара
+    if (!var->line[i] || var->line[i] == ' ' || var->line[i] == '=')		// здесь добавить в сет все символы кроме ?$_ и алнум
     {
         var->value = ft_strdup("$");
         return(j);
