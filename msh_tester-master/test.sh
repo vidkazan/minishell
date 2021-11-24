@@ -233,18 +233,17 @@ if [ "$1" == "multi" ] || [ "$1" == "all" ]; then
   printf $BOLDMAGENTA"\n\tMULTI TESTS\n"$RESET
   exec_test 'echo testing multi >lol ; echo <lol <lola ; echo "test 1  | and 2" >>lol ; cat <lol ; cat ../Makefile <lol | grep minishell'
   exec_test 'unset PATH; /bin/ls'
-  exec_test 'unset PATH; ./Makefile'
-  exec_test 'echo 5 > ls; <5 cat; rm 5'
-  exec_test 'ls | echo 6 > ls; <6 cat; rm 6'
-  exec_test 'cd; unset HOME; cd'
+#  exec_test 'unset PATH; ./Makefile'
+#  exec_test 'echo 5 > ls; <5 cat; rm 5'
+#  exec_test 'ls | echo 6 > ls; <6 cat; rm 6'
+#  exec_test 'cd; unset HOME; cd'
   exec_test 'cd .. > 1; pwd'
-  exec_test 'cd .. > 1| pwd'
+#  exec_test 'cd .. > 1| pwd'
   exec_test 'pwd > 1'
   exec_test 'pwd > 1; cat 1'
   exec_test 'pwd > 1; pwd'
-  exec_test 'pwd > 1| pwd'
+#  exec_test 'pwd > 1| pwd'
   exec_test 'pwd; unset HOME; pwd; cd; pwd'
-  exec_test 'ls | export TEST=5; echo $TEST'
   exec_test 'export TEST1=LOL TEST2=PIKAPIKA; unset TEST1 TEST2; echo $TEST1; echo $TEST2'
 fi
 
@@ -252,21 +251,21 @@ fi
 if [ "$1" == "syntax" ] || [ "$1" == "all" ]; then
   printf $BOLDMAGENTA"\n\tSYNTAX\n"$RESET
   exec_test ''
-  exec_test '" echo" lol'
-  exec_test '"echo " lol'
-  exec_test '" echo" | " pwd"'
-  exec_test '"echo " | "pwd "'
-  exec_test '/bin/lsa'
-  exec_test './Makefile'
+#  exec_test '" echo" lol'
+#  exec_test '"echo " lol'
+#  exec_test '" echo" | " pwd"'
+#  exec_test '"echo " | "pwd "'
+#  exec_test '/bin/lsa'
+#  exec_test './Makefile'
   exec_test '| test'
-  exec_test 'echo > <'
+#  exec_test 'echo > <'
   exec_test 'echo | |'
   exec_test 'echo "||"'
-  exec_test '<'
-  exec_test 'rm -f ls; cat < ls > ls'
-  exec_test "grep -z"
-  exec_test "ls'| 'wc -l"
-  exec_test "/ls"
+#  exec_test '<'
+#  exec_test 'rm -f ls; cat < ls > ls'
+#  exec_test "grep -z"
+#  exec_test "ls'| 'wc -l"
+#  exec_test "/ls"
 fi
 
 # EXIT
@@ -284,64 +283,10 @@ if [ "$1" == "exit" ] || [ "$1" == "all" ]; then
   exec_test "exit -4"
   exec_test "exit wrong"
   exec_test "exit  2 wrong_command"
-  exec_test "gdagadgag"
-  exec_test "ls -Z"
-  exec_test "cd gdhahahad"
-  exec_test "ls -la | wtf"
-fi
-
-
-# BONUS
-if [ "$1" == "bonus" ] || [ "$1" == "quote" ] || [ "$1" == "wildcard" ] || [ "$1" == "oper" ]; then
-  Compile and set executable rights
-  make bonus -C ../ > /dev/null
-  cp ../minishell .
-  chmod 755 minishell
-fi
-
-# BONUS QUOTES
-if [ "$1" == "bonus" ] || [ "$1" == "quote" ]; then
-  printf $BOLDMAGENTA"\n\tBONUS QUOTE\n"$RESET
-  exec_test "echo '"$USER"'"
-  exec_test "echo "'$USER'""
-fi
-
-# BONUS WILDCARD
-if [ "$1" == "bonus" ] || [ "$1" == "wildcard" ]; then
-  printf $BOLDMAGENTA"\n\tBONUS WILDCARD\n"$RESET
-  exec_test "echo * | wc"
-  exec_test "cd .. ; echo * | wc"
-  exec_test "echo .* | wc"
-  exec_test "echo M*e"
-  exec_test "echo *a*e"
-  exec_test "echo *.mp3"
-  exec_test "mkdir empty; cd empty; pwd; echo *; cd ..; rm -rf empty"
-fi
-
-# BONUS OPERATOR && || ()
-if [ "$1" == "bonus" ] || [ "$1" == "oper" ]; then
-  printf $BOLDMAGENTA"\n\tBONUS OPERATOR \$\$ || () \n"$RESET
-  
-  exec_test "true && ls"
-  exec_test "false&&ls"
-  exec_test "true||ls"
-  exec_test "false || ls"
-  exec_test "true || echo 1 && echo 2"
-  exec_test "false || echo 1 && echo 2"
-  exec_test "true || (echo 1 && echo 2)"
-  exec_test "true || echo 1 && echo 2 || echo 3"
-  exec_test "(ls)"
-  exec_test "( ls )"
-
-  exec_test "true || (echo 1 && echo 2) || echo 3"
-  exec_test "true || (echo 1 && echo 2) && echo 3"
-  exec_test "(true || (echo 1 && echo 2) && echo 3)"
-  exec_test "true || ((echo 1 && echo 2) && echo 3)"
-  
-  exec_test "( )"
-  exec_test " ls )"
-  exec_test "( ls " 
-  exec_test "ls && (touch 1 && pwd) && "
+#  exec_test "gdagadgag"
+#  exec_test "ls -Z"
+#  exec_test "cd gdhahahad"
+#  exec_test "ls -la | wtf"
 fi
 
 

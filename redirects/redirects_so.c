@@ -6,6 +6,8 @@
 
 t_elem	*simple_redirect_output(t_elem *elem)
 {
+	if(elem->data->debug)
+		dprintf(2, ">>> %d redirects so %p <%s>\n",getpid(), elem, *elem->cmd);
 	int    fd;
 
 	fd = open(elem->cmd[0], O_RDWR | O_CREAT | O_TRUNC, 0777);

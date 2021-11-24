@@ -6,10 +6,12 @@
 
 t_elem	*double_redirect_output(t_elem	*elem)
 {
+	if(elem->data->debug)
+		dprintf(2, ">>> %d redirects do %p <%s>\n",getpid(), elem, *elem->cmd);
 	int    fd;
 
 	fd = open(elem->cmd[0], O_RDWR | O_CREAT | O_APPEND, 0777);
-	if (fd < 0)
+	if (fd < 0) // FIXME ?????
 	{
 		ft_putstr_fd("error: ", 2);
 		ft_putstr_fd(strerror(errno), 2);

@@ -12,8 +12,6 @@
 
 void execution(t_elem *elem)// TODO #100 after handling ""  - fix path finding with spaces etc + check by "echo " | "pwd " FIXME exitcode 256?? export TEST1=LOL TEST2 env | sort | grep -v SHLVL | grep -v _=
 {
-//	if(elem->data->debug)
-//		dprintf(2, ">>> ADRESSES\n> data %p\n data.line %p\n> elem %p\n> elem.cmd %p\n> elem.line %p\n ", elem->data,elem->data->line, elem,elem->cmd, elem->comand_line);
     while(elem)
     {
         if(elem->data->exec)
@@ -114,6 +112,8 @@ void execution(t_elem *elem)// TODO #100 after handling ""  - fix path finding w
         }
         else
         {
+			if(elem->data->debug)
+				dprintf(2, ">>> %d skip %s\n", getpid(), elem->cmd[0]);
             if(elem->data->debug)
                 dprintf(2, ">>> %d exec = 1\n", getpid());
             elem->data->exec = 1;
@@ -121,7 +121,7 @@ void execution(t_elem *elem)// TODO #100 after handling ""  - fix path finding w
         if (elem->next)
         {
             if(elem->data->debug)
-                dprintf(2, ">>> %d next\n", getpid());
+                dprintf(2, ">>> %d next %s\n", getpid(), elem->next->cmd[0]);
             elem = elem->next;
         }
         else
