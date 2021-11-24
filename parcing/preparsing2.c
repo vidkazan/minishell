@@ -44,9 +44,7 @@
 int new_pipe_elem(int start, int end, t_data *data)
 {
     t_elem	*new;
-    int		return_value;
 
-    return_value = 0;
     new = push_back(data->elem_start, data);
     data->elem_start = new;
     while(new->next)
@@ -70,8 +68,8 @@ int new_pipe_elem(int start, int end, t_data *data)
     if(data->debug)
         printf("%d %d | cmd=^^%s^^, type = %d\n", start, end, new->comand_line, new->type);
     if (!*new->cmd)
-        return_value = 1;
-    return(return_value);
+        return(1);
+    return(0);
 }
 
 void	quotes(int i, t_data *data)
@@ -208,14 +206,24 @@ int	main_preparser(t_data *data, char *line)
         quotes(i, data);
         if (line[i] == '|' && !data->q1 && !data->q2)
         {
-            new_pipe_elem(prev_end, i, data);
+            if(new_pipe_elem(prev_end, i, data))
+            {
+        		builtins_error(data,NULL,NULL,"syntax error near unexpected token '|'", 2);
+        		data->exec = 0;
+        		return 1;
+        	}
             prev_end = i + 1;
         }
         i++;
     }
     if (new_pipe_elem(prev_end, i, data))
-        del_last_elem(data);
-	// printf("|%s|\n", data->elem_start->comand_line);
+        // del_last_elem(data);
+	{
+		builtins_error(data,NULL,NULL,"syntax error no cmd", 2);
+		data->exec = 0;
+		return 1;
+	}
+    // printf("|%s|\n", data->elem_start->comand_line);
     while(data->elem_start->prev)
         data->elem_start = data->elem_start->prev;
     // printf("%p\n", data->elem_start);
