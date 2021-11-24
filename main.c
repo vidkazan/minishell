@@ -48,60 +48,23 @@ void start_init(t_data *data, char **env, int ac)
 		data->debug = 1;
 }
 
+
 int main(int ac, char **av, char **env) // not save if no ENVP
 {
     t_data *data = malloc(sizeof (t_data));
-	int     exit_flag = 0;
-	t_elem *ptr;
 	start_init(data,env,ac);
-	while (!exit_flag)
+	while (1)
 	{
 		read_line_and_add_history(&data->line);
-		// ft_strip(&line);
 		vars(data);
-		if (data->line && !ft_strncmp(data->line, "exit", 5))
+		if(data->line && *data->line)
 		{
-            ft_putstr_fd("exit\n", 2);
-            exit_flag = 1;
-        }
-		else if (ft_strlen(data->line) != 0)
-		{
-            if(data->debug)
-                dprintf(2, ">>> %d VARS\n", getpid());
-            if(data->debug)
-                dprintf(2, ">>> %d PARSING\n", getpid());
-			if (!main_preparser(data, data->line))
-            // while(data->elem_start->prev) // костыыыль
-                // data->elem_start = data->elem_start->prev;
-	        {
-			    if(data->debug)
-	                dprintf(2, ">>> %d REDIR_PROC_BEGIN\n", getpid());
-				if(data->debug)
-				{
-					dprintf(2 ,">>> ELEM_ADDR\n");
-					ptr = data->elem_start;
-					while(ptr->next)
-					{
-						dprintf(2, "> %p %s\n", ptr, ptr->cmd[0]);
-						ptr = ptr->next;
-					}
-					dprintf(2 ,"> %p %s\n", ptr, ptr->cmd[0]);
-				}
-	            redirects(data);
-	            if(data->debug)
-	                dprintf(2, ">>> %d EXEC_BEGIN\n", getpid());
-	            execution(data->elem_start);
-	            waiting(data);
-	//            if(data->debug)
-	//                print_elems(data->elem_start);
-				data_reboot(data, NULL, 0);
-			}
-//			while(1)
-//			{
-//
-//			}
+			main_preparser(data, data->line);
+			redirects(data);
+			execution(data->elem_start);
+			waiting(data);
 		}
+		data_reboot(data, NULL, 0);
     }
-    closing(data);
     return 0;
 }

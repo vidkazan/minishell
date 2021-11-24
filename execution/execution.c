@@ -133,7 +133,7 @@ void waiting(t_data *data)
 {
     int status = -1;
 	t_elem *elem = data->elem_start;
-	while (elem)
+	while (elem && data->exec)
 	{
 	    if(!elem->is_builtin)
 	    {

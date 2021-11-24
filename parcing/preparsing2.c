@@ -196,7 +196,12 @@ int	main_preparser(t_data *data, char *line)
     prev_end = 0;
     data->elem_start = NULL;
     if (make_redirect_elems(data, line))
-		return(data_reboot(data, "syntax error near unexpected token `newline'", 1));
+//		return(data_reboot(data, "syntax error near unexpected token `newline'", 1));
+	{
+		builtins_error(data,NULL,NULL,"syntax error near unexpected token `newline'", 2);
+		data->exec = 0;
+		return 1;
+	}
     while (line[i])
     {
         quotes(i, data);
@@ -214,7 +219,11 @@ int	main_preparser(t_data *data, char *line)
         data->elem_start = data->elem_start->prev;
     // printf("%p\n", data->elem_start);
     if (data->q1 || data->q2)
-        return(data_reboot(data, "Error: Unclosed quotes", 1));
+	{
+		builtins_error(data,NULL,NULL,"Error: Unclosed quotes", 2);
+		data->exec = 0;
+		return 1;
+	}
 	return(0);
 
 }

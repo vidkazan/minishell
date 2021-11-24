@@ -7,7 +7,8 @@
 void redirects(t_data *data)
 {
 	t_elem *elem = data->elem_start;
-	while(elem)
+
+	while(elem && data->exec)
 	{
 	    if(data->debug)
             dprintf(2, ">>> %d REDIRECTS %p <%s>\n",getpid(), elem, *elem->cmd);

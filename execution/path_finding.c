@@ -67,11 +67,14 @@ void	find_path(t_elem *elem)
     char	*filename_no_path;
     char	**path_arr;
 
-    path_arr = ft_split(elem->data->path, ':'); // freed
+    path_arr = ft_split(elem->data->path, ':');
     if (!path_arr)
         return;
-    filename_no_path = elem->cmd[0];
-    path_check(elem, path_arr, filename_no_path);
+    if(*elem->cmd[0])
+    {
+		filename_no_path = elem->cmd[0];
+		path_check(elem, path_arr, filename_no_path);
+	}
     free_arr(path_arr);
 }
 

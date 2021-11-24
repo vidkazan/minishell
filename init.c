@@ -12,6 +12,7 @@
 
 void init(t_data *data, char **env)
 {
+	data->exec = 1;
     data->std_in = dup(0);
     data->std_out = dup(1);
     data->elem_start = NULL;
