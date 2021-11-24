@@ -16,10 +16,9 @@
   <component name="ChangeListManager">
     <list default="true" id="08f51eb6-c9f8-4b22-83a8-62e144caef93" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/builtins/builtins_export_main.c" beforeDir="false" afterPath="$PROJECT_DIR$/builtins/builtins_export_main.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/builtins/builtins_export_sorting.c" beforeDir="false" afterPath="$PROJECT_DIR$/builtins/builtins_export_sorting.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/execution/execution.c" beforeDir="false" afterPath="$PROJECT_DIR$/execution/execution.c" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/minishell" beforeDir="false" afterPath="$PROJECT_DIR$/minishell" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/msh_tester" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/msh_tester-master/minishell" beforeDir="false" afterPath="$PROJECT_DIR$/msh_tester-master/minishell" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -143,7 +142,7 @@
       <workItem from="1636707945214" duration="500000" />
       <workItem from="1636729323622" duration="1820000" />
       <workItem from="1636735508345" duration="5391000" />
-      <workItem from="1637751834454" duration="1135000" />
+      <workItem from="1637751834454" duration="1882000" />
     </task>
     <servers />
   </component>

@@ -10,10 +10,10 @@
 //tcsetattr, tcgetattr, tgetent, tgetflag, tgetnum,
 //tgetstr, tgoto, tputs
 
-void execution(t_elem *elem)// TODO #100 after handling ""  - fix path finding with spaces etc + check by "echo " | "pwd "
+void execution(t_elem *elem)// TODO #100 after handling ""  - fix path finding with spaces etc + check by "echo " | "pwd " FIXME exitcode 256?? export TEST1=LOL TEST2 env | sort | grep -v SHLVL | grep -v _=
 {
-	if(elem->data->debug)
-		dprintf(2, ">>> ADRESSES\n> data %p\n data.line %p\n> elem %p\n> elem.cmd %p\n> elem.line %p\n ", elem->data,elem->data->line, elem,elem->cmd, elem->comand_line);
+//	if(elem->data->debug)
+//		dprintf(2, ">>> ADRESSES\n> data %p\n data.line %p\n> elem %p\n> elem.cmd %p\n> elem.line %p\n ", elem->data,elem->data->line, elem,elem->cmd, elem->comand_line);
     while(elem)
     {
         if(elem->data->exec)
@@ -147,5 +147,9 @@ void waiting(t_data *data)
             break;
 	}
 	if(status != -1)
-	    data->exit_status = status;
+	{
+		data->exit_status = status;
+		if(elem->data->exit_status > 255)
+			elem->data->exit_status = elem->data->exit_status % 255;
+	}
 }
