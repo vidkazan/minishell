@@ -70,30 +70,32 @@ int main(int ac, char **av, char **env) // not save if no ENVP
                 dprintf(2, ">>> %d VARS\n", getpid());
             if(data->debug)
                 dprintf(2, ">>> %d PARSING\n", getpid());
-			main_preparser(data, data->line);
-            while(data->elem_start->prev) // костыыыль
-                data->elem_start = data->elem_start->prev;
-            if(data->debug)
-                dprintf(2, ">>> %d REDIR_PROC_BEGIN\n", getpid());
-			if(data->debug)
-			{
-				dprintf(2 ,">>> ELEM_ADDR\n");
-				ptr = data->elem_start;
-				while(ptr->next)
+			if (!main_preparser(data, data->line))
+            // while(data->elem_start->prev) // костыыыль
+                // data->elem_start = data->elem_start->prev;
+	        {
+			    if(data->debug)
+	                dprintf(2, ">>> %d REDIR_PROC_BEGIN\n", getpid());
+				if(data->debug)
 				{
-					dprintf(2, "> %p %s\n", ptr, ptr->cmd[0]);
-					ptr = ptr->next;
+					dprintf(2 ,">>> ELEM_ADDR\n");
+					ptr = data->elem_start;
+					while(ptr->next)
+					{
+						dprintf(2, "> %p %s\n", ptr, ptr->cmd[0]);
+						ptr = ptr->next;
+					}
+					dprintf(2 ,"> %p %s\n", ptr, ptr->cmd[0]);
 				}
-				dprintf(2 ,"> %p %s\n", ptr, ptr->cmd[0]);
+	            redirects(data);
+	            if(data->debug)
+	                dprintf(2, ">>> %d EXEC_BEGIN\n", getpid());
+	            execution(data->elem_start);
+	            waiting(data);
+	//            if(data->debug)
+	//                print_elems(data->elem_start);
+				data_reboot(data, NULL, 0);
 			}
-            redirects(data);
-            if(data->debug)
-                dprintf(2, ">>> %d EXEC_BEGIN\n", getpid());
-            execution(data->elem_start);
-            waiting(data);
-//            if(data->debug)
-//                print_elems(data->elem_start);
-			data_reboot(data, NULL, 0);
 //			while(1)
 //			{
 //

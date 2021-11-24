@@ -138,29 +138,33 @@ int	new_redirect_elem(int start, t_data *data)
     new->comand_line = ft_substr(data->line, start + 1 + (new->type > 4), count);
     // del_outer_quotes(new->comand_line);
     new->cmd = shell_split(new->comand_line, ' ');
+    if (!new->cmd[0])
+        return(1);
     if (new->type == 5 || new->type == 6)
         data->line[start++] = ' ';
     data->line[start] = ' ';
     while (count--)
         data->line[++start] = ' ';
-    return(1);
+    return(0);
 }
 
-void	make_redirect_elems(t_data *data, char *line)
+int	make_redirect_elems(t_data *data, char *line)
 {
-    int i = 0;
-    int	count;
+    int	i = 0;
+    // int	count;
 
     while (line[i])
     {
-        count = 0;
+        // count = 0;
         quotes(i, data);
         if ((line[i] == '<' || line[i] == '>') && !data->q1 && !data->q2)
         {
-            count = new_redirect_elem(i, data);
+            if (new_redirect_elem(i, data))
+				return(1);
         }
         i++;
     }
+	return(0);
 }
 
 void	del_last_elem(t_data *data)
@@ -184,14 +188,15 @@ void	del_last_elem(t_data *data)
         prelast_elem->next = NULL;
 }
 
-void	main_preparser(t_data *data, char *line)
+int	main_preparser(t_data *data, char *line)
 {
     int prev_end;
     int i = 0;
 
     prev_end = 0;
     data->elem_start = NULL;
-    make_redirect_elems(data, line);
+    if (make_redirect_elems(data, line))
+		return(data_reboot(data, "syntax error near unexpected token `newline'", 1));
     while (line[i])
     {
         quotes(i, data);
@@ -209,6 +214,7 @@ void	main_preparser(t_data *data, char *line)
         data->elem_start = data->elem_start->prev;
     // printf("%p\n", data->elem_start);
     if (data->q1 || data->q2)
-        data_reboot(data, "Error: Unclosed quotes", 1);
+        return(data_reboot(data, "Error: Unclosed quotes", 1));
+	return(0);
 
 }

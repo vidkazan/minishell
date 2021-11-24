@@ -24,7 +24,7 @@ void init(t_data *data, char **env)
 	data->q2 = 0;
 }
 
-void	data_reboot(t_data *data, char *message, int mode)
+int	data_reboot(t_data *data, char *message, int mode)
 {
 	if (mode)
 		printf("%s\n", message);
@@ -35,4 +35,5 @@ void	data_reboot(t_data *data, char *message, int mode)
 		data->line = 0;
 	}
 	init(data, data->envp);
+	return (1);
 }

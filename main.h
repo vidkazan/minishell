@@ -62,7 +62,7 @@ typedef struct s_data
 
 // init and close
 
-void    data_reboot(t_data *data, char *message, int mode);
+int    data_reboot(t_data *data, char *message, int mode);
 void    init(t_data *data, char **env);
 void    closing(t_data *data);
 
@@ -90,7 +90,7 @@ t_elem *double_redirect_input(t_elem *elem);
 
 // parsing
 
-void	main_preparser(t_data *data, char *line);
+int	main_preparser(t_data *data, char *line);
 
 // exit status
 
