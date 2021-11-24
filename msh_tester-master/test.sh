@@ -137,7 +137,6 @@ if [ "$1" == "cd" ] || [ "$1" == "all" ]; then
   exec_test 'cd /Users ; pwd'
   exec_test 'cd ; pwd'
   exec_test 'cd . ; pwd'
-  exec_test 'cd -; pwd; cd; cd -'
   exec_test 'mkdir test_dir ; cd test_dir ; rm -rf ../test_dir ; cd . ; cd .. ; pwd'
 fi
 
@@ -197,7 +196,6 @@ if [ "$1" == "export" ] || [ "$1" == "all" ]; then
   exec_test 'export TEST1=LOL TEST2=PIKAPIKA; echo $TEST ; ' $ENV_SHOW
   exec_test 'export TEST1=LOL TEST2' $ENV_SHOW
   exec_test 'export TEST=LOL; unset TEST' $ENV_SHOW
-  exec_test 'export TEST=LOL ; export TEST+=LOL ; echo $TEST ; ' $ENV_SHOW
   exec_test $ENV_SHOW
   exec_test $EXPORT_SHOW
   exec_test 'export TEST="ls -l - a" ; echo $TEST ; ' $ENV_SHOW

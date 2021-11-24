@@ -10,14 +10,17 @@ void builtin_pwd(t_elem *elem, int write_fd)
     char *res;
 //    res = search_strings_in_array(elem->data->envp, "PWD=", &i);
 //    if(!res)
-//        builtins_exit_status(elem, "pwd",NULL, "no env PATH");
+//        builtins_error(elem->data, elem->cmd[0],NULL, "no env PATH", 0);
 //    else
 //        ft_putendl_fd(res, write_fd);
-    res = getcwd(NULL, 0);
-    if(!res)
-        builtins_error(elem->data, "pwd", NULL, NULL, 0);
-    else
-        ft_putendl_fd(res, write_fd);
+	{
+		res = getcwd(NULL, 0);
+		if(!res)
+			builtins_error(elem->data, "pwd", NULL, NULL, 0);
+		else
+			ft_putendl_fd(res, write_fd);
+	}
+
 }
 
 void builtin_cd(t_elem *elem,int write_fd) // relative path cd NOT working if current dir is removed
@@ -29,16 +32,17 @@ void builtin_cd(t_elem *elem,int write_fd) // relative path cd NOT working if cu
 	int	old_pwd_index = 0;
 	home = search_strings_in_array(elem->data->envp, "HOME=", NULL);
 	search_strings_in_array(elem->data->envp, "OLDPWD=", &old_pwd_index);
-    if(!elem->cmd[1])
+    if(!elem->cmd[1] || !elem->cmd[1][0])
     {
         if(!home || !*home)
             builtins_error(elem->data, "cd",NULL, "HOME not set", 1);
         else if(chdir(home))
-            builtins_error(elem->data, "cd",NULL, NULL, 0);
+        {
+			dprintf(2,"here\n");
+			builtins_error(elem->data, "cd", NULL, NULL, 0);
+		}
         return;
     }
-    if(!elem->cmd[1][0])
-        return;
     else if(elem->cmd[1][0] == '~')
     {
         elem->cmd[1]++;
@@ -52,9 +56,9 @@ void builtin_cd(t_elem *elem,int write_fd) // relative path cd NOT working if cu
     else
     {
         res_path = ft_strdup(elem->cmd[1]);
-        if(!getcwd(NULL, 0))
+        if(!getcwd(NULL, 0) && !ft_strcmp(elem->cmd[1], "."))
          {
-             builtins_error(elem->data, "cd",elem->cmd[1], NULL, 0);
+             builtins_error(elem->data, "getcwd",elem->cmd[1], NULL, 0);
              return;
          }
         if (chdir(res_path))
