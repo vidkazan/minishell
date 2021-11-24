@@ -15,7 +15,10 @@ void builtins_error(t_elem *elem, char *cmd, char *arg, char *msg, int code)
         ft_putendl_fd(strerror(errno), 2);
     else
         ft_putendl_fd(msg, 2);
-    elem->data->exit_status = 1;
+	if(!code)
+    	elem->data->exit_status = 1;
+	else
+		elem->data->exit_status = code;
 }
 
 void execve_error(t_elem *elem, char *cmd, char *arg, char *msg)
