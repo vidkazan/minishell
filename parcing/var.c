@@ -81,7 +81,7 @@ int find_variable(t_vars *var, t_data *data)
     int i = var->end_i + 1;
     int j = 0;
 
-    if (!var->line[i] || var->line[i] == ' ' || var->line[i] == '=')		// здесь добавить в сет все символы кроме ?$_ и алнум
+    if (!var->line[i] || var->line[i] == ' ' || var->line[i] == '=' || (var->q2 && var->line[i] == '\"'))		// здесь добавить в сет все символы кроме ?$_ и алнум
     {
         var->value = ft_strdup("$");
         return(j);
