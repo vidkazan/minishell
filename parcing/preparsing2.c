@@ -196,7 +196,7 @@ int	main_preparser(t_data *data, char *line)
     prev_end = 0;
     data->elem_start = NULL;
     if (make_redirect_elems(data, line))
-//		return(data_reboot(data, "syntax error near unexpected token `newline'", 1));
+		return(data_reboot(data, "syntax error near unexpected token `newline'", 1));
     while (line[i])
     {
         quotes(i, data);

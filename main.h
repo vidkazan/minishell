@@ -123,7 +123,7 @@ void        free_arr(char **str);
 int     builtin_fd_gen(t_elem *elem);
 void    builtin_exec(t_elem *elem);
 void    builtin_check(t_elem *elem);
-void    builtins_error(t_elem *elem, char *cmd, char *arg, char *msg, int code);
+void    builtins_error(t_data *data, char *cmd, char *arg, char *msg, int code);
 void    builtin_exit(t_elem *elem);
 void    builtin_unset(t_elem *elem);
 void    builtin_check(t_elem *elem);

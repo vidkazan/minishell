@@ -15,7 +15,7 @@ void builtin_pwd(t_elem *elem, int write_fd)
 //        ft_putendl_fd(res, write_fd);
     res = getcwd(NULL, 0);
     if(!res)
-        builtins_error(elem, "pwd", NULL, NULL, 0);
+        builtins_error(elem->data, "pwd", NULL, NULL, 0);
     else
         ft_putendl_fd(res, write_fd);
 }
@@ -32,9 +32,9 @@ void builtin_cd(t_elem *elem,int write_fd) // relative path cd NOT working if cu
     if(!elem->cmd[1])
     {
         if(!home || !*home)
-            builtins_error(elem, "cd",NULL, "HOME not set", 1);
+            builtins_error(elem->data, "cd",NULL, "HOME not set", 1);
         else if(chdir(home))
-            builtins_error(elem, "cd",NULL, NULL, 0);
+            builtins_error(elem->data, "cd",NULL, NULL, 0);
         return;
     }
     if(!elem->cmd[1][0])
@@ -45,7 +45,7 @@ void builtin_cd(t_elem *elem,int write_fd) // relative path cd NOT working if cu
 		res_path = ft_strjoin(home, elem->cmd[1]);
 		if(chdir(res_path))
 		{
-            builtins_error(elem, "cd",NULL, NULL, 0);
+            builtins_error(elem->data, "cd",NULL, NULL, 0);
 			return;
 		}
 	}
@@ -54,12 +54,12 @@ void builtin_cd(t_elem *elem,int write_fd) // relative path cd NOT working if cu
         res_path = ft_strdup(elem->cmd[1]);
         if(!getcwd(NULL, 0))
          {
-             builtins_error(elem, "cd",elem->cmd[1], NULL, 0);
+             builtins_error(elem->data, "cd",elem->cmd[1], NULL, 0);
              return;
          }
         if (chdir(res_path))
         {
-            builtins_error(elem, "cd",elem->cmd[1], NULL, 0);
+            builtins_error(elem->data, "cd",elem->cmd[1], NULL, 0);
             return;
         }
     }

@@ -23,7 +23,7 @@ void    builtin_exit(t_elem *elem)
 
     if(elem->cmd[2])
     {
-        builtins_error(elem,"exit", NULL, "too many arguments", 0);
+        builtins_error(elem->data,"exit", NULL, "too many arguments", 0);
         exit(1);
     }
     if(!elem->cmd[1] || !*elem->cmd[1])
@@ -39,7 +39,7 @@ void    builtin_exit(t_elem *elem)
         {
             if(!ft_isdigit(elem->cmd[1][i]))
             {
-                builtins_error(elem,"exit", NULL, "numeric argument required", 0);
+                builtins_error(elem->data,"exit", NULL, "numeric argument required", 0);
                 exit(255);
             }
         }
@@ -49,7 +49,7 @@ void    builtin_exit(t_elem *elem)
         dprintf(2,"%llu\n",code);
     if(code == 255)
     {
-        builtins_error(elem,"exit", NULL, "numeric argument required", 0);
+        builtins_error(elem->data,"exit", NULL, "numeric argument required", 0);
         exit(255);
     }
     ft_putendl_fd("exit",2);

@@ -31,7 +31,7 @@ void execution(t_elem *elem)// TODO #100 after handling ""  - fix path finding w
                     dprintf(2, ">>> %d pipe\n", getpid());
                 if (pipe(elem->pfd))
                 {
-                    builtins_error(elem, "pipe:", NULL, NULL, 0);
+                    builtins_error(elem->data, "pipe:", NULL, NULL, 0);
                     return;
                 }
             }
@@ -40,7 +40,7 @@ void execution(t_elem *elem)// TODO #100 after handling ""  - fix path finding w
                 elem->pid = fork();
                 if (elem->pid < 0)
                 {
-                    builtins_error(elem, "fork:", NULL, NULL, 0);
+                    builtins_error(elem->data, "fork:", NULL, NULL, 0);
                     return;
                 }
             }

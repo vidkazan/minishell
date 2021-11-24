@@ -15,11 +15,18 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="08f51eb6-c9f8-4b22-83a8-62e144caef93" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/builtins/builtins_env.c" beforeDir="false" afterPath="$PROJECT_DIR$/builtins/builtins_env.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/builtins/builtins_export_set.c" beforeDir="false" afterPath="$PROJECT_DIR$/builtins/builtins_export_set.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/builtins/builtins_pwd_cd.c" beforeDir="false" afterPath="$PROJECT_DIR$/builtins/builtins_pwd_cd.c" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/execution/error.c" beforeDir="false" afterPath="$PROJECT_DIR$/execution/error.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/execution/execution.c" beforeDir="false" afterPath="$PROJECT_DIR$/execution/execution.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/execution/exit_status.c" beforeDir="false" afterPath="$PROJECT_DIR$/execution/exit_status.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main.h" beforeDir="false" afterPath="$PROJECT_DIR$/main.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/minishell" beforeDir="false" afterPath="$PROJECT_DIR$/minishell" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/parcing/preparsing.q" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/parcing/preparsing2.c" beforeDir="false" afterPath="$PROJECT_DIR$/parcing/preparsing2.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/redirects/redirects_si.c" beforeDir="false" afterPath="$PROJECT_DIR$/redirects/redirects_si.c" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
