@@ -45,7 +45,7 @@ t_elem	*delete_current_node(t_elem *elem)
 	elem->cmd = NULL;
 	if(!next_elem && !prev_elem)
 	{
-		elem->data->elem_start = NULL;
+		elem = NULL;
 		return NULL;
 	}
 	else if(!next_elem)

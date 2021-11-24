@@ -63,6 +63,7 @@ int main(int ac, char **av, char **env) // not save if no ENVP
 			redirects(data);
 			execution(data->elem_start);
 			waiting(data);
+//			print_elems(data->elem_start);
 		}
 		data_reboot(data, NULL, 0);
     }

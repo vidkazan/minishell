@@ -15,7 +15,7 @@ void redirects(t_data *data)
         else if(elem->type == DOUBLE_REDIRECT_INPUT && data->exec)
             elem = double_redirect_input(elem);
         else if(elem->type == SIMPLE_REDIRECT_OUTPUT && data->exec)
-		    elem = simple_redirect_output(elem);
+        	elem = simple_redirect_output(elem);
         else if(elem->type == DOUBLE_REDIRECT_OUTPUT && data->exec)
 		    elem = double_redirect_output(elem);
 		else if(!data->exec && (elem->type == 3 || elem->type == 4 || elem->type == 5 || elem->type == 6))

@@ -12,7 +12,7 @@
 
 void execution(t_elem *elem)// TODO #100 after handling ""  - fix path finding with spaces etc + check by "echo " | "pwd " FIXME exitcode 256?? export TEST1=LOL TEST2 env | sort | grep -v SHLVL | grep -v _=
 {
-    while(elem)
+    while(elem->cmd)
     {
         if(elem->data->exec)
         {
@@ -131,6 +131,8 @@ void execution(t_elem *elem)// TODO #100 after handling ""  - fix path finding w
 
 void waiting(t_data *data)
 {
+	if(!data->elem_start)
+		return;
     int status = -1;
 	t_elem *elem = data->elem_start;
 	while (elem && data->exec)

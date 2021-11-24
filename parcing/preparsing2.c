@@ -179,13 +179,14 @@ void	del_last_elem(t_data *data)
         count++;
         elem_to_del = elem_to_del->next;
     }
-    if (count)
-    {
-        prelast_elem = elem_to_del->prev;
-    }
-    free(elem_to_del);
-    if (count)
-        prelast_elem->next = NULL;
+	data->elem_start = delete_current_node(elem_to_del);
+//    if (count)
+//    {
+//        prelast_elem = elem_to_del->prev;
+//    }
+//    free(elem_to_del);
+//    if (count)
+//        prelast_elem->next = NULL;
 }
 
 int	main_preparser(t_data *data, char *line)
@@ -214,7 +215,7 @@ int	main_preparser(t_data *data, char *line)
     }
     if (new_pipe_elem(prev_end, i, data))
         del_last_elem(data);
-    // printf("|%s|\n", data->elem_start->comand_line);
+	// printf("|%s|\n", data->elem_start->comand_line);
     while(data->elem_start->prev)
         data->elem_start = data->elem_start->prev;
     // printf("%p\n", data->elem_start);
