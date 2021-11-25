@@ -6,31 +6,27 @@ void	del_outer_quotes(char *line)
     int j = 0;
     int q1 = 0;
     int q2 = 0;
-    int flag =0;
+    int flag = 0;
 
     while (line[i])
     {
         if (line[i] == '\'' && !q2)
         {
-            q1 += 1;
-            q1 %= 2;
+            q1 = (q1 + 1) % 2;
             flag = 1;
         }
         if (line[i] == '\"' && !q1)
         {
-            q2 += 1;
-            q2 %= 2;
+            q2 = (q2 + 1) % 2;
             flag = 1;
         }
         line[j] = line[i];
-        // printf("q1 flag = %d, char = %c\n", q1, line[i]);
         if (!flag)
             j++;
         i++;
         flag = 0;
     }
     line[j] = 0;
-    // printf("\n");
 }
 
 int	ft_value_of_strings(char c, t_data *data)
@@ -45,14 +41,7 @@ int	ft_value_of_strings(char c, t_data *data)
 	while (data->line[++i])
 	{
 		if (data->line[i] == '\'' || data->line[i] == '\"')
-		{
-			// if (!word_flag)
-			// {
-			// 	word_flag++;
-			// 	num++;
-			// }
 			quotes(i, data);
-		}
 		if (data->line[i] != c)
 		{
 			if (!word_flag)
@@ -64,7 +53,6 @@ int	ft_value_of_strings(char c, t_data *data)
 		if (data->line[i] == c && !data->q1 && !data->q2 && word_flag)
 			word_flag = 0;
 	}
-	// printf("val = %d\n", num);
 	data->q1 = 0;
 	data->q2 = 0;
 	return (num);
@@ -138,24 +126,3 @@ char	**shell_split(char const *s, char c)
 	arr = ft_write_arr(value_str, &data, c, arr);
 	return (arr);
 }
-
-// int main(void)
-// {
-// 	char *line;
-// 	char **array;
-// 	int i;
-
-// 	while(1)
-// 	{
-// 		line = readline("enter line:");
-// 		array = shell_split(line, ' ');
-// 		free(line);
-// 		line = NULL;
-// 		i = 0;
-// 		while(array[i])
-// 		{
-// 			printf("%d:|%s|\n", i, array[i++]);
-// 		}
-// 		printf("-------------------------------\n");
-// 	}
-// }

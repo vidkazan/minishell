@@ -28,36 +28,51 @@
 
 typedef struct s_data t_data;
 
+typedef struct s_vars
+{
+    char *line;
+    char *new;
+    char **env;
+    char *var;
+    char *key;
+    char *value;
+    int q1;
+    int q2;
+    int start_i;
+    int end_i;
+
+}	t_vars;
+
 typedef struct s_elem
 {
-    int type;
-    int is_builtin;
-    int pfd[2];
-    pid_t pid;
-    char **cmd;
-    char *comand_line;
-    struct s_elem *next;
-    struct s_elem *prev;
-    t_data  *data;
+	int type;
+	int is_builtin;
+	int pfd[2];
+	pid_t pid;
+	char **cmd;
+	char *comand_line;
+	struct s_elem *next;
+	struct s_elem *prev;
+	t_data  *data;
 }               t_elem;
 
 typedef struct s_data
 {
-    char *path;
-    int std_in;
-    int std_out;
-    char **envp;
-    int exit_status;
-    t_elem *elem_start;
-    int simple_redirect_input_fd;
-    int simple_redirect_output_fd;
-    int double_redirect_output_fd;
-    int double_redirect_input_fd;
-    int debug;
-    int exec;
-    int q1;
-    int q2;
-    char *line;
+	char *path;
+	int std_in;
+	int std_out;
+	char **envp;
+	int exit_status;
+	t_elem *elem_start;
+	int simple_redirect_input_fd;
+	int simple_redirect_output_fd;
+	int double_redirect_output_fd;
+	int double_redirect_input_fd;
+	int debug;
+	int exec;
+	int q1;
+	int q2;
+	char *line;
 }              t_data;
 
 // init and close
@@ -91,6 +106,9 @@ t_elem *double_redirect_input(t_elem *elem);
 // parsing
 
 int	main_preparser(t_data *data, char *line);
+void    vars(t_data *data);
+char	**shell_split(char const *s, char c);
+void	quotes(int i, t_data *data);
 
 // exit status
 
@@ -147,8 +165,5 @@ void	edit_env_keys(int env_index, char *new_value, t_data *data);
 int is_in_export_line(char *line, char **export_arr);
 int is_min_arr_line(char *line, char **envp,char **export_arr);
 
-void    vars(t_data *data);
-char	**shell_split(char const *s, char c);
-void	quotes(int i, t_data *data);
 
 #endif

@@ -1,23 +1,4 @@
-//
-// Created by fcody on 11/12/21.
-//
-
 #include "../main.h"
-
-typedef struct s_vars
-{
-    char *line;
-    char *new;
-    char **env;
-    char *var;
-    char *key;
-    char *value;
-    int q1;
-    int q2;
-    int start_i;
-    int end_i;
-
-}	t_vars;
 
 void	concatenation(char *src, int i, int len, t_vars *var)
 {
@@ -29,7 +10,6 @@ void	concatenation(char *src, int i, int len, t_vars *var)
     temp = var->new;
     var->new = ft_strjoin(var->new, new_string);
     free(temp);
-//     printf("result of concatenation:|%s|\n", var->new);
 }
 
 void vars_init(t_vars *vars, char **env)
@@ -55,14 +35,12 @@ void filling_key_val(t_vars *var, char *env_str)
     ft_strlcpy(var->key, env_str, i + 1);
     var->value = malloc(sizeof(char) * (ft_strlen(env_str + i + 1) + 1));
     ft_strlcpy(var->value, env_str + i + 1, ft_strlen(env_str + i + 1) + 1);
-//     printf("key=%s\nval=%s\n", var->key, var->value);
 }
 
 void find_value(t_vars *var)
 {
     int i = 0;
 
-//     printf("var=%s\n", var->var);
     while(var->env[i])
     {
         filling_key_val(var, var->env[i]);
@@ -76,37 +54,46 @@ void find_value(t_vars *var)
         var->value = ft_strdup("");
 }
 
+int unique_value_cases(int type, t_vars *var, t_data *data)
+{
+    if (type == 1)
+    {
+        var->value = ft_strdup("$");
+        return(0);
+    }
+    if (type == 2)
+    {
+        var->value = ft_strdup(ft_itoa(data->exit_status));
+        return(1);
+    }
+    if (type == 3)
+    {
+        var->value = ft_strdup("42021");
+        return(1);
+    }
+}
+
 int find_variable(t_vars *var, t_data *data)
 {
     int i = var->end_i + 1;
     int j = 0;
 
     if (!var->line[i] || var->line[i] == ' ' || var->line[i] == '=' || (var->q2 && var->line[i] == '\"'))		// здесь добавить в сет все символы кроме ?$_ и алнум
-    {
-        var->value = ft_strdup("$");
-        return(j);
-    }
+        return(unique_value_cases(1, var, data));
 	else if (var->line[i] == '?')
-    {
-        var->value = ft_strdup(ft_itoa(data->exit_status));
-        return(++j);
-    }
+        return(unique_value_cases(2, var, data));
     else if (var->line[i] == '$')
-    {
-        var->value = ft_strdup("42021");
-        return(++j);
-    }
+        return(unique_value_cases(3, var, data));
     while(var->line[i] && var->line[i] != ' ' && (ft_isalnum(var->line[i]) || var->line[i] == '_'))
     {
         j++;
         if (j == 1 && ft_isdigit(var->line[i]))
             break;
-        i++;											// здесь добавить проверку на ис_алнум + '_', ис_альфа или '_' для первого символа
+        i++;
     }
     var->var = malloc(sizeof(char) * (j + 1));
     ft_strlcpy(var->var, var->line + var->end_i + 1, j + 1);
     find_value(var);
-
     return(j);
 }
 
@@ -124,22 +111,15 @@ void handling_variables(t_vars *var, t_data *data)
     while(var->line[i])
     {
         if (var->line[i] == '\'' && !var->q2)
-        {
-//            printf(",");
             var->q1 = (var->q1 + 1) % 2;
-        }
         else if (var->line[i] == '\"' && !var->q1)
-        {
-//            printf(";");
             var->q2 = (var->q2 + 1) % 2;
-        }
         else
-//            printf("%c", var->line[i]);
         if (var->line[i] == '$' && !var->q1)
         {
             var->end_i = i;
             concatenation(var->line, var->start_i, var->end_i - var->start_i, var);
-            i += find_variable(var, data); // должна вернуть количество символов имени переменной без учета знака бакса
+            i += find_variable(var, data);
             concatenation(var->value, 0, ft_strlen(var->value), var);
             var->start_i = i + 1;
             fresher(var);
@@ -156,11 +136,9 @@ void vars(t_data *data)
     vars_init(&var, data->envp);
     var.line = data->line;
     handling_variables(&var, data);
-    // free(var.line);
     data->line = var.new;
     if(data->debug)
         printf(">>> handled line:|%s|\n", data->line);
-//    free(var.new);
     free(var.line);
     vars_init(&var, data->envp);
 }
