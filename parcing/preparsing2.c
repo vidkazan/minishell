@@ -201,7 +201,7 @@ int check_last_cmd(t_data *data)
         prelast->next = NULL;
         return 0;
     }
-    
+
     // printf("type last cmd = %d\n", prelast->type);
     return(1);
 }
