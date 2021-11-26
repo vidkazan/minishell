@@ -36,15 +36,12 @@ void builtin_unset(t_elem *elem)
     while(elem->cmd[++count])
     {
         flag = 0;
-//        find = ft_strjoin(elem->cmd[count], "=");
 		find = ft_strdup(elem->cmd[count]);
-        if (!search_strings_in_array(elem->data->envp, find, &index))
+        if (!search_strings_in_array(elem->data->envp, find, &index,0))
             flag = 1;
-		dprintf(2, "index %d found str %s\n",index, elem->data->envp[index]);
         free(find);
         if(!flag)
         {
-        	dprintf(2, "!flag\n");
             i = index;
             free(elem->data->envp[i]);
             while (elem->data->envp[i + 1])
