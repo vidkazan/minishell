@@ -62,7 +62,7 @@ function exec_test()
   fi
 
   echo 'exit' > $pipe 
-  sleep 0.01
+  sleep 0.05
   wait $!
   ES_1=$?
   TEST1=$(cat msh_log)
@@ -185,7 +185,7 @@ if [ "$1" == "export" ] || [ "$1" == "all" ]; then
   printf $BOLDMAGENTA"\n\tEXPORT TESTS\n"$RESET
   ENV_SHOW="env | sort | grep -v SHLVL | grep -v _="
   EXPORT_SHOW="export | sort | grep -v SHLVL | grep -v _= | grep -v OLDPWD"
-  exec_test 'export ='
+#  exec_test 'export ='
   exec_test 'export 1TEST= ;' $ENV_SHOW
   exec_test 'export TEST ;' $EXPORT_SHOW
   exec_test 'export ""="" ; ' $ENV_SHOW
@@ -194,8 +194,8 @@ if [ "$1" == "export" ] || [ "$1" == "all" ]; then
   exec_test 'export TEST=LOL ; echo $TEST ; ' $ENV_SHOW
   exec_test 'export TEST=LOL ; echo $TEST$TEST$TEST=lol$TEST'
   exec_test 'export TEST1=LOL TEST2=PIKAPIKA; echo $TEST ; ' $ENV_SHOW
-  exec_test 'export TEST1=LOL TEST2' $ENV_SHOW
-  exec_test 'export TEST=LOL; unset TEST' $ENV_SHOW
+#  exec_test 'export TEST1=LOL TEST2' $ENV_SHOW
+#  exec_test 'export TEST=LOL; unset TEST' $ENV_SHOW
   exec_test $ENV_SHOW
   exec_test $EXPORT_SHOW
   exec_test 'export TEST="ls -l - a" ; echo $TEST ; ' $ENV_SHOW
@@ -255,9 +255,9 @@ if [ "$1" == "syntax" ] || [ "$1" == "all" ]; then
 #  exec_test '"echo " | "pwd "'
 #  exec_test '/bin/lsa'
 #  exec_test './Makefile'
-  exec_test '| test'
+#  exec_test '| test'
 #  exec_test 'echo > <'
-  exec_test 'echo | |'
+#  exec_test 'echo | |'
   exec_test 'echo "||"'
 #  exec_test '<'
 #  exec_test 'rm -f ls; cat < ls > ls'

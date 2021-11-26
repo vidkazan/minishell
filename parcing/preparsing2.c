@@ -143,6 +143,25 @@ int check_last_cmd(t_data *data)
     return(1);
 }
 
+int check_last_cmd(t_data *data)
+{
+    t_elem *prelast;
+    t_elem *last;
+    last = data->elem_start;
+    while(last->next)
+        last = last->next;
+    prelast = last->prev;
+    if (prelast->type > 2)
+    {
+        free(last);
+        prelast->next = NULL;
+        return 0;
+    }
+
+    // printf("type last cmd = %d\n", prelast->type);
+    return(1);
+}
+
 int	main_preparser(t_data *data, char *line)
 {
     int prev_end;
@@ -176,6 +195,7 @@ int	main_preparser(t_data *data, char *line)
     		return 1;
         }
     }
+    // printf("|%s|\n", data->elem_start->comand_line);
     while(data->elem_start->prev)
         data->elem_start = data->elem_start->prev;
     if (data->q1 || data->q2)
