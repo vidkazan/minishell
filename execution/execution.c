@@ -106,7 +106,7 @@ void execution(t_elem *elem)// TODO #100 after handling ""  - fix path finding w
                 if (elem->is_builtin)
                     builtin_exec(elem);
                 if (elem->data->debug)
-                    dprintf(2, ">>> %d parent\n", getpid());
+                    dprintf(2, ">>> %d parent exit status %d\n", getpid(), elem->data->exit_status);
                 close_fd(elem);
             }
         }
@@ -161,7 +161,8 @@ void waiting(t_data *data)
 	}
 	if(status != -1)
 	{
-		data->exit_status = status;
+		if(!data->exit_status)
+			data->exit_status = status;
 		if(elem->data->exit_status > 255)
 			elem->data->exit_status = elem->data->exit_status % 255;
 	}
