@@ -50,7 +50,7 @@ typedef struct s_elem
     int pfd[2];
     pid_t pid;
     char **cmd;
-    char *comand_line;
+    char *str;
     struct s_elem *next;
     struct s_elem *prev;
     t_data  *data;

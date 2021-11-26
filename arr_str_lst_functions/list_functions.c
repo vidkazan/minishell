@@ -42,8 +42,8 @@ t_elem	*delete_current_node(t_elem *elem)
 		next_elem = elem->next;
 	if(elem->data->debug)
         dprintf(2,">>> %d DELNODE %p prev %p next %p %s\n", getpid(),elem, prev_elem, next_elem, elem->cmd[0]);
-	if(elem->comand_line)
-		free(elem->comand_line);
+	if(elem->str)
+		free(elem->str);
 	free_arr(elem->cmd);
 	elem->cmd = NULL;
 	if(!next_elem && !prev_elem)
@@ -95,7 +95,7 @@ t_elem  *push_back(t_elem *start, t_data *data)
         new_elem = create_elem(data);
         ptr->next = new_elem;
         new_elem->prev = ptr;
-        new_elem->comand_line = NULL;
+        new_elem->str = NULL;
     }
     return new_elem;
 }
