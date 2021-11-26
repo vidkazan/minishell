@@ -8,15 +8,15 @@ t_elem	*double_redirect_output(t_elem	*elem)
 {
 	if(elem->data->debug)
 		dprintf(2, ">>> %d redirects do %p <%s>\n",getpid(), elem, *elem->cmd);
+
 	int    fd;
 
 	fd = open(elem->cmd[0], O_RDWR | O_CREAT | O_APPEND, 0777);
-	if (fd < 0) // FIXME #104 ?????
+	if (fd < 0)
 	{
-		ft_putstr_fd("error: ", 2);
-		ft_putstr_fd(strerror(errno), 2);
-		ft_putstr_fd("\n", 2);
-		exit(1);
+		builtins_error(elem->data,elem->cmd[0],strerror(errno) ,errno);
+		elem = delete_current_node(elem);
+		return NULL;
 	}
 	else
 	{

@@ -91,23 +91,22 @@ void builtin_exec(t_elem *elem)
         builtin_debug(elem);
 }
 
-void builtin_check(t_elem *elem) // TODO #101 after #100 change all strNcmp to strcmp
+void builtin_check(t_elem *elem)
 {
     if(!ft_strcmp(elem->cmd[0], "echo"))
-//    if(!ft_strncmp(elem->cmd[0], "echo", 4)  && ft_strlen(elem->cmd[0]) == 4)
         elem->is_builtin = 1;
-    if(!ft_strncmp(elem->cmd[0], "cd", 2)  && ft_strlen(elem->cmd[0]) == 2)
+    if(!ft_strcmp(elem->cmd[0], "cd"))
         elem->is_builtin = 2;
-    if(!ft_strncmp(elem->cmd[0], "pwd", 3)  && ft_strlen(elem->cmd[0]) == 3)
+    if(!ft_strcmp(elem->cmd[0], "pwd"))
         elem->is_builtin = 3;
-    if(!ft_strncmp(elem->cmd[0], "env", 3)  && ft_strlen(elem->cmd[0]) == 3)
+    if(!ft_strcmp(elem->cmd[0], "env"))
         elem->is_builtin = 4;
-    if(!ft_strncmp(elem->cmd[0], "exit", 4)  && ft_strlen(elem->cmd[0]) == 4)
+    if(!ft_strcmp(elem->cmd[0], "exit"))
         elem->is_builtin = 5;
-    if(!ft_strncmp(elem->cmd[0], "unset", 5)  && ft_strlen(elem->cmd[0]) == 5)
+    if(!ft_strcmp(elem->cmd[0], "unset"))
         elem->is_builtin = 6;
-    if(!ft_strncmp(elem->cmd[0], "export", 6) && ft_strlen(elem->cmd[0]) == 6)
+    if(!ft_strcmp(elem->cmd[0], "export"))
         elem->is_builtin = 7;
-    if((!ft_strncmp(elem->cmd[0], "d", 3) && ft_strlen(elem->cmd[0]) == 1) || (!ft_strncmp(elem->cmd[0], "d", 1) && ft_strlen(elem->cmd[0]) == 1))
+    if(!ft_strcmp(elem->cmd[0], "d"))
         elem->is_builtin = 8;
 }
