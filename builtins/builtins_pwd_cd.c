@@ -42,7 +42,6 @@ void builtin_cd(t_elem *elem,int write_fd) // relative path cd NOT working if cu
             builtins_error(elem->data, "cd",NULL, "HOME not set", 1);
         else if(chdir(home))
 			builtins_error(elem->data, "cd", NULL, NULL, 0);
-        return;
     }
     else if(elem->cmd[1][0] == '~')
     {

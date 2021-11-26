@@ -6,24 +6,22 @@
 
 void	edit_env_keys(int env_index, char *new_value, t_data *data)
 {
-	dprintf(2, ">>> here6\n");
 	char *env_name;
 	int i;
 
 	i = 0;
 	if(env_index < 0 || !new_value[0] || !data->envp[env_index])
 		return;
-	dprintf(2, ">>> here7\n");
-	env_name = data->envp[env_index];
 	while(data->envp[env_index][i] && data->envp[env_index][i] != '=')
 		i++;
 	dprintf(2, ">>> here8\n");
-	env_name[i + 1] = 0;
-//	free(data->envp[env_index]);
+	env_name = ft_substr(data->envp[env_index], 0, i + 1);
+	free(data->envp[env_index]);
 	dprintf(2, ">>> here9\n");
 	data->envp[env_index] = ft_strjoin(env_name, new_value);
 	dprintf(2, ">>> here10\n");
-//	free(new_value);
+	free(new_value);
+	free(env_name);
 }
 
 int is_in_export_line(char *line, char **export_arr)
