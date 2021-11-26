@@ -62,7 +62,7 @@ function exec_test()
   fi
 
   echo 'exit' > $pipe 
-  sleep 0.01
+  sleep 0.05
   wait $!
   ES_1=$?
   TEST1=$(cat msh_log)
