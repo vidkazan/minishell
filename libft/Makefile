@@ -52,7 +52,7 @@ OBJS_B = $(SRCS_B:c=o)
 
 CC = gcc
 
-
+	
 all: $(NAME)
 
 $(NAME): $(OBJS)
@@ -62,11 +62,11 @@ bonus:	$(OBJS_B) libft.h
 	ar rcs $(NAME) $(OBJS_B)
 
 %.o: %.c libft.h
-	@$(CC) -I libft.h -c $<
+	@$(CC) -Wall -Wextra -Werror -I libft.h -c $<
 
 clean:
 	rm -rf *.o
-
+	
 fclean: clean
 	rm -f $(NAME)
 

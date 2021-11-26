@@ -10,24 +10,31 @@
 //tcsetattr, tcgetattr, tgetent, tgetflag, tgetnum,
 //tgetstr, tgoto, tputs
 
-void init(t_data *data)
+void init(t_data *data, char **env)
 {
-//    data->envp = ft_arrdup(env);
+	data->exec = 1;
     data->std_in = dup(0);
     data->std_out = dup(1);
     data->elem_start = NULL;
     data->simple_redirect_input_fd = -1;
     data->simple_redirect_output_fd = -1;
     data->double_redirect_output_fd = -1;
+    data->double_redirect_input_fd = -1;
 //    env_path_find(data);
 	data->q1 = 0;
 	data->q2 = 0;
 }
 
-void	data_reboot(t_data *data, char *message, int mode)
+int	data_reboot(t_data *data, char *message, int mode)
 {
 	if (mode)
 		printf("%s\n", message);
 	list_cleaner(data->elem_start);
-	init(data);		//	need to init everytime?
+	if(data->line)
+	{
+		free(data->line);
+		data->line = 0;
+	}
+	init(data, data->envp);
+	return (1);
 }
