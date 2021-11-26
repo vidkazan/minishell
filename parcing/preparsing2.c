@@ -100,7 +100,11 @@ int	make_redirect_elems(t_data *data, char *line)
         if ((line[i] == '<' || line[i] == '>') && !data->q1 && !data->q2)
         {
             if (new_redirect_elem(i, data))
-				return(1);
+            {
+        		builtins_error(data,NULL,NULL,"syntax error after redirect token", 2);
+        		data->exec = 0;
+                return (1);
+            }
         }
         i++;
     }
@@ -147,11 +151,7 @@ int	main_preparser(t_data *data, char *line)
     prev_end = 0;
     data->elem_start = NULL;
     if (make_redirect_elems(data, line))
-	{
-		builtins_error(data,NULL,NULL,"syntax error near unexpected token `newline'", 2);
-		data->exec = 0;
 		return 1;
-	}
     while (line[i])
     {
         quotes(i, data);
