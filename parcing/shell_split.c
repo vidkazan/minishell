@@ -2,31 +2,31 @@
 
 void	del_outer_quotes(char *line)
 {
-    int i = 0;
-    int j = 0;
-    int q1 = 0;
-    int q2 = 0;
-    int flag = 0;
+	int i = 0;
+	int j = 0;
+	int q1 = 0;
+	int q2 = 0;
+	int flag = 0;
 
-    while (line[i])
-    {
-        if (line[i] == '\'' && !q2)
-        {
-            q1 = (q1 + 1) % 2;
-            flag = 1;
-        }
-        if (line[i] == '\"' && !q1)
-        {
-            q2 = (q2 + 1) % 2;
-            flag = 1;
-        }
-        line[j] = line[i];
-        if (!flag)
-            j++;
-        i++;
-        flag = 0;
-    }
-    line[j] = 0;
+	while (line[i])
+	{
+		if (line[i] == '\'' && !q2)
+		{
+			q1 = (q1 + 1) % 2;
+			flag = 1;
+		}
+		if (line[i] == '\"' && !q1)
+		{
+			q2 = (q2 + 1) % 2;
+			flag = 1;
+		}
+		line[j] = line[i];
+		if (!flag)
+			j++;
+		i++;
+		flag = 0;
+	}
+	line[j] = 0;
 }
 
 int	ft_value_of_strings(char c, t_data *data)

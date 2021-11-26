@@ -8,9 +8,9 @@ void builtin_echo_main(int i, t_elem *elem, int write_fd)
 {
     while (elem->cmd[i])
     {
-        // if(elem->cmd[i] && !ft_strncmp(elem->cmd[i], "$?", 2)  && ft_strlen(elem->cmd[i]) == 2)
-        //     exit_code_print(elem,write_fd);
-        // else
+//        if(elem->cmd[i] && !ft_strncmp(elem->cmd[i], "$?", 2)  && ft_strlen(elem->cmd[i]) == 2)
+//            exit_code_print(elem,write_fd);
+//        else
             ft_putstr_fd(elem->cmd[i], write_fd);
         if (elem->cmd[i + 1])
             write(write_fd, " ", 1);

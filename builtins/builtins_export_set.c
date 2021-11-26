@@ -45,7 +45,7 @@ void export_set(t_elem  *elem)
             }
             free(search_line);
             search_line = NULL;
-            new_line = elem->cmd[j];
+            new_line = ft_strdup(elem->cmd[j]);
             elem->data->envp = ft_arrjoin_one_line(elem->data->envp, new_line);
         }
     }
