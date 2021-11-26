@@ -92,7 +92,7 @@ void waiting(t_data *data);
 
 void	env_path_find(t_data *data);
 void	find_path(t_elem *elem);
-char	*search_strings_in_array(char **arr, char *search_word, int *index);
+char	*search_strings_in_array(char **arr, char *search_word, int *index, int mode);
 
 // redirects
 

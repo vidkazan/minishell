@@ -36,12 +36,9 @@ void builtin_unset(t_elem *elem)
     while(elem->cmd[++count])
     {
         flag = 0;
-        find = ft_strjoin(elem->cmd[count], "=");
-        if (!search_strings_in_array(elem->data->envp, find, &index))
-        {
-//            builtins_error(elem, "unset", elem->cmd[count], "not a valid identifier", 0);
+		find = ft_strdup(elem->cmd[count]);
+        if (!search_strings_in_array(elem->data->envp, find, &index,0))
             flag = 1;
-        }
         free(find);
         if(!flag)
         {

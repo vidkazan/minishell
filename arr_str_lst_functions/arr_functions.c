@@ -66,7 +66,7 @@ char	**ft_arrjoin(char **s1, char **s2)
     return (res);
 }
 
-char *search_strings_in_array(char **arr, char *search_word, int *index)
+char *search_strings_in_array(char **arr, char *search_word, int *index, int mode)
 {
     int i;
 
@@ -75,21 +75,21 @@ char *search_strings_in_array(char **arr, char *search_word, int *index)
         return NULL;
     while(arr[++i])
     {
-		dprintf(2, ">>> %s %s %d\n", arr[i], search_word, i);
-        if(!ft_strncmp(arr[i], search_word, ft_strlen(search_word)))
+    	if(!ft_strncmp(arr[i], search_word, ft_strlen(search_word)) && (( !arr[i][ft_strlen(search_word)]) || arr[i][ft_strlen(search_word)] == '='))
         {
             if(index)
                 *index = i;
-            return (arr[i] + ft_strlen(search_word));
+            if(!mode)
+            	return (arr[i] + ft_strlen(search_word));
+            else
+            	return (arr[i] + ft_strlen(search_word) + 1);
         }
     }
-	dprintf(2, ">>> here62\n");
     return NULL;
 }
 
 char **ft_arrjoin_one_line(char **arr1,char *s2)
 {
-//    dprintf(2, ">>> arrjoin_one_line\n");
     char	**res;
     int		size_all;
     int     i;

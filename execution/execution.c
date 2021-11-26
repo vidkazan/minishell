@@ -10,8 +10,6 @@
 //tcsetattr, tcgetattr, tgetent, tgetflag, tgetnum,
 //tgetstr, tgoto, tputs
 
-// TODO #100 after handling ""  - fix path finding with spaces etc + check by "echo " | "pwd "
-// FIXME #102 exitcode 256?? export TEST1=LOL TEST2 env | sort | grep -v SHLVL | grep -v _=
 void execution(t_elem *elem)
 {
     while(elem->cmd)
@@ -40,7 +38,7 @@ void execution(t_elem *elem)
                 elem->pid = fork();
                 if (elem->pid < 0)
                 {
-                    builtins_error(elem->data, "fork:", NULL, NULL, 128); // FIXME #103 error code?
+                    builtins_error(elem->data, "fork:", NULL, NULL, 128);
                     return;
                 }
             }

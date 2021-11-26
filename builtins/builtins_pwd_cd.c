@@ -33,17 +33,15 @@ void builtin_cd(t_elem *elem,int write_fd) // relative path cd NOT working if cu
 	int	pwd_index = 0;
 	int	old_pwd_index = 0;
 	char *tilda_ptr = NULL;
-	home = search_strings_in_array(elem->data->envp, "HOME=", NULL);
-	search_strings_in_array(elem->data->envp, "OLDPWD=", &old_pwd_index);
+
+	home = search_strings_in_array(elem->data->envp, "HOME", NULL, 1);
+	search_strings_in_array(elem->data->envp, "OLDPWD", &old_pwd_index, 1);
     if(!elem->cmd[1] || !elem->cmd[1][0])
     {
         if(!home || !*home)
             builtins_error(elem->data, "cd",NULL, "HOME not set", 1);
         else if(chdir(home))
-        {
-			dprintf(2,"here\n");
 			builtins_error(elem->data, "cd", NULL, NULL, 0);
-		}
         return;
     }
     else if(elem->cmd[1][0] == '~')
@@ -84,7 +82,7 @@ void builtin_cd(t_elem *elem,int write_fd) // relative path cd NOT working if cu
 		free(res_path);
     }
 	dprintf(2, ">>> here5\n");
-    current_pwd_env = ft_strdup(search_strings_in_array(elem->data->envp, "PWD=", &pwd_index));
+    current_pwd_env = ft_strdup(search_strings_in_array(elem->data->envp, "PWD", &pwd_index,1));
 	edit_env_keys(pwd_index, getcwd(NULL, 0), elem->data);
 	dprintf(2, ">>> here6\n");
     edit_env_keys(old_pwd_index, current_pwd_env, elem->data);
