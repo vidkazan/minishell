@@ -11,7 +11,7 @@ t_elem	*double_redirect_output(t_elem	*elem)
 	int    fd;
 
 	fd = open(elem->cmd[0], O_RDWR | O_CREAT | O_APPEND, 0777);
-	if (fd < 0) // FIXME ?????
+	if (fd < 0) // FIXME #104 ?????
 	{
 		ft_putstr_fd("error: ", 2);
 		ft_putstr_fd(strerror(errno), 2);
