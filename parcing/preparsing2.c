@@ -9,14 +9,14 @@ int	new_pipe_elem(int start, int end, t_data *data)
 	while (new->next)
 		new = new->next;
 	new->type = 1;
-	new->comand_line = malloc(sizeof(char *) + (end - start + 1));
+	new->str = malloc(sizeof(char *) + (end - start + 1));
 	if (data->line[end] == '|')
 		new->type = 2;
-	ft_strlcpy(new->comand_line, data->line + start, end - start + 1);
-	(new->comand_line)[end - start + 1] = 0;
-	new->cmd = shell_split(new->comand_line, ' ');
+	ft_strlcpy(new->str, data->line + start, end - start + 1);
+	(new->str)[end - start + 1] = 0;
+	new->cmd = shell_split(new->str, ' ');
 	if (data->debug)
-		printf("%d %d | cmd=^^%s^^, type = %d\n", start, end, new->comand_line, new->type);
+		printf("%d %d | cmd=^^%s^^, type = %d\n", start, end, new->str, new->type);
 	if (!*new->cmd)
 		return(1);
 	return(0);
@@ -77,8 +77,8 @@ int	new_redirect_elem(int start, t_data *data)
 	data->elem_start = new;
 	count = redir_find_end(data->line + start, start, data);
 	set_redirect_type(data, new, start);
-	new->comand_line = ft_substr(data->line, start + 1 + (new->type > 4), count);
-	new->cmd = shell_split(new->comand_line, ' ');
+	new->str = ft_substr(data->line, start + 1 + (new->type > 4), count);
+	new->cmd = shell_split(new->str, ' ');
 	if (!new->cmd[0])
 		return (1);
 	if (new->type == 5 || new->type == 6)

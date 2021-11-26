@@ -42,7 +42,7 @@ void vars_init_end(t_vars *vars, char **env)
 	vars->line = NULL;
 	vars->key = NULL;
 	vars->value = NULL;
-	free(vars->var);
+	// free(vars->var);
 	vars->var = NULL;
 	vars->env = env;
 	vars->start_i = 0;
@@ -70,7 +70,9 @@ void find_value(t_vars *var)
 		if (!ft_strncmp(var->key, var->var, ft_strlen(var->var) + 1))
 			break;
 		free(var->key);
+		var->key = NULL;
 		free(var->value);
+		var->value = NULL;
 		i++;
 	}
 	if (!var->env[i])
@@ -119,8 +121,12 @@ int find_variable(t_vars *var, t_data *data)
 
 void	fresher(t_vars *var)
 {
+	if (var->key)
+		free(var->key);
     var->key = NULL;
+	free(var->value);
     var->value = NULL;
+	free(var->var);
     var->var = NULL;
 }
 
@@ -156,7 +162,10 @@ void vars(t_data *data)
 	vars_init(&var, data->envp);
 	var.line = data->line;
 	handling_variables(&var, data);
+	// char *temp;
+	// temp = data->line;
 	data->line = var.new;
+	// free(temp);
 	if(data->debug)
 		printf(">>> handled line:|%s|\n", data->line);
 	free(var.line);
