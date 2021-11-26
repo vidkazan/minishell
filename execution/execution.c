@@ -10,14 +10,14 @@
 //tcsetattr, tcgetattr, tgetent, tgetflag, tgetnum,
 //tgetstr, tgoto, tputs
 
-void execution(t_elem *elem)// TODO #100 after handling ""  - fix path finding with spaces etc + check by "echo " | "pwd "
+void execution(t_elem *elem)// TODO #100 after handling ""  - fix path finding with spaces etc + check by "echo " | "pwd " FIXME exitcode 256?? export TEST1=LOL TEST2 env | sort | grep -v SHLVL | grep -v _=
 {
-    while(elem)
+    while(elem->cmd)
     {
         if(elem->data->exec)
         {
             if (elem->data->debug)
-                dprintf(2, ">>> %d NOW %p %s\n", getpid(), elem, elem->cmd[0]);
+                dprintf(2, ">>> %d NOW %p <%s>\n", getpid(), elem, elem->cmd[0]);
             builtin_check(elem);
             if (elem->data->debug && elem->is_builtin)
                 dprintf(2, ">>> %d builtin\n", getpid());
@@ -29,7 +29,7 @@ void execution(t_elem *elem)// TODO #100 after handling ""  - fix path finding w
                     dprintf(2, ">>> %d pipe\n", getpid());
                 if (pipe(elem->pfd))
                 {
-                    builtins_error(elem, "pipe:", NULL, NULL, 0);
+                    builtins_error(elem->data, "pipe:", NULL, NULL, 0);
                     return;
                 }
             }
@@ -38,7 +38,7 @@ void execution(t_elem *elem)// TODO #100 after handling ""  - fix path finding w
                 elem->pid = fork();
                 if (elem->pid < 0)
                 {
-                    builtins_error(elem, "fork:", NULL, NULL, 0);
+                    builtins_error(elem->data, "fork:", NULL, NULL, 128); // FIXME error code?
                     return;
                 }
             }
@@ -97,6 +97,7 @@ void execution(t_elem *elem)// TODO #100 after handling ""  - fix path finding w
                 if (execve(elem->cmd[0], elem->cmd, elem->data->envp) < 0)
                 {
                     execve_error(elem, elem->cmd[0], NULL, NULL);
+					data_reboot(elem->data, NULL, 0);
                     exit(elem->data->exit_status);
                 }
             }
@@ -111,6 +112,19 @@ void execution(t_elem *elem)// TODO #100 after handling ""  - fix path finding w
         }
         else
         {
+			if (elem->type == PIPE)
+			{
+				if (elem->data->debug)
+					dprintf(2, ">>> %d pipe\n", getpid());
+				if (pipe(elem->pfd))
+				{
+					builtins_error(elem->data, "pipe:", NULL, NULL, 0);
+					return;
+				}
+				close_fd(elem);
+			}
+			if(elem->data->debug)
+				dprintf(2, ">>> %d skip %s\n", getpid(), elem->cmd[0]);
             if(elem->data->debug)
                 dprintf(2, ">>> %d exec = 1\n", getpid());
             elem->data->exec = 1;
@@ -118,7 +132,7 @@ void execution(t_elem *elem)// TODO #100 after handling ""  - fix path finding w
         if (elem->next)
         {
             if(elem->data->debug)
-                dprintf(2, ">>> %d next\n", getpid());
+                dprintf(2, ">>> %d next %s\n", getpid(), elem->next->cmd[0]);
             elem = elem->next;
         }
         else
@@ -128,9 +142,11 @@ void execution(t_elem *elem)// TODO #100 after handling ""  - fix path finding w
 
 void waiting(t_data *data)
 {
+	if(!data->elem_start)
+		return;
     int status = -1;
 	t_elem *elem = data->elem_start;
-	while (elem)
+	while (elem && data->exec)
 	{
 	    if(!elem->is_builtin)
 	    {
@@ -144,5 +160,9 @@ void waiting(t_data *data)
             break;
 	}
 	if(status != -1)
-	    data->exit_status = status;
+	{
+		data->exit_status = status;
+		if(elem->data->exit_status > 255)
+			elem->data->exit_status = elem->data->exit_status % 255;
+	}
 }

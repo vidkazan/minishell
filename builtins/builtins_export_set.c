@@ -14,14 +14,14 @@ void export_set(t_elem  *elem)
 
     if(*elem->cmd[1] == '=')
     {
-        builtins_error(elem, "export", elem->cmd[1], "not a valid identifier", 1);
+        builtins_error(elem->data, "export", elem->cmd[1], "not a valid identifier", 1);
         return;
     }
     j = 0;
     while (elem->cmd[++j])
     {
         if(!export_argument_check(elem->cmd[j]))
-            builtins_error(elem, "export", elem->cmd[j], "not a valid identifier", 1);
+            builtins_error(elem->data, "export", elem->cmd[j], "not a valid identifier", 1);
         else
         {
             i = 0;
@@ -45,7 +45,7 @@ void export_set(t_elem  *elem)
             }
             free(search_line);
             search_line = NULL;
-            new_line = elem->cmd[j];
+            new_line = ft_strdup(elem->cmd[j]);
             elem->data->envp = ft_arrjoin_one_line(elem->data->envp, new_line);
         }
     }

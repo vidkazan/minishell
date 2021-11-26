@@ -75,6 +75,7 @@ char *search_strings_in_array(char **arr, char *search_word, int *index)
         return NULL;
     while(arr[++i])
     {
+		dprintf(2, ">>> %s %s %d\n", arr[i], search_word, i);
         if(!ft_strncmp(arr[i], search_word, ft_strlen(search_word)))
         {
             if(index)
@@ -82,6 +83,7 @@ char *search_strings_in_array(char **arr, char *search_word, int *index)
             return (arr[i] + ft_strlen(search_word));
         }
     }
+	dprintf(2, ">>> here62\n");
     return NULL;
 }
 

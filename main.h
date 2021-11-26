@@ -28,6 +28,21 @@
 
 typedef struct s_data t_data;
 
+typedef struct s_vars
+{
+	char *line;
+	char *new;
+	char **env;
+	char *var;
+	char *key;
+	char *value;
+	int q1;
+	int q2;
+	int start_i;
+	int end_i;
+
+}	t_vars;
+
 typedef struct s_elem
 {
     int type;
@@ -35,7 +50,7 @@ typedef struct s_elem
     int pfd[2];
     pid_t pid;
     char **cmd;
-    char *cal;
+    char *comand_line;
     struct s_elem *next;
     struct s_elem *prev;
     t_data  *data;
@@ -43,7 +58,6 @@ typedef struct s_elem
 
 typedef struct s_data
 {
-    int exit_flag;
     char *path;
     int std_in;
     int std_out;
@@ -63,9 +77,8 @@ typedef struct s_data
 
 // init and close
 
-void    data_reboot(t_data *data, char *message, int mode);
+int    data_reboot(t_data *data, char *message, int mode);
 void    init(t_data *data, char **env);
-void    start_init(t_data *data, char **env);
 void    closing(t_data *data);
 
 // exec
@@ -92,7 +105,10 @@ t_elem *double_redirect_input(t_elem *elem);
 
 // parsing
 
-void	main_preparser(t_data *data, char *line);
+int	main_preparser(t_data *data, char *line);
+void    vars(t_data *data);
+char	**shell_split(char const *s, char c);
+void	quotes(int i, t_data *data);
 
 // exit status
 
@@ -125,7 +141,7 @@ void        free_arr(char **str);
 int     builtin_fd_gen(t_elem *elem);
 void    builtin_exec(t_elem *elem);
 void    builtin_check(t_elem *elem);
-void    builtins_error(t_elem *elem, char *cmd, char *arg, char *msg, int code);
+void    builtins_error(t_data *data, char *cmd, char *arg, char *msg, int code);
 void    builtin_exit(t_elem *elem);
 void    builtin_unset(t_elem *elem);
 void    builtin_check(t_elem *elem);

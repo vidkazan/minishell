@@ -6,6 +6,8 @@
 
 t_elem	*simple_redirect_input(t_elem *elem)
 {
+	if(elem->data->debug)
+		dprintf(2, ">>> %d redirects si %p <%s>\n",getpid(), elem, *elem->cmd);
 	int    fd;
 
     if(elem->data->double_redirect_input_fd)
@@ -18,14 +20,12 @@ t_elem	*simple_redirect_input(t_elem *elem)
 	fd = open(elem->cmd[0], O_RDONLY);
 	if (fd < 0)
 	{
-        builtins_error(elem, elem->cmd[0], NULL, "no such file or directory",1);
-        elem = delete_current_node(elem);
+        builtins_error(elem->data, elem->cmd[0], NULL, "no such file or directory",1);
 //        if(elem->type == CMD)
-        {
             if(elem->data->debug)
-                dprintf(2, ">>> %d exec = 0\n", getpid());
+                dprintf(2, ">>> %d  redirects SI exec = 0\n", getpid());
             elem->data->exec = 0;
-        }
+        elem = delete_current_node(elem);
 	}
 	else
 	{

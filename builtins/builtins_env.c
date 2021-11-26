@@ -29,7 +29,7 @@ void builtin_unset(t_elem *elem)
 
     if(!elem->cmd[1] || !elem->cmd[1][0])
     {
-        builtins_error(elem, "unset",NULL, "not enough arguments", 0);
+        builtins_error(elem->data, "unset",NULL, "not enough arguments", 0);
         return;
     }
     count = 0;
