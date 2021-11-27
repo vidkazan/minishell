@@ -8,15 +8,10 @@ void builtin_pwd(t_elem *elem, int write_fd)
 {
     int i = 0;
     char *res;
-//    res = search_strings_in_array(elem->data->envp, "PWD=", &i);
-//    if(!res)
-//        builtins_error(elem->data, elem->cmd[0],NULL, "no env PATH", 0);
-//    else
-//        ft_putendl_fd(res, write_fd);
 	{
 		res = getcwd(NULL, 0);
 		if(!res)
-			builtins_error(elem->data, "pwd", NULL, NULL, 0);
+			builtins_error(elem->data, "pwd", NULL, NULL);
 		else
 			ft_putendl_fd(res, write_fd);
 		free(res);
@@ -39,9 +34,9 @@ void builtin_cd(t_elem *elem,int write_fd) // relative path cd NOT working if cu
     if(!elem->cmd[1] || !elem->cmd[1][0])
     {
         if(!home || !*home)
-            builtins_error(elem->data, "cd",NULL, "HOME not set", 1);
+            builtins_error(elem->data, "cd",NULL, "HOME not set");
         else if(chdir(home))
-			builtins_error(elem->data, "cd", NULL, NULL, 0);
+			builtins_error(elem->data, "cd", NULL, NULL);
     }
     else if(elem->cmd[1][0] == '~')
     {
@@ -50,7 +45,7 @@ void builtin_cd(t_elem *elem,int write_fd) // relative path cd NOT working if cu
 		if(chdir(res_path))
 		{
 			free(res_path);
-            builtins_error(elem->data, "cd",NULL, NULL, 0);
+            builtins_error(elem->data, "cd",NULL, NULL);
 			return;
 		}
 		free(res_path);
@@ -65,14 +60,14 @@ void builtin_cd(t_elem *elem,int write_fd) // relative path cd NOT working if cu
          {
 			 free(getcwd_res);
 			 dprintf(2, ">>> here2\n");
-             builtins_error(elem->data, "getcwd",res_path, NULL, 0);
+             builtins_error(elem->data, "getcwd",res_path, NULL);
 			 free(res_path);
              return;
          }
         if (chdir(res_path))
         {
 			dprintf(2, ">>> here3\n");
-            builtins_error(elem->data, "cd",elem->cmd[1], NULL, 0);
+            builtins_error(elem->data, "cd",elem->cmd[1], NULL);
 			free(res_path);
             return;
         }

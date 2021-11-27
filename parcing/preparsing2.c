@@ -105,7 +105,8 @@ int	make_redirect_elems(t_data *data, char *line)
 			if (new_redirect_elem(i, data))
 			{
 				builtins_error(data, NULL, NULL, \
-					"syntax error after redirect token", 2);
+					"syntax error after redirect token");
+				data->exit_status = 2;
 				data->exec = 0;
 				return (1);
 			}
@@ -142,7 +143,8 @@ int	last_cmd_parser(t_data *data, int prev_end, int i)
 		if (check_last_cmd(data))
 		{
 			builtins_error(data, NULL, NULL, \
-				"syntax error no cmd", 2);
+				"syntax error no cmd");
+			data->exit_status = 2;
 			data->exec = 0;
 			return (1);
 		}
@@ -151,7 +153,8 @@ int	last_cmd_parser(t_data *data, int prev_end, int i)
 		data->elem_start = data->elem_start->prev;
 	if (data->q1 || data->q2)
 	{
-		builtins_error(data, NULL, NULL, "Error: Unclosed quotes", 2);
+		builtins_error(data, NULL, NULL, "Error: Unclosed quotes");
+		data->exit_status = 2;
 		data->exec = 0;
 		return (1);
 	}
@@ -178,7 +181,8 @@ int	main_preparser(t_data *data, char *line)
 			if (new_pipe_elem(prev_end, i, data))
 			{
 				builtins_error(data, NULL, NULL, \
-					"syntax error near unexpected token '|'", 2);
+					"syntax error near unexpected token '|'");
+			   	data->exit_status = 2;
 				data->exec = 0;
 				return (1);
 			}

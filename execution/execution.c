@@ -29,7 +29,7 @@ void execution(t_elem *elem)
                     dprintf(2, ">>> %d pipe\n", getpid());
                 if (pipe(elem->pfd))
                 {
-                    builtins_error(elem->data, "pipe:", NULL, NULL, 0);
+                    builtins_error(elem->data, "pipe:", NULL, NULL);
                     return;
                 }
             }
@@ -38,7 +38,8 @@ void execution(t_elem *elem)
                 elem->pid = fork();
                 if (elem->pid < 0)
                 {
-                    builtins_error(elem->data, "fork:", NULL, NULL, 128);
+                    builtins_error(elem->data, "fork:", NULL, NULL);
+					elem->data->exit_status = 128;
                     return;
                 }
             }
@@ -118,7 +119,7 @@ void execution(t_elem *elem)
 					dprintf(2, ">>> %d pipe\n", getpid());
 				if (pipe(elem->pfd))
 				{
-					builtins_error(elem->data, "pipe:", NULL, NULL, 0);
+					builtins_error(elem->data, "pipe:", NULL, NULL);
 					return;
 				}
 				close_fd(elem);

@@ -13,7 +13,8 @@ t_elem	*simple_redirect_output(t_elem *elem)
 	fd = open(elem->cmd[0], O_RDWR | O_CREAT | O_TRUNC, 0777);
 	if (fd < 0)
 	{
-		builtins_error(elem->data,elem->cmd[0],NULL,strerror(errno),errno);
+		builtins_error(elem->data,elem->cmd[0],NULL,strerror(errno));
+		elem->data->exit_status = errno;
 		elem = delete_current_node(elem->data,elem);
 		return NULL;
 	}

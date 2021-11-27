@@ -15,7 +15,7 @@ void export_set(t_elem  *elem)
 
     if(*elem->cmd[1] == '=')
     {
-        builtins_error(elem->data, "export", elem->cmd[1], "not a valid identifier", 1);
+        builtins_error(elem->data, "export", elem->cmd[1], "not a valid identifier");
         return;
     }
     j = 0;
@@ -24,7 +24,7 @@ void export_set(t_elem  *elem)
     	dprintf(2, ">>> now %s\n",elem->cmd[j]);
     	found= 0;
         if(!export_argument_check(elem->cmd[j]))
-            builtins_error(elem->data, "export", elem->cmd[j], "not a valid identifier", 1);
+            builtins_error(elem->data, "export", elem->cmd[j], "not a valid identifier");
         else // ARG is valid
         {
             i = 0;

@@ -15,6 +15,8 @@ void	read_line_and_add_history(char **line)
 
 void start_init(t_data *data, char **env, int ac)
 {
+	data->std_in = dup(0);
+	data->std_out = dup(1);
 	init(data, env);
 	data->envp = ft_arrdup(env);
 	data->exit_status = 0;
@@ -38,9 +40,7 @@ int main(int ac, char **av, char **env)
 		if(data->line && *data->line)
 		{
 			main_preparser(data, data->line);
-//			print_elems(data->elem_start);
 			redirects(data);
-//			print_elems(data->elem_start);
 			execution(data->elem_start);
 			waiting(data);
 		}
