@@ -38,10 +38,11 @@ int main(int ac, char **av, char **env)
 		if(data->line && *data->line)
 		{
 			main_preparser(data, data->line);
+//			print_elems(data->elem_start);
 			redirects(data);
+//			print_elems(data->elem_start);
 			execution(data->elem_start);
 			waiting(data);
-//			print_elems(data->elem_start);
 		}
 		data_reboot(data, NULL, 0);
     }

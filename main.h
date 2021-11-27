@@ -125,10 +125,10 @@ int		error_code_transform(void);
 // list functions
 
 void	list_cleaner(t_elem *elem);
-t_elem	*delete_current_node(t_elem	*elem);
+t_elem	*delete_current_node(t_data *data, t_elem	*elem);
 t_elem	*create_elem(t_data *data);
 t_elem	*push_back(t_elem *ptr, t_data *data);
-void	print_current_elem(t_elem *ptr, int id);
+void	print_current_elem(t_elem *ptr);
 void	print_elems(t_elem *ptr);
 
 // utils

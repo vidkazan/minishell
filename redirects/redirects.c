@@ -6,6 +6,8 @@
 
 void redirects(t_data *data)
 {
+	if (data->debug)
+		dprintf(2, ">>> %d redirects\n", getpid());
 	t_elem *elem = data->elem_start;
 
 	while(elem)
@@ -22,7 +24,11 @@ void redirects(t_data *data)
 		{
 			if(data->debug)
 				dprintf(2,">>> %d exec = 0 DELNODE %p  %s\n", getpid(),elem, elem->cmd[0]);
-			elem = delete_current_node(elem);
+			elem = delete_current_node(elem->data,elem);
+			if(!elem)
+				data->elem_start = NULL;
+			if(!elem)
+				return;
 		}
 		else if(elem->next)
 			elem = elem->next;

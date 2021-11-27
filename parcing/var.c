@@ -159,6 +159,8 @@ void	handling_variables(t_vars *v, t_data *data)
 
 void	vars(t_data *data)
 {
+	if (data->debug)
+		dprintf(2, ">>> %d vars\n", getpid());
 	t_vars	var;
 
 	vars_init(&var, data->envp);

@@ -12,7 +12,7 @@
 
 void execution(t_elem *elem)
 {
-    while(elem->cmd)
+    while(elem && elem->cmd)
     {
         if(elem->data->exec)
         {

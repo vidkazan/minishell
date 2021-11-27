@@ -10,28 +10,27 @@
 //tcsetattr, tcgetattr, tgetent, tgetflag, tgetnum,
 //tgetstr, tgoto, tputs
 
-void print_current_elem(t_elem *ptr,int id)
+void print_current_elem(t_elem *ptr)
 {
-    if(ptr->cmd && *ptr->cmd)
-    {
-        dprintf(2,">>> %p, type %d next %p", ptr, ptr->type, ptr->next);
-        while(*ptr->cmd)
-        	dprintf(2," %s ", *ptr->cmd++);
-        dprintf(2,"\n");
-    }
-    else
-		dprintf(2,">>> %p, type %d next %p nocmd\n", ptr, ptr->type, ptr->next);
+	dprintf(2,">>> %p, type %d next %p\n", ptr, ptr->type, ptr->next);
 }
 
 void print_elems(t_elem *root_ptr)
 {
-	dprintf(2,">>> printelems\n");
+	dprintf(2,">>> \nprintelems\n");
 	t_elem *ptr= root_ptr;
     int id = 1;
+    if(!ptr)
+    {
+    	dprintf(2, ">>> (null)\n");
+		return;
+    }
+    while(ptr->prev)
+    	ptr = ptr->prev;
     while(ptr)
     {
-        print_current_elem(ptr, id++);
-        if(ptr->next == NULL)
+        print_current_elem(ptr);
+        if(!ptr->next)
             break;
         ptr = ptr->next;
     }

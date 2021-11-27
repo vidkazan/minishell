@@ -29,7 +29,7 @@ t_elem  *create_elem(t_data *data)
     return ptr;
 }
 
-t_elem	*delete_current_node(t_elem *elem)
+t_elem	*delete_current_node(t_data *data,t_elem *elem)
 {
 	t_elem	*prev_elem;
 	t_elem	*next_elem;
@@ -41,15 +41,14 @@ t_elem	*delete_current_node(t_elem *elem)
 	if(elem->next)
 		next_elem = elem->next;
 	if(elem->data->debug)
-        dprintf(2,">>> %d DELNODE %p prev %p next %p %s\n", getpid(),elem, prev_elem, next_elem, elem->cmd[0]);
+        dprintf(2,">>> %d DELNODE %p type %d prev %p next %p %s\n", getpid(),elem, elem->type , prev_elem, next_elem, elem->cmd[0]);
 	if(elem->str)
 		free(elem->str);
 	free_arr(elem->cmd);
-	elem->cmd = NULL;
 	if(!next_elem && !prev_elem)
 	{
 		free(elem);
-		elem = NULL;
+		data->elem_start = NULL;
 		return NULL;
 	}
 	else if(!next_elem)
@@ -108,6 +107,6 @@ void	list_cleaner(t_elem *elem)
 		elem = elem->next;
 	while(elem)
 	{
-		elem = delete_current_node(elem);
+		elem = delete_current_node(elem->data,elem);
 	}
 }

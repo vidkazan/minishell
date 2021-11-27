@@ -15,7 +15,7 @@ t_elem	*double_redirect_output(t_elem	*elem)
 	if (fd < 0)
 	{
 		builtins_error(elem->data,elem->cmd[0],NULL,strerror(errno),errno);
-		elem = delete_current_node(elem);
+		elem = delete_current_node(elem->data,elem);
 		return NULL;
 	}
 	else
@@ -26,7 +26,7 @@ t_elem	*double_redirect_output(t_elem	*elem)
         if(elem->data->debug) {
 			dprintf(2, ">>> %d DOUBLE_REDIRECT_OUTPUT si %d di %d so %d do %d\n", getpid(),elem->data->simple_redirect_input_fd, elem->data->double_redirect_input_fd, elem->data->simple_redirect_output_fd, elem->data->double_redirect_output_fd);
 		}
-		elem = delete_current_node(elem);
+		elem = delete_current_node(elem->data,elem);
 		return elem;
 	}
 }
