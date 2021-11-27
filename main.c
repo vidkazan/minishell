@@ -1,6 +1,5 @@
 #include "main.h"
 
-
 void	read_line_and_add_history(char **line)
 {
 	if (*line)

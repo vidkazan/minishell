@@ -40,8 +40,6 @@ t_elem	*delete_current_node(t_data *data,t_elem *elem)
 		prev_elem = elem->prev;
 	if(elem->next)
 		next_elem = elem->next;
-	if(elem->data->debug)
-        dprintf(2,">>> %d DELNODE %p type %d prev %p next %p %s\n", getpid(),elem, elem->type , prev_elem, next_elem, elem->cmd[0]);
 	if(elem->str)
 		free(elem->str);
 	free_arr(elem->cmd);

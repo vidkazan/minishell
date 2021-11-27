@@ -8,15 +8,10 @@
 # include <stdio.h>
 # include <stdlib.h>
 # include <unistd.h>
-# include <curses.h>
-# include <term.h>
-# include <string.h>
 # include <sys/errno.h>
 # include "libft/libft.h"
-# include <dirent.h>
 # include <readline/readline.h>
 # include <readline/history.h>
-# include <curses.h>
 
 # define CMD 1
 # define PIPE 2
