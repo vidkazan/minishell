@@ -31,7 +31,7 @@ void	quotes(int i, t_data *data)
 		data->q1 = (data->q1 + 1) % 2;
 }
 
-int	redir_find_end(char *str, int start, t_data *data)
+int	redir_find_end(char *str)
 {
 	int	num;
 	int	i;
@@ -78,7 +78,7 @@ int	new_redirect_elem(int start, t_data *data)
 
 	new = push_back(data->elem_start, data);
 	data->elem_start = new;
-	count = redir_find_end(data->line + start, start, data);
+	count = redir_find_end(data->line + start);
 	set_redirect_type(data, new, start);
 	new->str = ft_substr(data->line, start + 1 + (new->type > 4), count);
 	new->cmd = shell_split(new->str, ' ');

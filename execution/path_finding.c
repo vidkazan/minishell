@@ -78,7 +78,7 @@ void	find_path(t_elem *elem)
     char	*filename_no_path;
     char	**path_arr;
 
-    if (!path_arr)
+    if (!elem)
         return;
 	path_arr = ft_split(elem->data->path, ':');
     if(*elem->cmd[0] && filename_check(elem->cmd[0]))

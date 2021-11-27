@@ -30,7 +30,7 @@ void export_set(t_elem  *elem)
             i = 0;
             while(elem->cmd[j][i] && elem->cmd[j][i] != '=') // while not =
                 i++;
-            if(i == ft_strlen(elem->cmd[j]))
+            if(i == (int)ft_strlen(elem->cmd[j]))
                 search_line = ft_strdup(elem->cmd[j]); // without =
             else
             	search_line = ft_substr(elem->cmd[j], 0, i); // with =

@@ -76,7 +76,7 @@ void builtin_exec(t_elem *elem)
     if(elem->is_builtin == 1)
         builtin_echo(elem, write_fd);
     if(elem->is_builtin == 2)
-        builtin_cd(elem, write_fd);
+        builtin_cd(elem);
     if(elem->is_builtin == 3)
         builtin_pwd(elem, write_fd);
     if(elem->is_builtin == 4)

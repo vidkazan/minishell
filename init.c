@@ -1,6 +1,6 @@
 #include "main.h"
 
-void	init(t_data *data, char **env)
+void	init(t_data *data)
 {
 	data->exec = 1;
 	data->elem_start = NULL;
@@ -22,6 +22,6 @@ int	data_reboot(t_data *data, char *message, int mode)
 		free(data->line);
 		data->line = 0;
 	}
-	init(data, data->envp);
+	init(data);
 	return (1);
 }

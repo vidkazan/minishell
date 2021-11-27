@@ -7,5 +7,5 @@ OBJ = $(SRC:.c=.o)
 NAME = minishell
 
 all: main.h
-	gcc $(SRC) -lreadline libft/libft.a -o $(NAME)
+	gcc $(SRC) -Wall -Wextra -Werror -lreadline libft/libft.a -o $(NAME)
 	echo OK!

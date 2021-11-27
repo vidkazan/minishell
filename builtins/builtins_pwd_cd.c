@@ -6,7 +6,6 @@
 
 void builtin_pwd(t_elem *elem, int write_fd)
 {
-    int i = 0;
     char *res;
 	{
 		res = getcwd(NULL, 0);
@@ -19,7 +18,7 @@ void builtin_pwd(t_elem *elem, int write_fd)
 
 }
 
-void builtin_cd(t_elem *elem,int write_fd) // relative path cd NOT working if current dir is removed
+void builtin_cd(t_elem *elem) // relative path cd NOT working if current dir is removed
 {
 	char *getcwd_res;
 	char *home;

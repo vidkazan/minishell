@@ -86,7 +86,7 @@ typedef struct s_del_quotes_helper
 // init and close
 
 int		data_reboot(t_data *data, char *message, int mode);
-void	init(t_data *data, char **env);
+void	init(t_data *data);
 void	closing(t_data *data);
 
 // exec
@@ -151,7 +151,7 @@ void	builtin_exit(t_elem *elem);
 void	builtin_unset(t_elem *elem);
 void	builtin_check(t_elem *elem);
 void	builtin_echo(t_elem *elem, int write_fd);
-void	builtin_cd(t_elem *elem, int write_fd);
+void	builtin_cd(t_elem *elem);
 void	builtin_pwd(t_elem *elem, int write_fd);
 void	builtin_env(t_elem *elem, int write_fd);
 void	builtin_export(t_elem *elem, int write_fd);

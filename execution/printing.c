@@ -19,7 +19,6 @@ void print_elems(t_elem *root_ptr)
 {
 	dprintf(2,">>> \nprintelems\n");
 	t_elem *ptr= root_ptr;
-    int id = 1;
     if(!ptr)
     {
     	dprintf(2, ">>> (null)\n");

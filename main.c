@@ -13,11 +13,12 @@ void	read_line_and_add_history(char **line)
 		add_history (*line);
 }
 
-void start_init(t_data *data, char **env, int ac)
+void start_init(t_data *data, char **env, int ac, char **av)
 {
+	av = NULL;
 	data->std_in = dup(0);
 	data->std_out = dup(1);
-	init(data, env);
+	init(data);
 	data->envp = ft_arrdup(env);
 	data->exit_status = 0;
 	data->debug = 0;
@@ -32,7 +33,7 @@ void start_init(t_data *data, char **env, int ac)
 int main(int ac, char **av, char **env)
 {
     t_data *data = malloc(sizeof (t_data));
-	start_init(data,env,ac);
+	start_init(data,env,ac,av);
 	while (1)
 	{
 		read_line_and_add_history(&data->line);
