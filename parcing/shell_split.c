@@ -1,37 +1,43 @@
 #include "../main.h"
 
+void	del_quotes_helper_init(t_del_quotes_helper *data)
+{
+	data->i = 0;
+	data->j = 0;
+	data->q1 = 0;
+	data->q2 = 0;
+	data->flag = 0;
+}
+
 void	del_outer_quotes(char *line)
 {
-	int i = 0;
-	int j = 0;
-	int q1 = 0;
-	int q2 = 0;
-	int flag = 0;
+	t_del_quotes_helper	data;
 
-	while (line[i])
+	del_quotes_helper_init(&data);
+	while (line[data.i])
 	{
-		if (line[i] == '\'' && !q2)
+		if (line[data.i] == '\'' && !data.q2)
 		{
-			q1 = (q1 + 1) % 2;
-			flag = 1;
+			data.q1 = (data.q1 + 1) % 2;
+			data.flag = 1;
 		}
-		if (line[i] == '\"' && !q1)
+		if (line[data.i] == '\"' && !data.q1)
 		{
-			q2 = (q2 + 1) % 2;
-			flag = 1;
+			data.q2 = (data.q2 + 1) % 2;
+			data.flag = 1;
 		}
-		line[j] = line[i];
-		if (!flag)
-			j++;
-		i++;
-		flag = 0;
+		line[data.j] = line[data.i];
+		if (!data.flag)
+			data.j++;
+		data.i++;
+		data.flag = 0;
 	}
-	line[j] = 0;
+	line[data.j] = 0;
 }
 
 int	ft_value_of_strings(char c, t_data *data)
 {
-	int word_flag;
+	int	word_flag;
 	int	num;
 	int	i;
 
@@ -74,24 +80,33 @@ char	**ft_free_arr(char **arr)
 	return ((char **) NULL);
 }
 
+int	one_word_lenght(t_data *data, char c, char *s, int *i)
+{
+	int	res;
+
+	res = 0;
+	while ((s[*i] != c || data->q1 || data->q2) && s[*i])
+	{
+		quotes(*i, data);
+		(*i)++;
+		res++;
+	}
+	return (res);
+}
+
 char	**ft_write_arr(int value_str, t_data *data, char c, char **arr)
 {
-	int	i;
-	int	n_str;
-	int	n_sum;
-	char *s = data->line;
+	int		i;
+	int		n_str;
+	int		n_sum;
+	char	*s;
 
+	s = data->line;
 	n_str = 0;
 	i = 0;
 	while (n_str < value_str)
 	{
-		n_sum = 0;
-		while ((s[i] != c || data->q1 || data->q2) && s[i])
-		{
-			quotes(i, data);
-			i++;
-			n_sum++;
-		}
+		n_sum = one_word_lenght(data, c, s, &i);
 		if (n_sum)
 		{
 			arr[n_str] = ft_substr(s, (i - n_sum), n_sum);
@@ -106,9 +121,9 @@ char	**ft_write_arr(int value_str, t_data *data, char c, char **arr)
 	return (arr);
 }
 
-char	**shell_split(char const *s, char c)
+char	**shell_split(char *s, char c)
 {
-	t_data data;
+	t_data	data;
 	char	**arr;
 	int		i;
 	int		value_str;
