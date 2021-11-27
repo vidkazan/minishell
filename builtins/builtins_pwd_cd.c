@@ -1,7 +1,3 @@
-//
-// Created by fcody on 10/21/21.
-//
-
 #include "../main.h"
 
 void builtin_pwd(t_elem *elem, int write_fd)
@@ -18,7 +14,7 @@ void builtin_pwd(t_elem *elem, int write_fd)
 
 }
 
-void builtin_cd(t_elem *elem) // relative path cd NOT working if current dir is removed
+void builtin_cd(t_elem *elem)
 {
 	char *getcwd_res;
 	char *home;

@@ -139,7 +139,6 @@ int	last_cmd_parser(t_data *data, int prev_end, int i)
 	{
 		while(data->elem_start->prev)
 			data->elem_start = data->elem_start->prev;
-//		print_elems(data->elem_start);
 		if (check_last_cmd(data))
 		{
 			builtins_error(data, NULL, NULL, \
@@ -163,8 +162,6 @@ int	last_cmd_parser(t_data *data, int prev_end, int i)
 
 int	main_preparser(t_data *data, char *line)
 {
-	if (data->debug)
-		dprintf(2, ">>> %d parcer\n", getpid());
 	int	prev_end;
 	int	i;
 

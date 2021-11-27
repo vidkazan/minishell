@@ -50,9 +50,10 @@ int export_argument_check(char *arg)
     char *ptr;
 
     ptr = arg;
-//        dprintf(2, ">>> export_arg_check\n");
     if((!ptr || !*ptr) || (!ft_isalpha(*ptr) && *ptr != '_'))
         return 0;
+	if(ptr[0] == '=')
+		return 0;
     while(*ptr)
     {
         if(!ft_isalpha(*ptr) && !ft_isdigit(*ptr) && *ptr != '_' && *ptr != '=' && *ptr != '\'' && *ptr != '\"' && *ptr != ' ' && *ptr != '-')

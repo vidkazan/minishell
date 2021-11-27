@@ -1,7 +1,3 @@
-//
-// Created by fcody on 10/21/21.
-//
-
 #include "../main.h"
 
 void	edit_env_keys(int env_index, char *new_value, t_data *data)
@@ -14,12 +10,9 @@ void	edit_env_keys(int env_index, char *new_value, t_data *data)
 		return;
 	while(data->envp[env_index][i] && data->envp[env_index][i] != '=')
 		i++;
-	dprintf(2, ">>> here8\n");
 	env_name = ft_substr(data->envp[env_index], 0, i + 1);
 	free(data->envp[env_index]);
-	dprintf(2, ">>> here9\n");
 	data->envp[env_index] = ft_strjoin(env_name, new_value);
-	dprintf(2, ">>> here10\n");
 	free(new_value);
 	free(env_name);
 }
