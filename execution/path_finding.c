@@ -62,15 +62,26 @@ void	env_path_find(t_data *data)
     }
 }
 
+int	filename_check(char *str)
+{
+	int i = -1;
+	while(str[++i])
+	{
+		if(str[i] != '/' && str[i] != '.')
+			return 1;
+	}
+	return 0;
+}
+
 void	find_path(t_elem *elem)
 {
     char	*filename_no_path;
     char	**path_arr;
 
-    path_arr = ft_split(elem->data->path, ':');
     if (!path_arr)
         return;
-    if(*elem->cmd[0])
+	path_arr = ft_split(elem->data->path, ':');
+    if(*elem->cmd[0] && filename_check(elem->cmd[0]))
     {
 		filename_no_path = elem->cmd[0];
 		path_check(elem, path_arr, filename_no_path);
