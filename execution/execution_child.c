@@ -57,7 +57,7 @@ void execution_child(t_elem *elem)
 	if (execve(elem->cmd[0], elem->cmd, elem->data->envp) < 0)
 	{
 		execve_error(elem, elem->cmd[0], NULL, NULL);
-		data_reboot(elem->data, NULL, 0);
+		data_reboot(elem->data);
 		exit(elem->data->exit_status);
 	}
 }

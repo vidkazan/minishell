@@ -12,10 +12,8 @@ void	init(t_data *data)
 	data->q2 = 0;
 }
 
-int		data_reboot(t_data *data, char *message, int mode)
+int	data_reboot(t_data *data)
 {
-	if (mode)
-		printf("%s\n", message);
 	list_cleaner(data->elem_start);
 	if (data->line)
 	{

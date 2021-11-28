@@ -2,22 +2,22 @@
 
 void	builtin_env(t_elem *elem, int write_fd)
 {
-	int i;
+	int	i;
 
 	i = -1;
 	while (elem->data->envp[++i])
 	{
-	    if(ft_strchr(elem->data->envp[i], '='))
-	    {
-            ft_putstr_fd(elem->data->envp[i], write_fd);
-            ft_putchar_fd('\n', write_fd);
-        }
+		if (ft_strchr(elem->data->envp[i], '='))
+		{
+			ft_putstr_fd(elem->data->envp[i], write_fd);
+			ft_putchar_fd('\n', write_fd);
+		}
 	}
 }
 
 void	builtin_unset_find(t_elem *elem, int *index, int *flag, int count)
 {
-	char *find;
+	char	*find;
 
 	*flag = 0;
 	find = ft_strdup(elem->cmd[count]);
@@ -28,7 +28,7 @@ void	builtin_unset_find(t_elem *elem, int *index, int *flag, int count)
 
 void	builtin_unset_rewrite(int index, t_elem *elem)
 {
-	int i;
+	int	i;
 
 	i = index;
 	free(elem->data->envp[i]);
@@ -42,21 +42,21 @@ void	builtin_unset_rewrite(int index, t_elem *elem)
 
 void	builtin_unset(t_elem *elem)
 {
-    int index;
-    int count;
-    int flag;
+	int	index;
+	int	count;
+	int	flag;
 
-    index = 0;
-    if(!elem->cmd[1] || !elem->cmd[1][0])
-    {
-        builtins_error(elem->data, "unset",NULL, "not enough arguments");
-        return;
-    }
-    count = 0;
-    while(elem->cmd[++count])
-    {
+	index = 0;
+	if (!elem->cmd[1] || !elem->cmd[1][0])
+	{
+		builtins_error(elem->data, "unset", NULL, "not enough arguments");
+		return ;
+	}
+	count = 0;
+	while (elem->cmd[++count])
+	{
 		builtin_unset_find(elem, &index, &flag, count);
-        if(!flag)
-        	builtin_unset_rewrite(index, elem);
-    }
+		if (!flag)
+			builtin_unset_rewrite(index, elem);
+	}
 }

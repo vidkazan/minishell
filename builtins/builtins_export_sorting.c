@@ -8,7 +8,7 @@ void	export_print(int write_fd, char **export_arr, int count)
 	while (export_arr[++i])
 	{
 		count = -1;
-		ft_putstr_fd("declare -x ",write_fd);
+		ft_putstr_fd("declare -x ", write_fd);
 		while(export_arr[i][++count] && export_arr[i][count] != '=')
 			ft_putchar_fd(export_arr[i][count], write_fd);
 		if(export_arr[i][count] == '=')

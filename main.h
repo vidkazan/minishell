@@ -80,15 +80,24 @@ typedef struct s_del_quotes_helper
 
 // init and close
 
-int		data_reboot(t_data *data, char *message, int mode);
+int		data_reboot(t_data *data);
 void	init(t_data *data);
 void	closing(t_data *data);
+void	close_fd(t_elem *elem);
 
 // exec
 
-void	close_fd(t_elem *elem);
-void	execution(t_elem *elem);
-void	waiting(t_data *data);
+void execution_not_exec(t_elem *elem);
+int execution_fork(t_elem *elem);
+void execution_parent_builtin(t_elem *elem);
+int	execution_pipe(t_elem *elem);
+void execution(t_elem *elem);
+void execution_child_last_cmd(t_elem *elem);
+void execution_child_first_cmd(t_elem *elem);
+void execution_child_first_pipe(t_elem *elem);
+void execution_child_middle_pipe(t_elem *elem);
+void execution_child(t_elem *elem);
+void waiting(t_data *data);
 
 // finding
 
