@@ -6,7 +6,7 @@
 /*   By: cstarmie <cstarmie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/28 19:54:06 by cstarmie          #+#    #+#             */
-/*   Updated: 2021/11/28 20:03:16 by cstarmie         ###   ########.fr       */
+/*   Updated: 2021/11/28 20:04:27 by cstarmie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,7 +109,7 @@ void	vars(t_data *data)
 	handling_variables(&var, data);
 	data->line = var.new;
 	if (data->debug)
-		printf(">>> handled line:|%s|\n", data->line);
+		printf(">>> handled line:|%s|\n ", data->line);
 	free(var.line);
 	vars_init(&var, data->envp, 0);
 }
