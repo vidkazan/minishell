@@ -9,5 +9,5 @@ NAME = minishell
 C_FLAGS = -Wall -Wextra -Werror
 
 all: main.h
-	@ gcc $(SRC) -lreadline -L ~/.brew/opt/readline/lib -I ~/.brew/opt/readline/include libft/libft.a -o $(NAME)
+	@ gcc $(SRC) $(C_FLAGS) -lreadline -L ~/.brew/opt/readline/lib -I ~/.brew/opt/readline/include libft/libft.a -o $(NAME)
 	@ echo OK!
