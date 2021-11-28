@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fcody <fcody@student.42.fr>                +#+  +:+       +#+        */
+/*   By: cstarmie <cstarmie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/28 08:17:02 by fcody             #+#    #+#             */
-/*   Updated: 2021/11/28 08:26:05 by fcody            ###   ########.fr       */
+/*   Updated: 2021/11/28 20:00:08 by cstarmie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -133,6 +133,14 @@ int			main_preparser(t_data *data, char *line);
 void		vars(t_data *data);
 char		**shell_split(char *s, char c);
 void		quotes(int i, t_data *data);
+int			unique_value_cases(int type, t_vars *var, t_data *data);
+void		vars_init(t_vars *vars, char **env, int mode);
+void		concatenation(char *src, int i, int len, t_vars *var);
+void		fresher(t_vars *var);
+void		del_outer_quotes(char *line);
+int			last_cmd_parser(t_data *data, int prev_end, int i);
+int			new_pipe_elem(int start, int end, t_data *data);
+int			make_redirect_elems(t_data *data, char *line);
 
 // exit status
 
@@ -150,6 +158,7 @@ void		print_current_elem(t_elem *ptr);
 void		print_elems(t_elem *ptr);
 
 // utils
+
 long long	ft_atoi_overflow(const char *str);
 int			ft_strlen_arr(char **arr);
 char		**ft_arrjoin(char **s1, char **s2);
@@ -189,7 +198,7 @@ int			is_min_arr_line(char *line, char **envp, char **export_arr);
 
 // signals
 
-void	signals_in_main(void);
-void	signals_in_cmd(void);
+void		signals_in_main(void);
+void		signals_in_cmd(void);
 
 #endif
