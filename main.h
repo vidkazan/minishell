@@ -24,6 +24,7 @@
 # include "libft/libft.h"
 # include <readline/readline.h>
 # include <readline/history.h>
+# include <signal.h>
 
 # define CMD 1
 # define PIPE 2
@@ -185,5 +186,10 @@ int			export_argument_check(char *arg);
 void		edit_env_keys(int env_index, char *new_value, t_data *data);
 int			is_in_export_line(char *line, char **export_arr);
 int			is_min_arr_line(char *line, char **envp, char **export_arr);
+
+// signals
+
+void	signals_in_main(void);
+void	signals_in_cmd(void);
 
 #endif

@@ -137,7 +137,7 @@ void	handling_variables(t_vars *v, t_data *data)
 	int	i;
 
 	i = 0;
-	while (v->line[i])
+	while (v->line && v->line[i])
 	{
 		if (v->line[i] == '\'' && !v->q2)
 			v->q1 = (v->q1 + 1) % 2;

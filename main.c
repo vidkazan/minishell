@@ -47,10 +47,12 @@ int	main(int ac, char **av, char **env)
 	start_init(data, env, ac, av);
 	while (1)
 	{
+		signals_in_main();
 		read_line_and_add_history(&data->line);
 		vars(data);
 		if (data->line && *data->line)
 		{
+			signals_in_cmd();
 			main_preparser(data, data->line);
 			redirects(data);
 			execution(data->elem_start);
