@@ -10,8 +10,8 @@ void	signal_ctrl_slash(int sig)
 static void	signal_cmd_ctrl_c(int sig)
 {
 	write(1, "\n", 1);
-	signal(SIGINT, SIG_IGN);
 	(void)sig;
+	signal(SIGINT, SIG_IGN);
 }
 
 static void	signal_ctrl_c(int sig)
