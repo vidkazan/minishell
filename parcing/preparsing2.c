@@ -1,6 +1,6 @@
 #include "../main.h"
 
-int	new_pipe_elem(int start, int end, t_data *data)
+int		new_pipe_elem(int start, int end, t_data *data)
 {
 	t_elem	*new;
 
@@ -31,7 +31,7 @@ void	quotes(int i, t_data *data)
 		data->q1 = (data->q1 + 1) % 2;
 }
 
-int	redir_find_end(char *str)
+int		redir_find_end(char *str)
 {
 	int	num;
 	int	i;
@@ -71,7 +71,7 @@ void	set_redirect_type(t_data *data, t_elem *new, int start)
 	}
 }
 
-int	new_redirect_elem(int start, t_data *data)
+int		new_redirect_elem(int start, t_data *data)
 {
 	t_elem	*new;
 	int		count;
@@ -92,7 +92,7 @@ int	new_redirect_elem(int start, t_data *data)
 	return (0);
 }
 
-int	make_redirect_elems(t_data *data, char *line)
+int		make_redirect_elems(t_data *data, char *line)
 {
 	int	i;
 
@@ -116,7 +116,7 @@ int	make_redirect_elems(t_data *data, char *line)
 	return (0);
 }
 
-int	check_last_cmd(t_data *data)
+int		check_last_cmd(t_data *data)
 {
 	t_elem	*prelast;
 	t_elem	*last;
@@ -133,7 +133,7 @@ int	check_last_cmd(t_data *data)
 	return (1);
 }
 
-int	last_cmd_parser(t_data *data, int prev_end, int i)
+int		last_cmd_parser(t_data *data, int prev_end, int i)
 {
 	if (new_pipe_elem(prev_end, i, data))
 	{
@@ -160,7 +160,7 @@ int	last_cmd_parser(t_data *data, int prev_end, int i)
 	return (0);
 }
 
-int	main_preparser(t_data *data, char *line)
+int		main_preparser(t_data *data, char *line)
 {
 	int	prev_end;
 	int	i;

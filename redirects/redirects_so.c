@@ -1,7 +1,3 @@
-//
-// Created by Felipe Cody on 10/20/21.
-//
-
 #include "../main.h"
 
 t_elem	*simple_redirect_output(t_elem *elem)

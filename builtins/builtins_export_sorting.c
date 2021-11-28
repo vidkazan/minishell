@@ -1,6 +1,6 @@
 #include "../main.h"
 
-void export_print(int write_fd, char **export_arr, int count)
+void	export_print(int write_fd, char **export_arr, int count)
 {
 	int i;
 
@@ -25,7 +25,7 @@ void export_print(int write_fd, char **export_arr, int count)
 	export_arr = NULL;
 }
 
-void export_sort(t_elem *elem, int write_fd)
+void	export_sort(t_elem *elem, int write_fd)
 {
     int i;
     int count;
@@ -50,7 +50,7 @@ void export_sort(t_elem *elem, int write_fd)
 	export_print(write_fd, export_arr, count);
 }
 
-int export_argument_check(char *arg)
+int		export_argument_check(char *arg)
 {
     char *ptr;
 

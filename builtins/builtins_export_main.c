@@ -17,7 +17,7 @@ void	edit_env_keys(int env_index, char *new_value, t_data *data)
 	free(env_name);
 }
 
-int is_in_export_line(char *line, char **export_arr)
+int		is_in_export_line(char *line, char **export_arr)
 {
     int i;
 
@@ -30,7 +30,7 @@ int is_in_export_line(char *line, char **export_arr)
     return 0;
 }
 
-int is_min_arr_line(char *line, char **envp,char **export_arr)
+int		is_min_arr_line(char *line, char **envp,char **export_arr)
 {
     int i;
     int j;
@@ -50,7 +50,7 @@ int is_min_arr_line(char *line, char **envp,char **export_arr)
     return 1;
 }
 
-void builtin_export(t_elem *elem, int write_fd)
+void	builtin_export(t_elem *elem, int write_fd)
 {
     if(!elem->cmd[1])
         export_sort(elem, write_fd);

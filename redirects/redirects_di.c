@@ -1,10 +1,6 @@
-//
-// Created by Felipe Cody on 10/20/21.
-//
-
 #include "../main.h"
 
-void double_redirect_input_io(t_elem *elem, int heredoc_pfd[2])
+void	double_redirect_input_io(t_elem *elem, int heredoc_pfd[2])
 {
 	char *line;
 	char *line_nl;
@@ -26,7 +22,7 @@ void double_redirect_input_io(t_elem *elem, int heredoc_pfd[2])
 }
 
 
-t_elem *double_redirect_input(t_elem *elem)
+t_elem	*double_redirect_input(t_elem *elem)
 {
     int    heredoc_pfd[2];
 

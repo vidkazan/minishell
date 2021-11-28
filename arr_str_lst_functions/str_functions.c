@@ -1,6 +1,6 @@
 #include "../main.h"
 
-void	ft_strip(char **str)
+void		ft_strip(char **str)
 {
     int i;
 
@@ -15,7 +15,7 @@ void	ft_strip(char **str)
     }
 }
 
-int	ft_strcmp(const char *s1, const char *s2)
+int			ft_strcmp(const char *s1, const char *s2)
 {
     unsigned int	i;
 

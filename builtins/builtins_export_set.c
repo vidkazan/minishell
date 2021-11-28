@@ -1,6 +1,6 @@
 #include "../main.h"
 
-void export_set_add(t_elem  *elem, int found, int j)
+void	export_set_add(t_elem  *elem, int found, int j)
 {
 	char *new_line;
 
@@ -11,7 +11,7 @@ void export_set_add(t_elem  *elem, int found, int j)
 	}
 }
 
-void export_set_find(t_elem  *elem, int *found, int j, char *search_line)
+void	export_set_find(t_elem  *elem, int *found, int j, char *search_line)
 {
 	int i;
 	int index;
@@ -29,7 +29,7 @@ void export_set_find(t_elem  *elem, int *found, int j, char *search_line)
 	}
 }
 
-char *export_set_search_line_gen(t_elem  *elem, int j)
+char	*export_set_search_line_gen(t_elem  *elem, int j)
 {
 	int i;
 
@@ -42,7 +42,7 @@ char *export_set_search_line_gen(t_elem  *elem, int j)
 		return (ft_substr(elem->cmd[j], 0, i));
 }
 
-void export_set(t_elem  *elem)
+void	export_set(t_elem  *elem)
 {
     int j;
     int found;

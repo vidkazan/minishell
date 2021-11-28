@@ -1,17 +1,6 @@
 #include "../main.h"
 
-void	free_arr(char **str)
-{
-    int	i;
-
-    i = -1;
-    while (str[++i])
-        free(str[i]);
-    free(str);
-    str = NULL;
-}
-
-static int	access_granted(t_elem *elem, char *filename_with_path)
+int		access_granted(t_elem *elem, char *filename_with_path)
 {
     if (access(filename_with_path, F_OK) > -1)
     {
@@ -58,7 +47,7 @@ void	env_path_find(t_data *data)
     }
 }
 
-int	filename_check(char *str)
+int		filename_check(char *str)
 {
 	int i = -1;
 	while(str[++i])

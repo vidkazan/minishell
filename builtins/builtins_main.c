@@ -1,6 +1,6 @@
 #include "../main.h"
 
-void builtin_debug(t_elem *elem)
+void	builtin_debug(t_elem *elem)
 {
     if ( (!elem->cmd[1] && !elem->data->debug )|| (elem->cmd[1] && *elem->cmd[1] == '1'))
     {
@@ -16,7 +16,7 @@ void builtin_debug(t_elem *elem)
     }
 }
 
-int   builtin_fd_gen(t_elem *elem)
+int		builtin_fd_gen(t_elem *elem)
 {
     if ((elem->type == CMD && elem->prev && !elem->next) || (elem->type == CMD && !elem->prev && !elem->next)) // first_last_CMD
     {
@@ -34,7 +34,7 @@ int   builtin_fd_gen(t_elem *elem)
 	return 1;
 }
 
-void builtin_exec(t_elem *elem)
+void	builtin_exec(t_elem *elem)
 {
     int write_fd;
 
@@ -53,11 +53,9 @@ void builtin_exec(t_elem *elem)
         builtin_unset(elem);
     if(elem->is_builtin == 7)
         builtin_export(elem, write_fd);
-//    if(elem->is_builtin == 8)
-//        builtin_debug(elem);
 }
 
-void builtin_check(t_elem *elem)
+void	builtin_check(t_elem *elem)
 {
     if(!ft_strcmp(elem->cmd[0], "echo"))
         elem->is_builtin = 1;
@@ -73,6 +71,4 @@ void builtin_check(t_elem *elem)
         elem->is_builtin = 6;
     if(!ft_strcmp(elem->cmd[0], "export"))
         elem->is_builtin = 7;
-//    if(!ft_strcmp(elem->cmd[0], "d"))
-//        elem->is_builtin = 8;
 }

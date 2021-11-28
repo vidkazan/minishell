@@ -1,6 +1,6 @@
 #include "../main.h"
 
-void builtin_env(t_elem *elem, int write_fd)
+void	builtin_env(t_elem *elem, int write_fd)
 {
 	int i;
 
@@ -15,7 +15,7 @@ void builtin_env(t_elem *elem, int write_fd)
 	}
 }
 
-void builtin_unset_find(t_elem *elem, int *index, int *flag, int count)
+void	builtin_unset_find(t_elem *elem, int *index, int *flag, int count)
 {
 	char *find;
 
@@ -26,7 +26,7 @@ void builtin_unset_find(t_elem *elem, int *index, int *flag, int count)
 	free(find);
 }
 
-void builtin_unset_rewrite(int index, t_elem *elem)
+void	builtin_unset_rewrite(int index, t_elem *elem)
 {
 	int i;
 
@@ -40,7 +40,7 @@ void builtin_unset_rewrite(int index, t_elem *elem)
 	elem->data->envp[i] = 0;
 }
 
-void builtin_unset(t_elem *elem)
+void	builtin_unset(t_elem *elem)
 {
     int index;
     int count;

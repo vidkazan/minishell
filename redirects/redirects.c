@@ -1,6 +1,6 @@
 #include "../main.h"
 
-void redirects(t_data *data)
+void	redirects(t_data *data)
 {
 	t_elem *elem;
 

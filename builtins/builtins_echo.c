@@ -1,6 +1,6 @@
 #include "../main.h"
 
-void builtin_echo_main(int i, t_elem *elem, int write_fd)
+void	builtin_echo_main(int i, t_elem *elem, int write_fd)
 {
     while (elem->cmd[i])
     {
@@ -11,7 +11,7 @@ void builtin_echo_main(int i, t_elem *elem, int write_fd)
     }
 }
 
-void builtin_echo(t_elem *elem,int write_fd)
+void	builtin_echo(t_elem *elem,int write_fd)
 {
     int is_n_flag;
     int i;

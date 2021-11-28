@@ -12,7 +12,7 @@ void	init(t_data *data)
 	data->q2 = 0;
 }
 
-int	data_reboot(t_data *data, char *message, int mode)
+int		data_reboot(t_data *data, char *message, int mode)
 {
 	if (mode)
 		printf("%s\n", message);

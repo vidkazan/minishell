@@ -1,6 +1,6 @@
 #include "../main.h"
 
-void builtin_cd_pwd_oldpwd(t_elem *elem)
+void	builtin_cd_pwd_oldpwd(t_elem *elem)
 {
 	char *current_pwd_env;
 	int	old_pwd_index;
@@ -14,7 +14,7 @@ void builtin_cd_pwd_oldpwd(t_elem *elem)
 	edit_env_keys(old_pwd_index, current_pwd_env, elem->data);
 }
 
-void builtin_pwd(t_elem *elem, int write_fd)
+void	builtin_pwd(t_elem *elem, int write_fd)
 {
     char *res;
 	{
@@ -27,7 +27,7 @@ void builtin_pwd(t_elem *elem, int write_fd)
 	}
 }
 
-void builtin_cd_empty(t_elem *elem)
+void	builtin_cd_empty(t_elem *elem)
 {
 	char *home;
 
@@ -39,7 +39,7 @@ void builtin_cd_empty(t_elem *elem)
 	builtin_cd_pwd_oldpwd(elem);
 }
 
-void builtin_cd_main(t_elem *elem)
+void	builtin_cd_main(t_elem *elem)
 {
 	char *getcwd_res;
 	char *res_path;
@@ -65,7 +65,7 @@ void builtin_cd_main(t_elem *elem)
 	builtin_cd_pwd_oldpwd(elem);
 }
 
-void builtin_cd(t_elem *elem)
+void	builtin_cd(t_elem *elem)
 {
     if(!elem->cmd[1] || !elem->cmd[1][0])
 		builtin_cd_empty(elem);

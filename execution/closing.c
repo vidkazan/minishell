@@ -1,6 +1,6 @@
 #include "../main.h"
 
-void close_fd(t_elem *elem)
+void	close_fd(t_elem *elem)
 {
     if (elem->type == CMD && elem->prev && !elem->next) // last_CMD
         close(elem->prev->pfd[0]);
@@ -13,7 +13,18 @@ void close_fd(t_elem *elem)
     }
 }
 
-void closing(t_data *data)
+void	closing(t_data *data)
 {
     free_arr(data->envp);
+}
+
+void	free_arr(char **str)
+{
+	int	i;
+
+	i = -1;
+	while (str[++i])
+		free(str[i]);
+	free(str);
+	str = NULL;
 }

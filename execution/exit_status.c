@@ -1,6 +1,6 @@
 #include "../main.h"
 
-int error_code_transform()
+int		error_code_transform()
 {
     if(errno == 2) // command not found
         return 127;
@@ -9,14 +9,14 @@ int error_code_transform()
     return 0;
 }
 
-void exit_code_print(t_elem *elem, int write_fd)
+void	exit_code_print(t_elem *elem, int write_fd)
 {
     if(elem->data->exit_status > 255)
         elem->data->exit_status = elem->data->exit_status % 255;
     ft_putnbr_fd(elem->data->exit_status, write_fd);
 }
 
-void    builtin_exit_cases(t_elem *elem)
+void	builtin_exit_cases(t_elem *elem)
 {
 	if(ft_strlen_arr(elem->cmd) > 2)
 	{
@@ -35,7 +35,7 @@ void    builtin_exit_cases(t_elem *elem)
 	}
 }
 
-void    builtin_exit_check(t_elem *elem,int *i)
+void	builtin_exit_check(t_elem *elem,int *i)
 {
 	while(elem->cmd[1][++(*i)])
 	{
@@ -47,7 +47,7 @@ void    builtin_exit_check(t_elem *elem,int *i)
 	}
 }
 
-void    builtin_exit(t_elem *elem)
+void	builtin_exit(t_elem *elem)
 {
     long long code;
     int i = -1;

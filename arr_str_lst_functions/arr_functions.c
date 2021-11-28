@@ -1,6 +1,6 @@
 #include "../main.h"
 
-int ft_strlen_arr(char **arr)
+int		ft_strlen_arr(char **arr)
 {
     int i;
 
@@ -12,7 +12,7 @@ int ft_strlen_arr(char **arr)
     return i;
 }
 
-char    **ft_arrdup(char **arr)
+char	**ft_arrdup(char **arr)
 {
     char **arr_dup;
     int i;
@@ -29,7 +29,7 @@ char    **ft_arrdup(char **arr)
     return arr_dup;
 }
 
-char	**ft_arrjoin(char **s1, char **s2)
+char 	**ft_arrjoin(char **s1, char **s2)
 {
     char	**res;
     int		size_all;
@@ -56,7 +56,7 @@ char	**ft_arrjoin(char **s1, char **s2)
     return (res);
 }
 
-char *search_strings_in_array(char **arr, char *search_word, int *index, int mode)
+char	*search_strings_in_array(char **arr, char *search_word, int *index, int mode)
 {
     int i;
 
@@ -78,7 +78,7 @@ char *search_strings_in_array(char **arr, char *search_word, int *index, int mod
     return NULL;
 }
 
-char **ft_arrjoin_one_line(char **arr1,char *s2)
+char	**ft_arrjoin_one_line(char **arr1,char *s2)
 {
     char	**res;
     int		size_all;

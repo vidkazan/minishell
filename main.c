@@ -12,7 +12,7 @@ void	read_line_and_add_history(char **line)
 		add_history (*line);
 }
 
-void start_init(t_data *data, char **env, int ac, char **av)
+void	start_init(t_data *data, char **env, int ac, char **av)
 {
 	av = NULL;
 	data->std_in = dup(0);
@@ -28,7 +28,7 @@ void start_init(t_data *data, char **env, int ac, char **av)
 		data->debug = 1;
 }
 
-int main(int ac, char **av, char **env)
+int		main(int ac, char **av, char **env)
 {
     t_data *data = malloc(sizeof (t_data));
 	start_init(data,env,ac,av);
