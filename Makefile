@@ -1,4 +1,4 @@
-SRC = *.c arr_str_lst_functions/*.c builtins/*.c execution/*.c parcing/*.c redirects/*.c
+SRC = *.c arr_str_lst_functions/*.c builtins/*.c execution/*.c parcing/*.c redirects/*.c main_utils/*.c
 
 MSG = OK!
 
