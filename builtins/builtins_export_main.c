@@ -50,10 +50,10 @@ int is_min_arr_line(char *line, char **envp,char **export_arr)
     return 1;
 }
 
-void builtin_export(t_elem *elem, int write_fd) // FIXME #105 if not a valid identifier doesnt make new line free + check if key and value is editing
+void builtin_export(t_elem *elem, int write_fd)
 {
     if(!elem->cmd[1])
-        export_sort_print(elem, write_fd);
+        export_sort(elem, write_fd);
     else
         export_set(elem);
 }

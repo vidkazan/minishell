@@ -1,15 +1,5 @@
 #include "../main.h"
 
-//rl_clear_history, rl_on_new_line,
-//rl_replace_line, rl_redisplay, add_history, printf,
-//malloc, free, write, open, read, close, fork, wait,
-//waitpid, wait3, wait4, signal, kill, exit, getcwd,
-//chdir, stat, lstat, fstat, unlink, execve, dup,
-//dup2, pipe, opendir, readdir, closedir, strerror,
-//perror, isatty, ttyname, ttyslot, ioctl, getenv,
-//tcsetattr, tcgetattr, tgetent, tgetflag, tgetnum,
-//tgetstr, tgoto, tputs
-
 void builtin_debug(t_elem *elem)
 {
     if ( (!elem->cmd[1] && !elem->data->debug )|| (elem->cmd[1] && *elem->cmd[1] == '1'))
@@ -28,30 +18,7 @@ void builtin_debug(t_elem *elem)
 
 int   builtin_fd_gen(t_elem *elem)
 {
-    if (elem->type == CMD && elem->prev && !elem->next) // last_CMD
-    {
-        if(elem->data->debug)
-            dprintf(2,">>> redirecting last CMD\n");
-        if(elem->data->simple_redirect_output_fd < 0 && elem->data->double_redirect_output_fd < 0)
-        {
-            if(elem->data->debug)
-                dprintf(2,">>> STD\n");
-            return 1;
-        }
-        if(elem->data->double_redirect_output_fd > 2)
-        {
-            if(elem->data->debug)
-                dprintf(2,">>> DO\n");
-            return elem->data->double_redirect_output_fd;
-        }
-        if(elem->data->simple_redirect_output_fd > 2)
-        {
-            if(elem->data->debug)
-                dprintf(2,">>> SO\n");
-            return elem->data->simple_redirect_output_fd;
-        }
-    }
-    else if(elem->type == CMD && !elem->prev && !elem->next) // first_CMD
+    if ((elem->type == CMD && elem->prev && !elem->next) || (elem->type == CMD && !elem->prev && !elem->next)) // first_last_CMD
     {
         if(elem->data->simple_redirect_output_fd < 0 && elem->data->double_redirect_output_fd < 0)
             return 1;
@@ -64,8 +31,7 @@ int   builtin_fd_gen(t_elem *elem)
         return elem->pfd[1];
     else if(elem->type == PIPE && elem->prev && elem->next) // middle_PIPE
         return elem->pfd[1];
-    write(2, ">>> builtin_fd_gen: else!\n", 10);
-        return 1;
+	return 1;
 }
 
 void builtin_exec(t_elem *elem)
@@ -87,8 +53,8 @@ void builtin_exec(t_elem *elem)
         builtin_unset(elem);
     if(elem->is_builtin == 7)
         builtin_export(elem, write_fd);
-    if(elem->is_builtin == 8)
-        builtin_debug(elem);
+//    if(elem->is_builtin == 8)
+//        builtin_debug(elem);
 }
 
 void builtin_check(t_elem *elem)
@@ -107,6 +73,6 @@ void builtin_check(t_elem *elem)
         elem->is_builtin = 6;
     if(!ft_strcmp(elem->cmd[0], "export"))
         elem->is_builtin = 7;
-    if(!ft_strcmp(elem->cmd[0], "d"))
-        elem->is_builtin = 8;
+//    if(!ft_strcmp(elem->cmd[0], "d"))
+//        elem->is_builtin = 8;
 }

@@ -28,7 +28,6 @@ void start_init(t_data *data, char **env, int ac, char **av)
 		data->debug = 1;
 }
 
-
 int main(int ac, char **av, char **env)
 {
     t_data *data = malloc(sizeof (t_data));

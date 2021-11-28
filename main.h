@@ -159,7 +159,7 @@ void	edit_env_keys(int env_index, char *new_value, t_data *data);
 // export
 
 void	export_set(t_elem *elem);
-void	export_sort_print(t_elem *elem, int write_fd);
+void	export_sort(t_elem *elem, int write_fd);
 int		export_argument_check(char *arg);
 void	edit_env_keys(int env_index, char *new_value, t_data *data);
 int		is_in_export_line(char *line, char **export_arr);

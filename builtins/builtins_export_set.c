@@ -23,8 +23,6 @@ void export_set_find(t_elem  *elem, int *found, int j, char *search_line)
 		{
 			free(elem->data->envp[index]);
 			elem->data->envp[index] = ft_strdup(elem->cmd[j]);
-			free(search_line);
-			search_line = NULL;
 			*found = 1;
 			break;
 		}

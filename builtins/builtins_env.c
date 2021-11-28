@@ -1,7 +1,3 @@
-//
-// Created by fcody on 10/21/21.
-//
-
 #include "../main.h"
 
 void builtin_env(t_elem *elem, int write_fd)
