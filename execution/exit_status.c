@@ -71,8 +71,6 @@ void	builtin_exit(t_elem *elem)
 		i++;
 	builtin_exit_check(elem, &i);
 	code = ft_atoi_overflow(elem->cmd[1]);
-	if (elem->data->debug)
-		dprintf(2, "%llu\n", code);
 	if (code == 255)
 	{
 		builtins_error(elem->data, "exit", NULL, "numeric argument required");

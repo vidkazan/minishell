@@ -102,14 +102,10 @@ void	vars(t_data *data)
 {
 	t_vars	var;
 
-	if (data->debug)
-		dprintf(2, ">>> %d vars\n", getpid());
 	vars_init(&var, data->envp, 1);
 	var.line = data->line;
 	handling_variables(&var, data);
 	data->line = var.new;
-	if (data->debug)
-		printf(">>> handled line:|%s|\n ", data->line);
 	free(var.line);
 	vars_init(&var, data->envp, 0);
 }

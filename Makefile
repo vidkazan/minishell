@@ -34,12 +34,6 @@ SRCS_FILES =	arr_str_lst_functions/arr_functions.c \
 				redirects/redirects_si.c \
 				redirects/redirects_so.c 
 
-# SRC = arr_str_lst_functions/*.c builtins/*.c execution/*.c parcing/*.c redirects/*.c main_utils/*.c
-
-# all:
-# 	@gcc $(SRCS_FILES) -lreadline -L ~/.brew/opt/readline/lib -I ~/.brew/opt/readline/include libft/libft.a -o $(NAME)
-# 	@echo OK!
-
 SRCS		= 	$(SRCS_FILES)
 
 OBJS		=	$(SRCS:.c=.o)
@@ -61,7 +55,7 @@ all:		$(NAME)
 			gcc $(FLAGS) $(INCLUDE) -c $< -o $@
 
 $(NAME):	$(OBJS)
-			gcc $(OBJS) $(LIB) ${READLINE} -o $(NAME)
+			gcc $(OBJS) $(LIB) $(READLINE) -o $(NAME)
 
 clean:
 			rm -rf $(OBJS)
