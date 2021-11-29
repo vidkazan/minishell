@@ -6,7 +6,7 @@
 /*   By: cstarmie <cstarmie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/28 08:17:07 by fcody             #+#    #+#             */
-/*   Updated: 2021/11/29 13:03:24 by cstarmie         ###   ########.fr       */
+/*   Updated: 2021/11/29 14:04:36 by cstarmie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,13 @@ void	read_line_and_add_history(char **line)
 		*line = NULL;
 	}
 	*line = readline("minishell $> ");
+	if (!*line)
+	{
+		write(2, "exit\n", 5);
+		exit(0);
+	}
 	if (*line && **line)
-		add_history (*line);
+		add_history(*line);
 }
 
 void	start_init(t_data *data, char **env, int ac, char **av)
@@ -49,8 +54,6 @@ int	main(int ac, char **av, char **env)
 	{
 		signals_in_main();
 		read_line_and_add_history(&data->line);
-		if (!data->line)
-			exit(0);
 		vars(data);
 		if (data->line && *data->line)
 		{
