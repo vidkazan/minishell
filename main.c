@@ -20,8 +20,13 @@ void	read_line_and_add_history(char **line)
 		*line = NULL;
 	}
 	*line = readline("minishell $> ");
+	if(!*line)
+	{
+		write(2, "exit\n", 5);
+		exit(0);
+	}
 	if (*line && **line)
-		add_history (*line);
+		add_history(*line);
 }
 
 void	start_init(t_data *data, char **env, int ac, char **av)
