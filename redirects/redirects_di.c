@@ -24,18 +24,19 @@ void	double_redirect_input_io(t_elem *elem, int heredoc_pfd[2])
 		if (line && *line)
 			free(line);
 		line = readline("> ");
-		if(!line)
+		if (!line)
 			return ;
+		if (!*line)
+			free(line);
 		else
 		{
 			line_nl = ft_strjoin(line, "\n");
 			if (strcmp(elem->cmd[0], line))
 				write(heredoc_pfd[1], line_nl, ft_strlen(line_nl));
 			free(line_nl);
+			line_nl = NULL;
 		}
 	}
-	if (line && *line)
-		free(line);
 }
 
 t_elem	*double_redirect_input(t_elem *elem)

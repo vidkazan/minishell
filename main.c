@@ -20,7 +20,7 @@ void	read_line_and_add_history(char **line)
 		*line = NULL;
 	}
 	*line = readline("minishell $> ");
-	if(!*line)
+	if (!*line)
 	{
 		write(2, "exit\n", 5);
 		exit(0);
