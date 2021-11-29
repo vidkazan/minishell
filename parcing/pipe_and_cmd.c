@@ -6,7 +6,7 @@
 /*   By: cstarmie <cstarmie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/28 19:53:51 by cstarmie          #+#    #+#             */
-/*   Updated: 2021/11/29 11:39:03 by cstarmie         ###   ########.fr       */
+/*   Updated: 2021/11/29 13:00:33 by cstarmie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ int	check_last_cmd(t_data *data)
 	while (last->next)
 		last = last->next;
 	prelast = last->prev;
-	if (prelast->type > 2)
+	if (prelast && prelast->type > 2)
 	{
 		delete_current_node(data, last);
 		return (0);

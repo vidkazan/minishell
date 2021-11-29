@@ -68,6 +68,7 @@ clean:
 
 fclean:		clean
 			rm -rf $(NAME)
+			rm -rf msh_tester-master/$(NAME)
 
 re:			fclean all
 

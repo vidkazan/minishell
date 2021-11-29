@@ -6,7 +6,7 @@
 /*   By: cstarmie <cstarmie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/28 08:17:07 by fcody             #+#    #+#             */
-/*   Updated: 2021/11/29 11:40:06 by cstarmie         ###   ########.fr       */
+/*   Updated: 2021/11/29 13:03:24 by cstarmie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,8 @@ int	main(int ac, char **av, char **env)
 	{
 		signals_in_main();
 		read_line_and_add_history(&data->line);
+		if (!data->line)
+			exit(0);
 		vars(data);
 		if (data->line && *data->line)
 		{
