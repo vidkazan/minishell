@@ -37,6 +37,8 @@ void	double_redirect_input_io(t_elem *elem, int heredoc_pfd[2])
 			line_nl = NULL;
 		}
 	}
+	if (line && *line)
+		free(line);
 }
 
 t_elem	*double_redirect_input(t_elem *elem)
