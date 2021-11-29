@@ -6,11 +6,11 @@
 /*   By: cstarmie <cstarmie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/28 20:02:34 by cstarmie          #+#    #+#             */
-/*   Updated: 2021/11/28 20:06:17 by cstarmie         ###   ########.fr       */
+/*   Updated: 2021/11/29 11:39:03 by cstarmie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../main.h"
+#include "../include/main.h"
 
 int	redir_find_end(char *str)
 {

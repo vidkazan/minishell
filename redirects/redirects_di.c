@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   redirects_di.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fcody <fcody@student.42.fr>                +#+  +:+       +#+        */
+/*   By: cstarmie <cstarmie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/28 08:17:18 by fcody             #+#    #+#             */
-/*   Updated: 2021/11/28 08:17:19 by fcody            ###   ########.fr       */
+/*   Updated: 2021/11/29 12:15:23 by cstarmie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../main.h"
+#include "../include/main.h"
 
 void	double_redirect_input_io(t_elem *elem, int heredoc_pfd[2])
 {
@@ -25,7 +25,7 @@ void	double_redirect_input_io(t_elem *elem, int heredoc_pfd[2])
 			free(line);
 		line = readline("> ");
 		line_nl = ft_strjoin(line, "\n");
-		if ( line && strcmp(elem->cmd[0], line))
+		if (line && strcmp(elem->cmd[0], line))
 			write(heredoc_pfd[1], line_nl, ft_strlen(line_nl));
 		free(line_nl);
 	}

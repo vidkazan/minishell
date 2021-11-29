@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   builtins_pwd_cd.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fcody <fcody@student.42.fr>                +#+  +:+       +#+        */
+/*   By: cstarmie <cstarmie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/28 08:14:34 by fcody             #+#    #+#             */
-/*   Updated: 2021/11/28 08:14:54 by fcody            ###   ########.fr       */
+/*   Updated: 2021/11/29 11:39:03 by cstarmie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../main.h"
+#include "../include/main.h"
 
 void	builtin_cd_pwd_oldpwd(t_elem *elem)
 {

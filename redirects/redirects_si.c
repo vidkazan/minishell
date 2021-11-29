@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   redirects_si.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fcody <fcody@student.42.fr>                +#+  +:+       +#+        */
+/*   By: cstarmie <cstarmie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/28 08:17:15 by fcody             #+#    #+#             */
-/*   Updated: 2021/11/28 08:17:15 by fcody            ###   ########.fr       */
+/*   Updated: 2021/11/29 11:39:03 by cstarmie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../main.h"
+#include "../include/main.h"
 
 t_elem	*simple_redirect_input(t_elem *elem)
 {

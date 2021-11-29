@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   arr_functions.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fcody <fcody@student.42.fr>                +#+  +:+       +#+        */
+/*   By: cstarmie <cstarmie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/28 08:15:56 by fcody             #+#    #+#             */
-/*   Updated: 2021/11/28 08:16:17 by fcody            ###   ########.fr       */
+/*   Updated: 2021/11/29 11:39:03 by cstarmie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../main.h"
+#include "../include/main.h"
 
 int	ft_strlen_arr(char **arr)
 {

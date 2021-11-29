@@ -6,11 +6,11 @@
 /*   By: cstarmie <cstarmie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/28 20:02:39 by cstarmie          #+#    #+#             */
-/*   Updated: 2021/11/28 20:06:25 by cstarmie         ###   ########.fr       */
+/*   Updated: 2021/11/29 11:39:03 by cstarmie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../main.h"
+#include "../include/main.h"
 
 int	ft_value_of_strings(char c, t_data *data)
 {

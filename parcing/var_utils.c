@@ -6,11 +6,11 @@
 /*   By: cstarmie <cstarmie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/28 20:02:45 by cstarmie          #+#    #+#             */
-/*   Updated: 2021/11/28 20:06:23 by cstarmie         ###   ########.fr       */
+/*   Updated: 2021/11/29 11:39:03 by cstarmie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../main.h"
+#include "../include/main.h"
 
 void	concatenation(char *src, int i, int len, t_vars *var)
 {

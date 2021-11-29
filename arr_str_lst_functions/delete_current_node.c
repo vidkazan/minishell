@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   delete_current_node.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fcody <fcody@student.42.fr>                +#+  +:+       +#+        */
+/*   By: cstarmie <cstarmie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/28 08:16:01 by fcody             #+#    #+#             */
-/*   Updated: 2021/11/28 08:16:16 by fcody            ###   ########.fr       */
+/*   Updated: 2021/11/29 11:39:03 by cstarmie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../main.h"
+#include "../include/main.h"
 
 t_elem	*del_curr_node_single(t_data *data, t_elem *elem)
 {

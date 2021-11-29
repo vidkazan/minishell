@@ -6,7 +6,7 @@
 /*   By: cstarmie <cstarmie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/28 08:17:02 by fcody             #+#    #+#             */
-/*   Updated: 2021/11/28 20:00:08 by cstarmie         ###   ########.fr       */
+/*   Updated: 2021/11/29 12:06:33 by cstarmie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@
 # include <stdlib.h>
 # include <unistd.h>
 # include <sys/errno.h>
-# include "libft/libft.h"
+# include "../libft/libft.h"
 # include <readline/readline.h>
 # include <readline/history.h>
 # include <signal.h>

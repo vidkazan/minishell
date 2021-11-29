@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   builtins_export_main.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fcody <fcody@student.42.fr>                +#+  +:+       +#+        */
+/*   By: cstarmie <cstarmie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/28 08:14:26 by fcody             #+#    #+#             */
-/*   Updated: 2021/11/28 08:14:56 by fcody            ###   ########.fr       */
+/*   Updated: 2021/11/29 11:39:03 by cstarmie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../main.h"
+#include "../include/main.h"
 
 void	edit_env_keys(int env_index, char *new_value, t_data *data)
 {

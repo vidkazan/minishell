@@ -6,11 +6,11 @@
 /*   By: cstarmie <cstarmie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/28 19:54:06 by cstarmie          #+#    #+#             */
-/*   Updated: 2021/11/28 20:06:06 by cstarmie         ###   ########.fr       */
+/*   Updated: 2021/11/29 11:39:03 by cstarmie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../main.h"
+#include "../include/main.h"
 
 void	filling_key_val(t_vars *var, char *env_str)
 {
