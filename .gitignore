@@ -1,4 +1,5 @@
 .DS_Store
+*/.DS_Store
 .idea/*
 minishell
-msh_tester-master/*
+msh_tester-master/minishell

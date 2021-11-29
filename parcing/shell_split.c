@@ -1,37 +1,20 @@
-#include "../main.h"
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   shell_split.c                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: cstarmie <cstarmie@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/11/28 20:02:39 by cstarmie          #+#    #+#             */
+/*   Updated: 2021/11/29 11:39:03 by cstarmie         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
-void	del_outer_quotes(char *line)
-{
-	int i = 0;
-	int j = 0;
-	int q1 = 0;
-	int q2 = 0;
-	int flag = 0;
-
-	while (line[i])
-	{
-		if (line[i] == '\'' && !q2)
-		{
-			q1 = (q1 + 1) % 2;
-			flag = 1;
-		}
-		if (line[i] == '\"' && !q1)
-		{
-			q2 = (q2 + 1) % 2;
-			flag = 1;
-		}
-		line[j] = line[i];
-		if (!flag)
-			j++;
-		i++;
-		flag = 0;
-	}
-	line[j] = 0;
-}
+#include "../include/main.h"
 
 int	ft_value_of_strings(char c, t_data *data)
 {
-	int word_flag;
+	int	word_flag;
 	int	num;
 	int	i;
 
@@ -74,24 +57,33 @@ char	**ft_free_arr(char **arr)
 	return ((char **) NULL);
 }
 
+int	one_word_lenght(t_data *data, char c, char *s, int *i)
+{
+	int	res;
+
+	res = 0;
+	while ((s[*i] != c || data->q1 || data->q2) && s[*i])
+	{
+		quotes(*i, data);
+		(*i)++;
+		res++;
+	}
+	return (res);
+}
+
 char	**ft_write_arr(int value_str, t_data *data, char c, char **arr)
 {
-	int	i;
-	int	n_str;
-	int	n_sum;
-	char *s = data->line;
+	int		i;
+	int		n_str;
+	int		n_sum;
+	char	*s;
 
+	s = data->line;
 	n_str = 0;
 	i = 0;
 	while (n_str < value_str)
 	{
-		n_sum = 0;
-		while ((s[i] != c || data->q1 || data->q2) && s[i])
-		{
-			quotes(i, data);
-			i++;
-			n_sum++;
-		}
+		n_sum = one_word_lenght(data, c, s, &i);
 		if (n_sum)
 		{
 			arr[n_str] = ft_substr(s, (i - n_sum), n_sum);
@@ -106,9 +98,9 @@ char	**ft_write_arr(int value_str, t_data *data, char c, char **arr)
 	return (arr);
 }
 
-char	**shell_split(char const *s, char c)
+char	**shell_split(char *s, char c)
 {
-	t_data data;
+	t_data	data;
 	char	**arr;
 	int		i;
 	int		value_str;

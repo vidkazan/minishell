@@ -1,42 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   closing.c                                          :+:      :+:    :+:   */
+/*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: cstarmie <cstarmie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/11/28 08:14:36 by fcody             #+#    #+#             */
+/*   Created: 2021/11/28 08:17:09 by fcody             #+#    #+#             */
 /*   Updated: 2021/11/29 11:39:03 by cstarmie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/main.h"
 
-void	close_fd(t_elem *elem)
+void	init(t_data *data)
 {
-	if (elem->type == CMD && elem->prev && !elem->next)
-		close(elem->prev->pfd[0]);
-	else if (elem->type == PIPE && !elem->prev)
-		close(elem->pfd[1]);
-	else if (elem->type == PIPE && elem->prev && elem->next)
+	data->exec = 1;
+	data->elem_start = NULL;
+	data->simple_redirect_input_fd = -1;
+	data->simple_redirect_output_fd = -1;
+	data->double_redirect_output_fd = -1;
+	data->double_redirect_input_fd = -1;
+	data->q1 = 0;
+	data->q2 = 0;
+}
+
+int	data_reboot(t_data *data)
+{
+	list_cleaner(data->elem_start);
+	if (data->line)
 	{
-		close(elem->prev->pfd[0]);
-		close(elem->pfd[1]);
+		free(data->line);
+		data->line = 0;
 	}
-}
-
-void	closing(t_data *data)
-{
-	free_arr(data->envp);
-}
-
-void	free_arr(char **str)
-{
-	int	i;
-
-	i = -1;
-	while (str[++i])
-		free(str[i]);
-	free(str);
-	str = NULL;
+	init(data);
+	return (1);
 }

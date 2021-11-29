@@ -1,42 +1,40 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   redirects.c                                        :+:      :+:    :+:   */
+/*   waiting.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: cstarmie <cstarmie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/11/28 08:17:11 by fcody             #+#    #+#             */
+/*   Created: 2021/11/28 08:14:46 by fcody             #+#    #+#             */
 /*   Updated: 2021/11/29 11:39:03 by cstarmie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/main.h"
 
-void	redirects(t_data *data)
+void	waiting(t_data *data)
 {
+	int		status;
 	t_elem	*elem;
 
+	if (!data->elem_start)
+		return ;
 	elem = data->elem_start;
-	while (elem)
+	status = -1;
+	while (elem && data->exec)
 	{
-		if (elem->type == SIMPLE_REDIRECT_INPUT && data->exec)
-			elem = simple_redirect_input(elem);
-		else if (elem->type == DOUBLE_REDIRECT_INPUT && data->exec)
-			elem = double_redirect_input(elem);
-		else if (elem->type == SIMPLE_REDIRECT_OUTPUT && data->exec)
-			elem = simple_redirect_output(elem);
-		else if (elem->type == DOUBLE_REDIRECT_OUTPUT && data->exec)
-			elem = double_redirect_output(elem);
-		else if (!data->exec && (elem->type == 3 || elem->type == 4 \
-		|| elem->type == 5 || elem->type == 6))
-		{
-			elem = delete_current_node(elem->data, elem);
-			if (!elem)
-				return ;
-		}
-		else if (elem->next)
+		if (!elem->is_builtin)
+			waitpid(elem->pid, &status, 0);
+		if (elem->next)
 			elem = elem->next;
 		else
 			break ;
+	}
+	if (status != -1)
+	{
+		if (!data->exit_status)
+			data->exit_status = status;
+		if (elem->data->exit_status > 255)
+			elem->data->exit_status = elem->data->exit_status % 255;
 	}
 }

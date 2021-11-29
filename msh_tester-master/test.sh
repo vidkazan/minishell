@@ -121,6 +121,13 @@ if [ "$2" == "leaks" ]; then
   rm -f leaks
 fi
 
+# OURS
+if [ "$1" == "our" ] || [ "$1" == "all" ]; then
+  printf $BOLDMAGENTA"\n\tOUR TESTS\n"$RESET
+  exec_test '>1'
+#  exec_test '>'
+fi
+
 # ECHO TESTS
 if [ "$1" == "echo" ] || [ "$1" == "all" ]; then
   printf $BOLDMAGENTA"\n\tECHO TESTS\n"$RESET

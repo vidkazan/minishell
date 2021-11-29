@@ -1,42 +1,49 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   closing.c                                          :+:      :+:    :+:   */
+/*   signals.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: cstarmie <cstarmie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/11/28 08:14:36 by fcody             #+#    #+#             */
+/*   Created: 2021/11/28 19:54:17 by cstarmie          #+#    #+#             */
 /*   Updated: 2021/11/29 11:39:03 by cstarmie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/main.h"
 
-void	close_fd(t_elem *elem)
+static void	signal_cmd_ctrl_c(int sig)
 {
-	if (elem->type == CMD && elem->prev && !elem->next)
-		close(elem->prev->pfd[0]);
-	else if (elem->type == PIPE && !elem->prev)
-		close(elem->pfd[1]);
-	else if (elem->type == PIPE && elem->prev && elem->next)
-	{
-		close(elem->prev->pfd[0]);
-		close(elem->pfd[1]);
-	}
+	write(1, "\n", 1);
+	(void)sig;
+	signal(SIGINT, SIG_IGN);
 }
 
-void	closing(t_data *data)
+void	signal_ctrl_slash(int sig)
 {
-	free_arr(data->envp);
+	(void)sig;
+	ft_putendl_fd("Quit", 2);
+	signal(SIGINT, SIG_IGN);
 }
 
-void	free_arr(char **str)
+void	signals_in_cmd(void)
 {
-	int	i;
+	signal(SIGINT, signal_cmd_ctrl_c);
+	signal(SIGQUIT, signal_ctrl_slash);
+}
 
-	i = -1;
-	while (str[++i])
-		free(str[i]);
-	free(str);
-	str = NULL;
+static void	signal_ctrl_c(int sig)
+{
+	write(1, "\n", 1);
+	rl_replace_line("", 0);
+	rl_on_new_line();
+	rl_redisplay();
+	(void)sig;
+}
+
+void	signals_in_main(void)
+{
+	signal(SIGTERM, SIG_IGN);
+	signal(SIGQUIT, SIG_IGN);
+	signal(SIGINT, signal_ctrl_c);
 }

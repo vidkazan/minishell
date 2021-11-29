@@ -1,32 +1,38 @@
-//
-// Created by Felipe Cody on 10/20/21.
-//
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   redirects_so.c                                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: cstarmie <cstarmie@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/11/28 08:17:13 by fcody             #+#    #+#             */
+/*   Updated: 2021/11/29 11:39:03 by cstarmie         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
-#include "../main.h"
+#include "../include/main.h"
 
 t_elem	*simple_redirect_output(t_elem *elem)
 {
-	if(elem->data->debug)
-		dprintf(2, ">>> %d redirects so %p <%s>\n",getpid(), elem, *elem->cmd);
+	int	fd;
 
-	int    fd;
 	fd = open(elem->cmd[0], O_RDWR | O_CREAT | O_TRUNC, 0777);
 	if (fd < 0)
 	{
-		ft_putstr_fd("error: ", 2);
-		ft_putstr_fd(strerror(errno), 2);
-		ft_putstr_fd("\n", 2);
-		exit(1);
+		builtins_error(elem->data, elem->cmd[0], NULL, strerror(errno));
+		elem->data->exit_status = errno;
+		delete_current_node(elem->data, elem);
+		return (NULL);
 	}
 	else
 	{
-		if(elem->data->double_redirect_output_fd && elem->data->double_redirect_output_fd != elem->data->simple_redirect_output_fd)
+		if (elem->data->double_redirect_output_fd && \
+		elem->data->double_redirect_output_fd != \
+		elem->data->simple_redirect_output_fd)
 			close(elem->data->double_redirect_output_fd);
 		elem->data->double_redirect_output_fd = -1;
 		elem->data->simple_redirect_output_fd = fd;
-		if(elem->data->debug)
-			dprintf(2, ">>> %d SIMPLE_REDIRECT_OUTPUT si %d di %d so %d do %d\n", getpid(), elem->data->simple_redirect_input_fd, elem->data->double_redirect_input_fd, elem->data->simple_redirect_output_fd, elem->data->double_redirect_output_fd);
-		elem = delete_current_node(elem);
-        return elem;
-    }
+		elem = delete_current_node(elem->data, elem);
+		return (elem);
+	}
 }
