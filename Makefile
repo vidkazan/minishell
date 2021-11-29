@@ -40,7 +40,6 @@ SRCS_FILES =	arr_str_lst_functions/arr_functions.c \
 # 	@gcc $(SRCS_FILES) -lreadline -L ~/.brew/opt/readline/lib -I ~/.brew/opt/readline/include libft/libft.a -o $(NAME)
 # 	@echo OK!
 
-
 SRCS		= 	$(SRCS_FILES)
 
 OBJS		=	$(SRCS:.c=.o)
